@@ -1,0 +1,147 @@
+{"header": ["! device: clab-clos-large-leaf1 (cEOSLab, EOS-4.32.0F-36401836.4320F (engineering build))"
+    ], "comments": [], "cmds": {"no aaa root": None, "username admin privilege 15 role network-admin secret sha512 $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1": None, "username arista privilege 15 role network-admin nopassword": None, "username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk= tony@autobox-huge": None, "daemon TerminAttr": {"comments": [], "cmds": {"exec /usr/bin/TerminAttr -cvaddr=192.168.1.201: 9910 -cvauth=token,/tmp/token -cvvrf=MGMT -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -ingestexclude=/Sysdb/cell/1/agent,/Sysdb/cell/2/agent -taillogs": None, "no shutdown": None
+            }
+        }, "vlan internal order ascending range 1006 1199": None, "transceiver qsfp default-mode 4x10G": None, "service routing protocols model multi-agent": None, "hostname clab-clos-large-leaf1": None, "ip name-server vrf MGMT 192.168.1.9": None, "dns domain atd.lab": None, "spanning-tree mode mstp": None, "no spanning-tree vlan-id 4093-4094": None, "spanning-tree mst 0 priority 16384": None, "system l1": {"comments": [], "cmds": {"unsupported speed action error": None, "unsupported error-correction action error": None
+            }
+        }, "vlan 10": {"comments": [], "cmds": {"name DMZ": None
+            }
+        }, "vlan 20": {"comments": [], "cmds": {"name Internal": None
+            }
+        }, "vlan 30": {"comments": [], "cmds": {"name Dev": None
+            }
+        }, "vlan 40": {"comments": [], "cmds": {"name QA": None
+            }
+        }, "vlan 50": {"comments": [], "cmds": {"name Guest": None
+            }
+        }, "vlan 100": {"comments": [], "cmds": {"name VLAN_100": None
+            }
+        }, "vlan 200,
+        300,
+        400": {"comments": [], "cmds": {"name VLAN_200": None
+            }
+        }, "vlan 1000": {"comments": [], "cmds": {"name VLAN_1000": None
+            }
+        }, "vlan 1001": {"comments": [], "cmds": {"name VLAN_1001": None
+            }
+        }, "vlan 1002": {"comments": [], "cmds": {"name VLAN_1002": None
+            }
+        }, "vlan 1003": {"comments": [], "cmds": {"name VLAN_1003": None
+            }
+        }, "vlan 1004": {"comments": [], "cmds": {"name VLAN_1004": None
+            }
+        }, "vlan 1005": {"comments": [], "cmds": {"name VLAN_1005": None
+            }
+        }, "vlan 1006": {"comments": [], "cmds": {"name VLAN_1006": None
+            }
+        }, "vlan 3009": {"comments": [], "cmds": {"name MLAG_iBGP_VRF_A": None, "trunk group LEAF_PEER_L3": None
+            }
+        }, "vlan 4093": {"comments": [], "cmds": {"name LEAF_PEER_L3": None, "trunk group LEAF_PEER_L3": None
+            }
+        }, "vlan 4094": {"comments": [], "cmds": {"name MLAG_PEER": None, "trunk group MLAG": None
+            }
+        }, "vrf instance MGMT": {"comments": [], "cmds": {}
+        }, "vrf instance VRF_A": {"comments": [], "cmds": {}
+        }, "management api http-commands": {"comments": [], "cmds": {"no shutdown": None, "vrf MGMT": {"comments": [], "cmds": {"no shutdown": None
+                    }
+                }
+            }
+        }, "aaa authorization exec default local": None, "interface Port-Channel1": {"comments": [], "cmds": {"description MLAG_PEER_clab-clos-large-leaf2_Po1": None, "switchport mode trunk": None, "switchport trunk group LEAF_PEER_L3": None, "switchport trunk group MLAG": None
+            }
+        }, "interface Port-Channel7": {"comments": [], "cmds": {"description host1_PortChanne1": None, "switchport access vlan 10": None, "evpn ethernet-segment": {"comments": [], "cmds": {"identifier 0000: 0000: 0000: 0000: 0001": None, "route-target import 00: 00: 00: 00: 00: 01": None
+                    }
+                }, "lacp system-id 0000.0000.0001": None
+            }
+        }, "interface Ethernet1": {"comments": [], "cmds": {"description MLAG_PEER_clab-clos-large-leaf2_Ethernet1": None, "channel-group 1 mode active": None
+            }
+        }, "interface Ethernet2": {"comments": [], "cmds": {"description MLAG_PEER_clab-clos-large-leaf2_Ethernet2": None, "channel-group 1 mode active": None
+            }
+        }, "interface Ethernet3": {"comments": [], "cmds": {"description P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE1_Ethernet2": None, "mtu 1550": None, "no switchport": None, "ip address 192.168.108.1/31": None
+            }
+        }, "interface Ethernet4": {"comments": [], "cmds": {"description P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE2_Ethernet2": None, "mtu 1550": None, "no switchport": None, "ip address 192.168.108.3/31": None
+            }
+        }, "interface Ethernet5": {"comments": [], "cmds": {"description P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE3_Ethernet2": None, "mtu 1550": None, "no switchport": None, "ip address 192.168.108.5/31": None
+            }
+        }, "interface Ethernet7": {"comments": [], "cmds": {"description host1_e1": None, "channel-group 7 mode active": None
+            }
+        }, "interface Loopback0": {"comments": [], "cmds": {"description EVPN_Overlay_Peering": None, "ip address 192.168.101.1/32": None
+            }
+        }, "interface Loopback1": {"comments": [], "cmds": {"description VTEP_VXLAN_Tunnel_Source": None, "ip address 192.168.102.1/32": None
+            }
+        }, "interface Management0": {"comments": [], "cmds": {"description oob_management": None, "vrf MGMT": None, "ip address 172.20.20.11/24": None
+            }
+        }, "interface Vlan10": {"comments": [], "cmds": {"description DMZ": None, "vrf VRF_A": None, "ip address virtual 10.1.10.1/24": None
+            }
+        }, "interface Vlan20": {"comments": [], "cmds": {"description Internal": None, "vrf VRF_A": None, "ip address virtual 10.1.20.1/24": None
+            }
+        }, "interface Vlan30": {"comments": [], "cmds": {"description Dev": None, "vrf VRF_A": None, "ip address virtual 10.1.30.1/24": None
+            }
+        }, "interface Vlan40": {"comments": [], "cmds": {"description QA": None, "vrf VRF_A": None, "ip address virtual 10.1.40.1/24": None
+            }
+        }, "interface Vlan50": {"comments": [], "cmds": {"description Guest": None, "vrf VRF_A": None, "ip address virtual 10.1.50.1/24": None
+            }
+        }, "interface Vlan100": {"comments": [], "cmds": {"description VLAN_100": None, "vrf VRF_A": None, "ip address virtual 10.1.100.1/24": None
+            }
+        }, "interface Vlan200": {"comments": [], "cmds": {"description VLAN_200": None, "vrf VRF_A": None, "ip address virtual 10.1.200.1/24": None
+            }
+        }, "interface Vlan300": {"comments": [], "cmds": {"description VLAN_200": None, "vrf VRF_A": None, "ip address virtual 10.1.31.1/24": None
+            }
+        }, "interface Vlan400": {"comments": [], "cmds": {"description VLAN_200": None, "vrf VRF_A": None, "ip address virtual 10.1.41.1/24": None
+            }
+        }, "interface Vlan3009": {"comments": [], "cmds": {"description MLAG_PEER_L3_iBGP: vrf VRF_A": None, "mtu 1550": None, "vrf VRF_A": None, "ip address 10.255.251.0/31": None
+            }
+        }, "interface Vlan4093": {"comments": [], "cmds": {"description MLAG_PEER_L3_PEERING": None, "mtu 1550": None, "ip address 10.255.251.0/31": None
+            }
+        }, "interface Vlan4094": {"comments": [], "cmds": {"description MLAG_PEER": None, "mtu 1550": None, "no autostate": None, "ip address 10.255.252.0/31": None
+            }
+        }, "interface Vxlan1": {"comments": [], "cmds": {"description clab-clos-large-leaf1_VTEP": None, "vxlan source-interface Loopback1": None, "vxlan virtual-router encapsulation mac-address mlag-system-id": None, "vxlan udp-port 4789": None, "vxlan vlan 10 vni 10010": None, "vxlan vlan 20 vni 10020": None, "vxlan vlan 30 vni 10030": None, "vxlan vlan 40 vni 10040": None, "vxlan vlan 50 vni 10050": None, "vxlan vlan 100 vni 10100": None, "vxlan vlan 200 vni 10200": None, "vxlan vlan 300 vni 10300": None, "vxlan vlan 400 vni 10400": None, "vxlan vlan 1000 vni 11000": None, "vxlan vlan 1001 vni 11001": None, "vxlan vlan 1002 vni 11002": None, "vxlan vlan 1003 vni 11003": None, "vxlan vlan 1004 vni 11004": None, "vxlan vlan 1005 vni 11005": None, "vxlan vlan 1006 vni 11006": None, "vxlan vrf VRF_A vni 10": None
+            }
+        }, "ip virtual-router mac-address 00: 1c: 73: 00: 00: 99": None, "ip routing": None, "no ip routing vrf MGMT": None, "ip routing vrf VRF_A": None, "ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY": {"comments": [], "cmds": {"seq 10 permit 192.168.101.0/24 eq 32": None, "seq 20 permit 192.168.102.0/24 eq 32": None
+            }
+        }, "ip prefix-list PL-MLAG-PEER-VRFS": {"comments": [], "cmds": {"seq 10 permit 10.255.251.0/31": None
+            }
+        }, "mlag configuration": {"comments": [], "cmds": {"domain-id mlag1": None, "local-interface Vlan4094": None, "peer-address 10.255.252.1": None, "peer-link Port-Channel1": None, "reload-delay mlag 300": None, "reload-delay non-mlag 330": None
+            }
+        }, "ip route vrf MGMT 0.0.0.0/0 172.20.20.1": None, "route-map RM-CONN-2-BGP permit 10": {"comments": [], "cmds": {"match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY": None
+            }
+        }, "route-map RM-CONN-2-BGP-VRFS deny 10": {"comments": [], "cmds": {"match ip address prefix-list PL-MLAG-PEER-VRFS": None
+            }
+        }, "route-map RM-CONN-2-BGP-VRFS permit 20": {"comments": [], "cmds": {}
+        }, "route-map RM-MLAG-PEER-IN permit 10": {"comments": [], "cmds": {"description Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing": None, "set origin incomplete": None
+            }
+        }, "router bfd": {"comments": [], "cmds": {"multihop interval 1200 min-rx 1200 multiplier 3": None
+            }
+        }, "router bgp 65100": {"comments": [], "cmds": {"router-id 192.168.101.1": None, "no bgp default ipv4-unicast": None, "maximum-paths 4 ecmp 4": None, "neighbor EVPN-OVERLAY-PEERS peer group": None, "neighbor EVPN-OVERLAY-PEERS update-source Loopback0": None, "neighbor EVPN-OVERLAY-PEERS bfd": None, "neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3": None, "neighbor EVPN-OVERLAY-PEERS send-community": None, "neighbor EVPN-OVERLAY-PEERS maximum-routes 0": None, "neighbor IPv4-UNDERLAY-PEERS peer group": None, "neighbor IPv4-UNDERLAY-PEERS send-community": None, "neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000": None, "neighbor MLAG-IPv4-UNDERLAY-PEER peer group": None, "neighbor MLAG-IPv4-UNDERLAY-PEER remote-as 65100": None, "neighbor MLAG-IPv4-UNDERLAY-PEER next-hop-self": None, "neighbor MLAG-IPv4-UNDERLAY-PEER description clab-clos-large-leaf2": None, "neighbor MLAG-IPv4-UNDERLAY-PEER route-map RM-MLAG-PEER-IN in": None, "neighbor MLAG-IPv4-UNDERLAY-PEER send-community": None, "neighbor MLAG-IPv4-UNDERLAY-PEER maximum-routes 12000": None, "neighbor 10.255.251.1 peer group MLAG-IPv4-UNDERLAY-PEER": None, "neighbor 10.255.251.1 description clab-clos-large-leaf2": None, "neighbor 192.168.101.101 peer group EVPN-OVERLAY-PEERS": None, "neighbor 192.168.101.101 remote-as 65001": None, "neighbor 192.168.101.101 description clab-clos-large-spine1": None, "neighbor 192.168.101.102 peer group EVPN-OVERLAY-PEERS": None, "neighbor 192.168.101.102 remote-as 65001": None, "neighbor 192.168.101.102 description clab-clos-large-spine2": None, "neighbor 192.168.101.103 peer group EVPN-OVERLAY-PEERS": None, "neighbor 192.168.101.103 remote-as 65001": None, "neighbor 192.168.101.103 description clab-clos-large-spine3": None, "neighbor 192.168.108.0 peer group IPv4-UNDERLAY-PEERS": None, "neighbor 192.168.108.0 remote-as 65001": None, "neighbor 192.168.108.0 description clab-clos-large-spine1_Ethernet2": None, "neighbor 192.168.108.2 peer group IPv4-UNDERLAY-PEERS": None, "neighbor 192.168.108.2 remote-as 65001": None, "neighbor 192.168.108.2 description clab-clos-large-spine2_Ethernet2": None, "neighbor 192.168.108.4 peer group IPv4-UNDERLAY-PEERS": None, "neighbor 192.168.108.4 remote-as 65001": None, "neighbor 192.168.108.4 description clab-clos-large-spine3_Ethernet2": None, "redistribute connected route-map RM-CONN-2-BGP": None, "vlan-aware-bundle VLAN_1000": {"comments": [], "cmds": {"rd 192.168.101.1: 11000": None, "route-target both 11000: 11000": None, "redistribute learned": None, "vlan 1000": None
+                    }
+                }, "vlan-aware-bundle VLAN_1001": {"comments": [], "cmds": {"rd 192.168.101.1: 11001": None, "route-target both 11001: 11001": None, "redistribute learned": None, "vlan 1001": None
+                    }
+                }, "vlan-aware-bundle VLAN_1002": {"comments": [], "cmds": {"rd 192.168.101.1: 11002": None, "route-target both 11002: 11002": None, "redistribute learned": None, "vlan 1002": None
+                    }
+                }, "vlan-aware-bundle VLAN_1003": {"comments": [], "cmds": {"rd 192.168.101.1: 11003": None, "route-target both 11003: 11003": None, "redistribute learned": None, "vlan 1003": None
+                    }
+                }, "vlan-aware-bundle VLAN_1004": {"comments": [], "cmds": {"rd 192.168.101.1: 11004": None, "route-target both 11004: 11004": None, "redistribute learned": None, "vlan 1004": None
+                    }
+                }, "vlan-aware-bundle VLAN_1005": {"comments": [], "cmds": {"rd 192.168.101.1: 11005": None, "route-target both 11005: 11005": None, "redistribute learned": None, "vlan 1005": None
+                    }
+                }, "vlan-aware-bundle VLAN_1006": {"comments": [], "cmds": {"rd 192.168.101.1: 11006": None, "route-target both 11006: 11006": None, "redistribute learned": None, "vlan 1006": None
+                    }
+                }, "vlan-aware-bundle VRF_A": {"comments": [], "cmds": {"rd 192.168.101.1: 10": None, "route-target both 10: 10": None, "redistribute learned": None, "vlan 10,
+                        20,
+                        30,
+                        40,
+                        50,
+                        100,
+                        200,
+                        300,
+                        400": None
+                    }
+                }, "address-family evpn": {"comments": [], "cmds": {"neighbor EVPN-OVERLAY-PEERS activate": None
+                    }
+                }, "address-family ipv4": {"comments": [], "cmds": {"no neighbor EVPN-OVERLAY-PEERS activate": None, "neighbor IPv4-UNDERLAY-PEERS activate": None, "neighbor MLAG-IPv4-UNDERLAY-PEER activate": None
+                    }
+                }, "vrf VRF_A": {"comments": [], "cmds": {"rd 192.168.101.1: 10": None, "route-target import evpn 10: 10": None, "route-target export evpn 10: 10": None, "router-id 192.168.101.1": None, "neighbor 10.255.251.1 peer group MLAG-IPv4-UNDERLAY-PEER": None, "redistribute connected route-map RM-CONN-2-BGP-VRFS": None
+                    }
+                }
+            }
+        }
+    }
+}

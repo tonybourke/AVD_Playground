@@ -1,0 +1,145 @@
+network_ports:
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet7, Ethernet7]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet8, Ethernet8]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet9, Ethernet9]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet10, Ethernet10]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet11, Ethernet11]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet12, Ethernet12]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet13, Ethernet13]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet14, Ethernet14]
+    vlans: "10, 20, 30, 40, 50"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet15, Ethernet15]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet16, Ethernet16]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet17, Ethernet17]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet18, Ethernet18]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet19, Ethernet19]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet20, Ethernet20]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet21, Ethernet21]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet22, Ethernet22]
+    vlans: "100, 200, 300, 400"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet23, Ethernet23]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet24, Ethernet24]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet25, Ethernet25]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet26, Ethernet26]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet27, Ethernet27]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet28, Ethernet28]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet29, Ethernet29]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active
+  - switches: [clab-clos-large-leaf29, clab-clos-large-leaf30]
+    switch_ports: [Ethernet30, Ethernet30]
+    vlans: "1000, 1001, 1002, 1003, 1004, 1005, 1006"
+    enabled: true
+    port_channel:
+      mode: active

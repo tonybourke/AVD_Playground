@@ -1,0 +1,356 @@
+{
+    "vlans": {
+        "1": {
+            "name": "default",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "10": {
+            "name": "DMZ",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "20": {
+            "name": "Internal",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "30": {
+            "name": "Dev",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "40": {
+            "name": "QA",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "50": {
+            "name": "Guest",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "100": {
+            "name": "VLAN_100",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "200": {
+            "name": "VLAN_200",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "300": {
+            "name": "VLAN_200",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "400": {
+            "name": "VLAN_200",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1000": {
+            "name": "VLAN_1000",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1001": {
+            "name": "VLAN_1001",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1002": {
+            "name": "VLAN_1002",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1003": {
+            "name": "VLAN_1003",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1004": {
+            "name": "VLAN_1004",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1005": {
+            "name": "VLAN_1005",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1006": {
+            "name": "VLAN_1006",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "1199": {
+            "name": "VLAN1199",
+            "dynamic": true,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Vxlan1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "3009": {
+            "name": "MLAG_iBGP_VRF_A",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "4093": {
+            "name": "LEAF_PEER_L3",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        },
+        "4094": {
+            "name": "MLAG_PEER",
+            "dynamic": false,
+            "status": "active",
+            "interfaces": {
+                "Cpu": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                },
+                "Port-Channel1": {
+                    "privatePromoted": false,
+                    "blocked": "none"
+                }
+            }
+        }
+    },
+    "sourceDetail": ""
+}

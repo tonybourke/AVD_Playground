@@ -1,0 +1,14 @@
+---
+servers:
+  - name: host1
+    adapters:
+      - endpoint_ports: [ e1, e2]
+        switch_ports: [ Ethernet7, Ethernet7]
+        switches: [ clab-clos-large-leaf1, clab-clos-large-leaf2]
+        vlans: 10
+        mode: access
+        port_channel:
+          description: PortChanne1
+          mode: active
+        ethernet_segment:
+          short_esi: 0000:0000:0001

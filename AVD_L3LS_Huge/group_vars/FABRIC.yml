@@ -1,0 +1,367 @@
+---
+
+fabric_name: FABRIC
+
+# Various fabric settings
+
+# Enable vlan aware bundles
+evpn_vlan_aware_bundles: true
+
+isis_area_id: 49.0001
+isis_system_id_format: underlay_loopback
+
+underlay_routing_protocol: isis
+
+# Spine Switches
+spine:
+  defaults:
+    platform: cEOS-lab
+    bgp_as: 65001
+    loopback_ipv4_pool: 192.168.101.0/24
+    mlag: false
+  nodes:
+    - name: clab-clos-large-spine1
+      id: 101
+      mgmt_ip: 172.20.20.101/24
+    - name: clab-clos-large-spine2
+      id: 102
+      mgmt_ip: 172.20.20.102/24
+    - name: clab-clos-large-spine3
+      id: 103
+      mgmt_ip: 172.20.20.103/24
+
+
+# clab-clos-large-leaf switches. Most clab-clos-large-leafs will be l3clab-clos-large-leaf, not l2clab-clos-large-leaf.
+l3leaf:
+  defaults:
+    bgp_as: 65100-65199 # Gives a range which will be auto-assigned
+    platform: cEOS-lab
+    loopback_ipv4_pool: 192.168.101.0/24 # This is loopback0 (underlay)
+    vtep_loopback_ipv4_pool: 192.168.102.0/24 # This is loopback1 (VTEP)
+    uplink_interfaces: [Ethernet3, Ethernet4, Ethernet5] # clab-clos-large-leaf uplinks
+    uplink_switches: [clab-clos-large-spine1, clab-clos-large-spine2, clab-clos-large-spine3] # Where the clab-clos-large-leaf uplinks go
+    uplink_ipv4_pool: 192.168.110.0/22 # For the p2p interfaces to chopped up into /31s
+    mlag_interfaces: [Ethernet1, Ethernet2] # MLAG peer link
+    mlag_peer_ipv4_pool: 10.255.252.0/24 # MLAG peer IPs
+    mlag_peer_l3_ipv4_pool: 10.255.251.0/24 # iBGP peering between MLAG peers
+    virtual_router_mac_address: 00:1c:73:00:00:99 # The vMAC for the anycast gateways
+    spanning_tree_mode: mstp # Spanning Tree is still enabled even in EVPN setups
+    spanning_tree_priority: 16384 
+    mlag: true # By default, use MLAG
+  nodes:
+    - name: clab-clos-large-borderleaf1
+      id: 91
+      uplink_switch_interfaces: [Ethernet52, Ethernet52, Ethernet52]
+      mgmt_ip: 172.20.20.91/24
+      mlag: false
+    - name: clab-clos-large-borderleaf2
+      id: 92
+      uplink_switch_interfaces: [Ethernet53, Ethernet53, Ethernet53]
+      mlag: false
+      mgmt_ip: 172.20.20.92/24
+  node_groups: 
+    - group: mlag1
+      nodes:
+        - name: clab-clos-large-leaf1
+          id: 1
+          mgmt_ip: 172.20.20.11/24
+          uplink_switch_interfaces: [Ethernet2, Ethernet2, Ethernet2]
+        - name: clab-clos-large-leaf2
+          id: 2
+          mgmt_ip: 172.20.20.12/24
+          uplink_switch_interfaces: [Ethernet3, Ethernet3, Ethernet3]
+    - group: mlag2
+      nodes:
+        - name: clab-clos-large-leaf3
+          id: 3
+          mgmt_ip: 172.20.20.13/24
+          uplink_switch_interfaces: [Ethernet4, Ethernet4, Ethernet4]
+        - name: clab-clos-large-leaf4
+          id: 4
+          mgmt_ip: 172.20.20.14/24
+          uplink_switch_interfaces: [Ethernet5, Ethernet5, Ethernet5]
+    - group: mlag3
+      nodes:
+        - name: clab-clos-large-leaf5
+          id: 5
+          mgmt_ip: 172.20.20.15/24
+          uplink_switch_interfaces: [Ethernet6, Ethernet6, Ethernet6]
+        - name: clab-clos-large-leaf6
+          id: 6
+          mgmt_ip: 172.20.20.16/24
+          uplink_switch_interfaces: [Ethernet7, Ethernet7, Ethernet7]
+    - group: mlag4
+      nodes:
+        - name: clab-clos-large-leaf7
+          id: 7
+          mgmt_ip: 172.20.20.17/24
+          uplink_switch_interfaces: [Ethernet8, Ethernet8, Ethernet8]
+        - name: clab-clos-large-leaf8
+          id: 8
+          mgmt_ip: 172.20.20.18/24
+          uplink_switch_interfaces: [Ethernet9, Ethernet9, Ethernet9]
+    - group: mlag5
+      nodes:
+        - name: clab-clos-large-leaf9
+          id: 9
+          mgmt_ip: 172.20.20.19/24
+          uplink_switch_interfaces: [Ethernet10, Ethernet10, Ethernet10]
+        - name: clab-clos-large-leaf10
+          id: 10
+          mgmt_ip: 172.20.20.20/24
+          uplink_switch_interfaces: [Ethernet11, Ethernet11, Ethernet11]
+    - group: mlag6
+      nodes:
+        - name: clab-clos-large-leaf11
+          id: 11
+          mgmt_ip: 172.20.20.21/24
+          uplink_switch_interfaces: [Ethernet12, Ethernet12, Ethernet12]
+        - name: clab-clos-large-leaf12
+          id: 12
+          mgmt_ip: 172.20.20.22/24
+          uplink_switch_interfaces: [Ethernet13, Ethernet13, Ethernet13]
+    - group: mlag7
+      nodes:
+        - name: clab-clos-large-leaf13
+          id: 13
+          mgmt_ip: 172.20.20.23/24
+          uplink_switch_interfaces: [Ethernet14, Ethernet14, Ethernet14]
+        - name: clab-clos-large-leaf14
+          id: 14
+          mgmt_ip: 172.20.20.24/24
+          uplink_switch_interfaces: [Ethernet15, Ethernet15, Ethernet15]
+    - group: mlag8
+      nodes:
+        - name: clab-clos-large-leaf15
+          id: 15
+          mgmt_ip: 172.20.20.25/24
+          uplink_switch_interfaces: [Ethernet16, Ethernet16, Ethernet16]
+        - name: clab-clos-large-leaf16
+          id: 16
+          mgmt_ip: 172.20.20.26/24
+          uplink_switch_interfaces: [Ethernet17, Ethernet17, Ethernet17]
+    - group: mlag9
+      nodes:
+        - name: clab-clos-large-leaf17
+          id: 17
+          mgmt_ip: 172.20.20.27/24
+          uplink_switch_interfaces: [Ethernet18, Ethernet18, Ethernet18]
+        - name: clab-clos-large-leaf18
+          id: 18
+          mgmt_ip: 172.20.20.28/24
+          uplink_switch_interfaces: [Ethernet19, Ethernet19, Ethernet19]
+    - group: mlag10
+      nodes:
+        - name: clab-clos-large-leaf19
+          id: 19
+          mgmt_ip: 172.20.20.29/24
+          uplink_switch_interfaces: [Ethernet20, Ethernet20, Ethernet20]
+        - name: clab-clos-large-leaf20
+          id: 20
+          mgmt_ip: 172.20.20.30/24
+          uplink_switch_interfaces: [Ethernet21, Ethernet21, Ethernet21]
+    - group: mlag11
+      nodes:
+        - name: clab-clos-large-leaf21
+          id: 21
+          mgmt_ip: 172.20.20.31/24
+          uplink_switch_interfaces: [Ethernet22, Ethernet22, Ethernet22]
+        - name: clab-clos-large-leaf22
+          id: 22
+          mgmt_ip: 172.20.20.32/24
+          uplink_switch_interfaces: [Ethernet23, Ethernet23, Ethernet23]
+    - group: mlag12
+      nodes:
+        - name: clab-clos-large-leaf23
+          id: 23
+          mgmt_ip: 172.20.20.33/24
+          uplink_switch_interfaces: [Ethernet24, Ethernet24, Ethernet24]
+        - name: clab-clos-large-leaf24
+          id: 24
+          mgmt_ip: 172.20.20.34/24
+          uplink_switch_interfaces: [Ethernet25, Ethernet25, Ethernet25]
+    - group: mlag13
+      nodes:
+        - name: clab-clos-large-leaf25
+          id: 25
+          mgmt_ip: 172.20.20.35/24
+          uplink_switch_interfaces: [Ethernet26, Ethernet26, Ethernet26]
+        - name: clab-clos-large-leaf26
+          id: 26
+          mgmt_ip: 172.20.20.36/24
+          uplink_switch_interfaces: [Ethernet27, Ethernet27, Ethernet27]
+    - group: mlag14
+      nodes:
+        - name: clab-clos-large-leaf27
+          id: 27
+          mgmt_ip: 172.20.20.37/24
+          uplink_switch_interfaces: [Ethernet28, Ethernet28, Ethernet28]
+        - name: clab-clos-large-leaf28
+          id: 28
+          mgmt_ip: 172.20.20.38/24
+          uplink_switch_interfaces: [Ethernet29, Ethernet29, Ethernet29]
+    - group: mlag15
+      nodes:
+        - name: clab-clos-large-leaf29
+          id: 29
+          mgmt_ip: 172.20.20.39/24
+          uplink_switch_interfaces: [Ethernet30, Ethernet30, Ethernet30]
+        - name: clab-clos-large-leaf30
+          id: 30
+          mgmt_ip: 172.20.20.40/24
+          uplink_switch_interfaces: [Ethernet31, Ethernet31, Ethernet31]
+    - group: mlag16
+      nodes:
+        - name: clab-clos-large-leaf31
+          id: 31
+          mgmt_ip: 172.20.20.41/24
+          uplink_switch_interfaces: [Ethernet32, Ethernet32, Ethernet32]
+        - name: clab-clos-large-leaf32
+          id: 32
+          mgmt_ip: 172.20.20.42/24
+          uplink_switch_interfaces: [Ethernet33, Ethernet33, Ethernet33]
+    - group: mlag17
+      nodes:
+        - name: clab-clos-large-leaf33
+          id: 33
+          mgmt_ip: 172.20.20.43/24
+          uplink_switch_interfaces: [Ethernet34, Ethernet34, Ethernet34]
+        - name: clab-clos-large-leaf34
+          id: 34
+          mgmt_ip: 172.20.20.44/24
+          uplink_switch_interfaces: [Ethernet35, Ethernet35, Ethernet35]
+    - group: mlag18
+      nodes:
+        - name: clab-clos-large-leaf35
+          id: 35
+          mgmt_ip: 172.20.20.45/24
+          uplink_switch_interfaces: [Ethernet36, Ethernet36, Ethernet36]
+        - name: clab-clos-large-leaf36
+          id: 36
+          mgmt_ip: 172.20.20.46/24
+          uplink_switch_interfaces: [Ethernet37, Ethernet37, Ethernet37]
+    - group: mlag19
+      nodes:
+        - name: clab-clos-large-leaf37
+          id: 37
+          mgmt_ip: 172.20.20.47/24
+          uplink_switch_interfaces: [Ethernet38, Ethernet38, Ethernet38]
+        - name: clab-clos-large-leaf38
+          id: 38
+          mgmt_ip: 172.20.20.48/24
+          uplink_switch_interfaces: [Ethernet39, Ethernet39, Ethernet39]
+    - group: mlag20
+      nodes:
+        - name: clab-clos-large-leaf39
+          id: 39
+          mgmt_ip: 172.20.20.49/24
+          uplink_switch_interfaces: [Ethernet40, Ethernet40, Ethernet40]
+        - name: clab-clos-large-leaf40
+          id: 40
+          mgmt_ip: 172.20.20.50/24
+          uplink_switch_interfaces: [Ethernet41, Ethernet41, Ethernet41]
+    - group: mlag21
+      nodes:
+        - name: clab-clos-large-leaf41
+          id: 41
+          mgmt_ip: 172.20.20.51/24
+          uplink_switch_interfaces: [Ethernet42, Ethernet42, Ethernet42]
+        - name: clab-clos-large-leaf42
+          id: 42
+          mgmt_ip: 172.20.20.52/24
+          uplink_switch_interfaces: [Ethernet43, Ethernet43, Ethernet43]
+    - group: mlag22
+      nodes:
+        - name: clab-clos-large-leaf43
+          id: 43
+          mgmt_ip: 172.20.20.53/24
+          uplink_switch_interfaces: [Ethernet44, Ethernet44, Ethernet44]
+        - name: clab-clos-large-leaf44
+          id: 44
+          mgmt_ip: 172.20.20.54/24
+          uplink_switch_interfaces: [Ethernet45, Ethernet45, Ethernet45]
+    - group: mlag23
+      nodes:
+        - name: clab-clos-large-leaf45
+          id: 45
+          mgmt_ip: 172.20.20.55/24
+          uplink_switch_interfaces: [Ethernet46, Ethernet46, Ethernet46]
+        - name: clab-clos-large-leaf46
+          id: 46
+          mgmt_ip: 172.20.20.56/24
+          uplink_switch_interfaces: [Ethernet47, Ethernet47, Ethernet47]
+    - group: mlag24
+      nodes:
+        - name: clab-clos-large-leaf47
+          id: 47
+          mgmt_ip: 172.20.20.57/24
+          uplink_switch_interfaces: [Ethernet48, Ethernet48, Ethernet48]
+        - name: clab-clos-large-leaf48
+          id: 48
+          mgmt_ip: 172.20.20.58/24
+          uplink_switch_interfaces: [Ethernet49, Ethernet49, Ethernet49]
+    - group: mlag25
+      nodes:
+        - name: clab-clos-large-leaf49
+          id: 49
+          mgmt_ip: 172.20.20.59/24
+          uplink_switch_interfaces: [Ethernet50, Ethernet50, Ethernet50]
+        - name: clab-clos-large-leaf50
+          id: 50
+          mgmt_ip: 172.20.20.60/24
+          uplink_switch_interfaces: [Ethernet51, Ethernet51, Ethernet51]
+  
+
+
+# There's an issue with vEOS with larger MTUs
+p2p_uplinks_mtu: 1550
+
+# BFD Settings
+bfd_multihop:
+  interval: 1200
+  min_rx: 1200
+  multiplier: 3
+
+
+# Needed for vEOS/cEOS
+
+bgp_update_wait_install: false
+bgp_update_wait_for_convergence: false
+
+# Needed for Arista ATD Lab Environment
+dns_domain: atd.lab
+mgmt_interface: Management0
+mgmt_interface_vrf: MGMT
+mgmt_gateway: 172.20.20.1
+name_servers: [192.168.1.9]
+
+
+local_users:
+  - name: arista
+    privilege: 15
+    role: network-admin
+    no_password: True
+    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk= tony@autobox-huge"
+  - name: admin
+    privilege: 15
+    role: network-admin
+    no_password: True
+    sha512_password: "$6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1"
+management_api:
+  enable_https: true
+
+aaa_authentication:
+  login:
+    default: local
+
+aaa_authorization:
+  exec: 
+    default: local
+
+          #     - aaa authentication login default local 
+          # - aaa authorization exec default local
+
+
+
+cvp_instance_ips: [192.168.1.201]
+cvp_token_file: /tmp/token

@@ -1,0 +1,9 @@
+---
+network_ports:
+  - switches: [clab-clos-large-leaf5, clab-clos-large-leaf6]
+    switch_ports: [Ethernet7, Ethernet7]
+    description: host2
+    profile: VLAN_20
+    enabled: true
+    port_channel:
+      mode: active
