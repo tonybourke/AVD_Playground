@@ -9,6 +9,7 @@
   - [Management API HTTP](#management-api-http)
 - [Authentication](#authentication)
   - [Local Users](#local-users)
+  - [Enable Password](#enable-password)
   - [AAA Authentication](#aaa-authentication)
   - [AAA Authorization](#aaa-authorization)
 - [Monitoring](#monitoring)
@@ -27,10 +28,15 @@
   - [IP Routing](#ip-routing)
   - [IPv6 Routing](#ipv6-routing)
   - [Static Routes](#static-routes)
-  - [Router ISIS](#router-isis)
   - [Router BGP](#router-bgp)
 - [BFD](#bfd)
   - [Router BFD](#router-bfd)
+- [Multicast](#multicast)
+  - [Router Multicast](#router-multicast)
+  - [PIM Sparse Mode](#pim-sparse-mode)
+- [Filters](#filters)
+  - [Prefix-lists](#prefix-lists)
+  - [Route-maps](#route-maps)
 - [VRF Instances](#vrf-instances)
   - [VRF Instances Summary](#vrf-instances-summary)
   - [VRF Instances Device Configuration](#vrf-instances-device-configuration)
@@ -45,20 +51,20 @@
 
 | Management Interface | Description | Type | VRF | IP Address | Gateway |
 | -------------------- | ----------- | ---- | --- | ---------- | ------- |
-| Management0 | oob_management | oob | MGMT | 172.20.20.102/24 | 172.20.20.1 |
+| Management0 | OOB_MANAGEMENT | oob | MGMT | 172.20.20.102/24 | 172.20.20.1 |
 
 ##### IPv6
 
 | Management Interface | Description | Type | VRF | IPv6 Address | IPv6 Gateway |
 | -------------------- | ----------- | ---- | --- | ------------ | ------------ |
-| Management0 | oob_management | oob | MGMT | - | - |
+| Management0 | OOB_MANAGEMENT | oob | MGMT | - | - |
 
 #### Management Interfaces Device Configuration
 
 ```eos
 !
 interface Management0
-   description oob_management
+   description OOB_MANAGEMENT
    no shutdown
    vrf MGMT
    ip address 172.20.20.102/24
@@ -93,9 +99,9 @@ ip name-server vrf MGMT 192.168.1.9
 
 #### Management API HTTP Summary
 
-| HTTP | HTTPS | Default Services |
-| ---- | ----- | ---------------- |
-| False | True | - |
+| HTTP | HTTPS | UNIX-Socket | Default Services |
+| ---- | ----- | ----------- | ---------------- |
+| False | True | - | - |
 
 #### Management API VRF Access
 
@@ -134,6 +140,10 @@ username admin privilege 15 role network-admin secret sha512 <removed>
 username arista privilege 15 role network-admin nopassword
 username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk= tony@autobox-huge
 ```
+
+### Enable Password
+
+Enable password has been disabled
 
 ### AAA Authentication
 
@@ -227,695 +237,482 @@ vlan internal order ascending range 1006 1199
 
 *Inherited from Port-Channel Interface
 
-##### IPv4
+##### IPv6
 
-| Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
-| --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
-| Ethernet2 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF1_Ethernet4 | routed | - | 192.168.108.2/31 | default | 1550 | False | - | - |
-| Ethernet3 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF2_Ethernet4 | routed | - | 192.168.108.8/31 | default | 1550 | False | - | - |
-| Ethernet4 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF3_Ethernet4 | routed | - | 192.168.108.14/31 | default | 1550 | False | - | - |
-| Ethernet5 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF4_Ethernet4 | routed | - | 192.168.108.20/31 | default | 1550 | False | - | - |
-| Ethernet6 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF5_Ethernet4 | routed | - | 192.168.108.26/31 | default | 1550 | False | - | - |
-| Ethernet7 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF6_Ethernet4 | routed | - | 192.168.108.32/31 | default | 1550 | False | - | - |
-| Ethernet8 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF7_Ethernet4 | routed | - | 192.168.108.38/31 | default | 1550 | False | - | - |
-| Ethernet9 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF8_Ethernet4 | routed | - | 192.168.108.44/31 | default | 1550 | False | - | - |
-| Ethernet10 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF9_Ethernet4 | routed | - | 192.168.108.50/31 | default | 1550 | False | - | - |
-| Ethernet11 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF10_Ethernet4 | routed | - | 192.168.108.56/31 | default | 1550 | False | - | - |
-| Ethernet12 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF11_Ethernet4 | routed | - | 192.168.108.62/31 | default | 1550 | False | - | - |
-| Ethernet13 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF12_Ethernet4 | routed | - | 192.168.108.68/31 | default | 1550 | False | - | - |
-| Ethernet14 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF13_Ethernet4 | routed | - | 192.168.108.74/31 | default | 1550 | False | - | - |
-| Ethernet15 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF14_Ethernet4 | routed | - | 192.168.108.80/31 | default | 1550 | False | - | - |
-| Ethernet16 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF15_Ethernet4 | routed | - | 192.168.108.86/31 | default | 1550 | False | - | - |
-| Ethernet17 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF16_Ethernet4 | routed | - | 192.168.108.92/31 | default | 1550 | False | - | - |
-| Ethernet18 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF17_Ethernet4 | routed | - | 192.168.108.98/31 | default | 1550 | False | - | - |
-| Ethernet19 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF18_Ethernet4 | routed | - | 192.168.108.104/31 | default | 1550 | False | - | - |
-| Ethernet20 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF19_Ethernet4 | routed | - | 192.168.108.110/31 | default | 1550 | False | - | - |
-| Ethernet21 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF20_Ethernet4 | routed | - | 192.168.108.116/31 | default | 1550 | False | - | - |
-| Ethernet22 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF21_Ethernet4 | routed | - | 192.168.108.122/31 | default | 1550 | False | - | - |
-| Ethernet23 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF22_Ethernet4 | routed | - | 192.168.108.128/31 | default | 1550 | False | - | - |
-| Ethernet24 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF23_Ethernet4 | routed | - | 192.168.108.134/31 | default | 1550 | False | - | - |
-| Ethernet25 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF24_Ethernet4 | routed | - | 192.168.108.140/31 | default | 1550 | False | - | - |
-| Ethernet26 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF25_Ethernet4 | routed | - | 192.168.108.146/31 | default | 1550 | False | - | - |
-| Ethernet27 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF26_Ethernet4 | routed | - | 192.168.108.152/31 | default | 1550 | False | - | - |
-| Ethernet28 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF27_Ethernet4 | routed | - | 192.168.108.158/31 | default | 1550 | False | - | - |
-| Ethernet29 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF28_Ethernet4 | routed | - | 192.168.108.164/31 | default | 1550 | False | - | - |
-| Ethernet30 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF29_Ethernet4 | routed | - | 192.168.108.170/31 | default | 1550 | False | - | - |
-| Ethernet31 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF30_Ethernet4 | routed | - | 192.168.108.176/31 | default | 1550 | False | - | - |
-| Ethernet32 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF31_Ethernet4 | routed | - | 192.168.108.182/31 | default | 1550 | False | - | - |
-| Ethernet33 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF32_Ethernet4 | routed | - | 192.168.108.188/31 | default | 1550 | False | - | - |
-| Ethernet34 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF33_Ethernet4 | routed | - | 192.168.108.194/31 | default | 1550 | False | - | - |
-| Ethernet35 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF34_Ethernet4 | routed | - | 192.168.108.200/31 | default | 1550 | False | - | - |
-| Ethernet36 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF35_Ethernet4 | routed | - | 192.168.108.206/31 | default | 1550 | False | - | - |
-| Ethernet37 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF36_Ethernet4 | routed | - | 192.168.108.212/31 | default | 1550 | False | - | - |
-| Ethernet38 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF37_Ethernet4 | routed | - | 192.168.108.218/31 | default | 1550 | False | - | - |
-| Ethernet39 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF38_Ethernet4 | routed | - | 192.168.108.224/31 | default | 1550 | False | - | - |
-| Ethernet40 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF39_Ethernet4 | routed | - | 192.168.108.230/31 | default | 1550 | False | - | - |
-| Ethernet41 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF40_Ethernet4 | routed | - | 192.168.108.236/31 | default | 1550 | False | - | - |
-| Ethernet42 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF41_Ethernet4 | routed | - | 192.168.108.242/31 | default | 1550 | False | - | - |
-| Ethernet43 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF42_Ethernet4 | routed | - | 192.168.108.248/31 | default | 1550 | False | - | - |
-| Ethernet44 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF43_Ethernet4 | routed | - | 192.168.108.254/31 | default | 1550 | False | - | - |
-| Ethernet45 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF44_Ethernet4 | routed | - | 192.168.109.4/31 | default | 1550 | False | - | - |
-| Ethernet46 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF45_Ethernet4 | routed | - | 192.168.109.10/31 | default | 1550 | False | - | - |
-| Ethernet47 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF46_Ethernet4 | routed | - | 192.168.109.16/31 | default | 1550 | False | - | - |
-| Ethernet48 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF47_Ethernet4 | routed | - | 192.168.109.22/31 | default | 1550 | False | - | - |
-| Ethernet49 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF48_Ethernet4 | routed | - | 192.168.109.28/31 | default | 1550 | False | - | - |
-| Ethernet50 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF49_Ethernet4 | routed | - | 192.168.109.34/31 | default | 1550 | False | - | - |
-| Ethernet51 | P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF50_Ethernet4 | routed | - | 192.168.109.40/31 | default | 1550 | False | - | - |
-| Ethernet52 | P2P_LINK_TO_CLAB-CLOS-LARGE-BORDERLEAF1_Ethernet4 | routed | - | 192.168.110.30/31 | default | 1550 | False | - | - |
-| Ethernet53 | P2P_LINK_TO_CLAB-CLOS-LARGE-BORDERLEAF2_Ethernet4 | routed | - | 192.168.110.36/31 | default | 1550 | False | - | - |
-
-##### ISIS
-
-| Interface | Channel Group | ISIS Instance | ISIS BFD | ISIS Metric | Mode | ISIS Circuit Type | Hello Padding | Authentication Mode |
-| --------- | ------------- | ------------- | -------- | ----------- | ---- | ----------------- | ------------- | ------------------- |
-| Ethernet2 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet3 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet4 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet5 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet6 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet7 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet8 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet9 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet10 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet11 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet12 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet13 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet14 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet15 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet16 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet17 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet18 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet19 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet20 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet21 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet22 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet23 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet24 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet25 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet26 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet27 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet28 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet29 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet30 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet31 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet32 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet33 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet34 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet35 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet36 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet37 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet38 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet39 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet40 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet41 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet42 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet43 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet44 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet45 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet46 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet47 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet48 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet49 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet50 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet51 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet52 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
-| Ethernet53 | - | EVPN_UNDERLAY | - | 50 | point-to-point | level-2 | - | - |
+| Interface | Description | Channel Group | IPv6 Address | VRF | MTU | Shutdown | ND RA Disabled | Managed Config Flag | IPv6 ACL In | IPv6 ACL Out |
+| --------- | ----------- | --------------| ------------ | --- | --- | -------- | -------------- | -------------------| ----------- | ------------ |
+| Ethernet2 | P2P_clab-clos-large-leaf1_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet3 | P2P_clab-clos-large-leaf2_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet4 | P2P_clab-clos-large-leaf3_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet5 | P2P_clab-clos-large-leaf4_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet6 | P2P_clab-clos-large-leaf5_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet7 | P2P_clab-clos-large-leaf6_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet8 | P2P_clab-clos-large-leaf7_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet9 | P2P_clab-clos-large-leaf8_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet10 | P2P_clab-clos-large-leaf9_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet11 | P2P_clab-clos-large-leaf10_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet12 | P2P_clab-clos-large-leaf11_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet13 | P2P_clab-clos-large-leaf12_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet14 | P2P_clab-clos-large-leaf13_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet15 | P2P_clab-clos-large-leaf14_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet16 | P2P_clab-clos-large-leaf15_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet17 | P2P_clab-clos-large-leaf16_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet18 | P2P_clab-clos-large-leaf17_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet19 | P2P_clab-clos-large-leaf18_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet20 | P2P_clab-clos-large-leaf19_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet21 | P2P_clab-clos-large-leaf20_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet22 | P2P_clab-clos-large-leaf21_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet23 | P2P_clab-clos-large-leaf22_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet24 | P2P_clab-clos-large-leaf23_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet25 | P2P_clab-clos-large-leaf24_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet26 | P2P_clab-clos-large-leaf25_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet27 | P2P_clab-clos-large-leaf26_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet28 | P2P_clab-clos-large-leaf27_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet29 | P2P_clab-clos-large-leaf28_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet30 | P2P_clab-clos-large-leaf29_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet31 | P2P_clab-clos-large-leaf30_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet32 | P2P_clab-clos-large-leaf31_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet33 | P2P_clab-clos-large-leaf32_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet34 | P2P_clab-clos-large-leaf33_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet35 | P2P_clab-clos-large-leaf34_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet36 | P2P_clab-clos-large-leaf35_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet37 | P2P_clab-clos-large-leaf36_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet38 | P2P_clab-clos-large-leaf37_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet39 | P2P_clab-clos-large-leaf38_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet40 | P2P_clab-clos-large-leaf39_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet41 | P2P_clab-clos-large-leaf40_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet42 | P2P_clab-clos-large-leaf41_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet43 | P2P_clab-clos-large-leaf42_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet44 | P2P_clab-clos-large-leaf43_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet45 | P2P_clab-clos-large-leaf44_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet46 | P2P_clab-clos-large-leaf45_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet47 | P2P_clab-clos-large-leaf46_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet48 | P2P_clab-clos-large-leaf47_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet49 | P2P_clab-clos-large-leaf48_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet50 | P2P_clab-clos-large-leaf49_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet51 | P2P_clab-clos-large-leaf50_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet52 | P2P_clab-clos-large-borderleaf1_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
+| Ethernet53 | P2P_clab-clos-large-borderleaf2_Ethernet4 | - | - | default | 1550 | False | - | - | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
 ```eos
 !
 interface Ethernet2
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF1_Ethernet4
+   description P2P_clab-clos-large-leaf1_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.2/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet3
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF2_Ethernet4
+   description P2P_clab-clos-large-leaf2_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.8/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet4
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF3_Ethernet4
+   description P2P_clab-clos-large-leaf3_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.14/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet5
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF4_Ethernet4
+   description P2P_clab-clos-large-leaf4_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.20/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet6
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF5_Ethernet4
+   description P2P_clab-clos-large-leaf5_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.26/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet7
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF6_Ethernet4
+   description P2P_clab-clos-large-leaf6_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.32/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet8
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF7_Ethernet4
+   description P2P_clab-clos-large-leaf7_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.38/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet9
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF8_Ethernet4
+   description P2P_clab-clos-large-leaf8_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.44/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet10
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF9_Ethernet4
+   description P2P_clab-clos-large-leaf9_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.50/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet11
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF10_Ethernet4
+   description P2P_clab-clos-large-leaf10_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.56/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet12
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF11_Ethernet4
+   description P2P_clab-clos-large-leaf11_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.62/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet13
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF12_Ethernet4
+   description P2P_clab-clos-large-leaf12_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.68/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet14
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF13_Ethernet4
+   description P2P_clab-clos-large-leaf13_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.74/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet15
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF14_Ethernet4
+   description P2P_clab-clos-large-leaf14_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.80/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet16
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF15_Ethernet4
+   description P2P_clab-clos-large-leaf15_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.86/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet17
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF16_Ethernet4
+   description P2P_clab-clos-large-leaf16_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.92/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet18
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF17_Ethernet4
+   description P2P_clab-clos-large-leaf17_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.98/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet19
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF18_Ethernet4
+   description P2P_clab-clos-large-leaf18_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.104/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet20
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF19_Ethernet4
+   description P2P_clab-clos-large-leaf19_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.110/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet21
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF20_Ethernet4
+   description P2P_clab-clos-large-leaf20_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.116/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet22
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF21_Ethernet4
+   description P2P_clab-clos-large-leaf21_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.122/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet23
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF22_Ethernet4
+   description P2P_clab-clos-large-leaf22_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.128/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet24
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF23_Ethernet4
+   description P2P_clab-clos-large-leaf23_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.134/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet25
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF24_Ethernet4
+   description P2P_clab-clos-large-leaf24_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.140/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet26
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF25_Ethernet4
+   description P2P_clab-clos-large-leaf25_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.146/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet27
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF26_Ethernet4
+   description P2P_clab-clos-large-leaf26_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.152/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet28
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF27_Ethernet4
+   description P2P_clab-clos-large-leaf27_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.158/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet29
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF28_Ethernet4
+   description P2P_clab-clos-large-leaf28_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.164/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet30
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF29_Ethernet4
+   description P2P_clab-clos-large-leaf29_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.170/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet31
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF30_Ethernet4
+   description P2P_clab-clos-large-leaf30_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.176/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet32
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF31_Ethernet4
+   description P2P_clab-clos-large-leaf31_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.182/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet33
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF32_Ethernet4
+   description P2P_clab-clos-large-leaf32_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.188/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet34
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF33_Ethernet4
+   description P2P_clab-clos-large-leaf33_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.194/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet35
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF34_Ethernet4
+   description P2P_clab-clos-large-leaf34_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.200/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet36
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF35_Ethernet4
+   description P2P_clab-clos-large-leaf35_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.206/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet37
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF36_Ethernet4
+   description P2P_clab-clos-large-leaf36_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.212/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet38
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF37_Ethernet4
+   description P2P_clab-clos-large-leaf37_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.218/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet39
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF38_Ethernet4
+   description P2P_clab-clos-large-leaf38_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.224/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet40
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF39_Ethernet4
+   description P2P_clab-clos-large-leaf39_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.230/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet41
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF40_Ethernet4
+   description P2P_clab-clos-large-leaf40_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.236/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet42
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF41_Ethernet4
+   description P2P_clab-clos-large-leaf41_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.242/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet43
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF42_Ethernet4
+   description P2P_clab-clos-large-leaf42_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.248/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet44
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF43_Ethernet4
+   description P2P_clab-clos-large-leaf43_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.254/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet45
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF44_Ethernet4
+   description P2P_clab-clos-large-leaf44_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.4/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet46
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF45_Ethernet4
+   description P2P_clab-clos-large-leaf45_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.10/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet47
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF46_Ethernet4
+   description P2P_clab-clos-large-leaf46_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.16/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet48
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF47_Ethernet4
+   description P2P_clab-clos-large-leaf47_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.22/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet49
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF48_Ethernet4
+   description P2P_clab-clos-large-leaf48_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.28/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet50
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF49_Ethernet4
+   description P2P_clab-clos-large-leaf49_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.34/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet51
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF50_Ethernet4
+   description P2P_clab-clos-large-leaf50_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.109.40/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet52
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-BORDERLEAF1_Ethernet4
+   description P2P_clab-clos-large-borderleaf1_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.110.30/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 !
 interface Ethernet53
-   description P2P_LINK_TO_CLAB-CLOS-LARGE-BORDERLEAF2_Ethernet4
+   description P2P_clab-clos-large-borderleaf2_Ethernet4
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.110.36/31
-   isis enable EVPN_UNDERLAY
-   isis circuit-type level-2
-   isis metric 50
-   isis network point-to-point
+   ipv6 enable
+   pim ipv4 sparse-mode
 ```
 
 ### Loopback Interfaces
@@ -926,30 +723,22 @@ interface Ethernet53
 
 | Interface | Description | VRF | IP Address |
 | --------- | ----------- | --- | ---------- |
-| Loopback0 | EVPN_Overlay_Peering | default | 192.168.101.102/32 |
+| Loopback0 | ROUTER_ID | default | 192.168.101.102/32 |
 
 ##### IPv6
 
 | Interface | Description | VRF | IPv6 Address |
 | --------- | ----------- | --- | ------------ |
-| Loopback0 | EVPN_Overlay_Peering | default | - |
-
-##### ISIS
-
-| Interface | ISIS instance | ISIS metric | Interface mode |
-| --------- | ------------- | ----------- | -------------- |
-| Loopback0 | EVPN_UNDERLAY | - | passive |
+| Loopback0 | ROUTER_ID | default | - |
 
 #### Loopback Interfaces Device Configuration
 
 ```eos
 !
 interface Loopback0
-   description EVPN_Overlay_Peering
+   description ROUTER_ID
    no shutdown
    ip address 192.168.101.102/32
-   isis enable EVPN_UNDERLAY
-   isis passive
 ```
 
 ## Routing
@@ -969,14 +758,14 @@ service routing protocols model multi-agent
 
 | VRF | Routing Enabled |
 | --- | --------------- |
-| default | True |
+| default | True (ipv6 interfaces) |
 | MGMT | False |
 
 #### IP Routing Device Configuration
 
 ```eos
 !
-ip routing
+ip routing ipv6 interfaces
 no ip routing vrf MGMT
 ```
 
@@ -986,8 +775,15 @@ no ip routing vrf MGMT
 
 | VRF | Routing Enabled |
 | --- | --------------- |
-| default | False |
+| default | True |
 | MGMT | false |
+
+#### IPv6 Routing Device Configuration
+
+```eos
+!
+ipv6 unicast-routing
+```
 
 ### Static Routes
 
@@ -1002,98 +798,6 @@ no ip routing vrf MGMT
 ```eos
 !
 ip route vrf MGMT 0.0.0.0/0 172.20.20.1
-```
-
-### Router ISIS
-
-#### Router ISIS Summary
-
-| Settings | Value |
-| -------- | ----- |
-| Instance | EVPN_UNDERLAY |
-| Net-ID | 49.0001.1921.6810.1102.00 |
-| Type | level-2 |
-| Router-ID | 192.168.101.102 |
-| Log Adjacency Changes | True |
-
-#### ISIS Interfaces Summary
-
-| Interface | ISIS Instance | ISIS Metric | Interface Mode |
-| --------- | ------------- | ----------- | -------------- |
-| Ethernet2 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet3 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet4 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet5 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet6 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet7 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet8 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet9 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet10 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet11 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet12 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet13 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet14 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet15 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet16 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet17 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet18 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet19 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet20 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet21 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet22 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet23 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet24 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet25 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet26 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet27 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet28 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet29 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet30 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet31 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet32 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet33 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet34 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet35 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet36 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet37 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet38 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet39 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet40 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet41 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet42 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet43 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet44 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet45 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet46 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet47 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet48 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet49 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet50 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet51 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet52 | EVPN_UNDERLAY | 50 | point-to-point |
-| Ethernet53 | EVPN_UNDERLAY | 50 | point-to-point |
-| Loopback0 | EVPN_UNDERLAY | - | passive |
-
-#### ISIS IPv4 Address Family Summary
-
-| Settings | Value |
-| -------- | ----- |
-| IPv4 Address-family Enabled | True |
-| Maximum-paths | 4 |
-
-#### Router ISIS Device Configuration
-
-```eos
-!
-router isis EVPN_UNDERLAY
-   net 49.0001.1921.6810.1102.00
-   is-type level-2
-   router-id ipv4 192.168.101.102
-   log-adjacency-changes
-   !
-   address-family ipv4 unicast
-      maximum-paths 4
-   !
 ```
 
 ### Router BGP
@@ -1124,6 +828,14 @@ ASN Notation: asplain
 | Ebgp multihop | 3 |
 | Send community | all |
 | Maximum routes | 0 (no limit) |
+
+##### IPv4-UNDERLAY-PEERS
+
+| Settings | Value |
+| -------- | ----- |
+| Address Family | ipv4 |
+| Send community | all |
+| Maximum routes | 12000 |
 
 #### BGP Neighbors
 
@@ -1182,13 +894,70 @@ ASN Notation: asplain
 | 192.168.101.91 | 65190 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 192.168.101.92 | 65191 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 
+#### BGP Neighbor Interfaces
+
+| Neighbor Interface | VRF | Peer Group | Remote AS | Peer Filter |
+| ------------------ | --- | ---------- | --------- | ----------- |
+| Ethernet2 | default | IPv4-UNDERLAY-PEERS | 65100 | - |
+| Ethernet3 | default | IPv4-UNDERLAY-PEERS | 65100 | - |
+| Ethernet4 | default | IPv4-UNDERLAY-PEERS | 65102 | - |
+| Ethernet5 | default | IPv4-UNDERLAY-PEERS | 65102 | - |
+| Ethernet6 | default | IPv4-UNDERLAY-PEERS | 65104 | - |
+| Ethernet7 | default | IPv4-UNDERLAY-PEERS | 65104 | - |
+| Ethernet8 | default | IPv4-UNDERLAY-PEERS | 65106 | - |
+| Ethernet9 | default | IPv4-UNDERLAY-PEERS | 65106 | - |
+| Ethernet10 | default | IPv4-UNDERLAY-PEERS | 65108 | - |
+| Ethernet11 | default | IPv4-UNDERLAY-PEERS | 65108 | - |
+| Ethernet12 | default | IPv4-UNDERLAY-PEERS | 65110 | - |
+| Ethernet13 | default | IPv4-UNDERLAY-PEERS | 65110 | - |
+| Ethernet14 | default | IPv4-UNDERLAY-PEERS | 65112 | - |
+| Ethernet15 | default | IPv4-UNDERLAY-PEERS | 65112 | - |
+| Ethernet16 | default | IPv4-UNDERLAY-PEERS | 65114 | - |
+| Ethernet17 | default | IPv4-UNDERLAY-PEERS | 65114 | - |
+| Ethernet18 | default | IPv4-UNDERLAY-PEERS | 65116 | - |
+| Ethernet19 | default | IPv4-UNDERLAY-PEERS | 65116 | - |
+| Ethernet20 | default | IPv4-UNDERLAY-PEERS | 65118 | - |
+| Ethernet21 | default | IPv4-UNDERLAY-PEERS | 65118 | - |
+| Ethernet22 | default | IPv4-UNDERLAY-PEERS | 65120 | - |
+| Ethernet23 | default | IPv4-UNDERLAY-PEERS | 65120 | - |
+| Ethernet24 | default | IPv4-UNDERLAY-PEERS | 65122 | - |
+| Ethernet25 | default | IPv4-UNDERLAY-PEERS | 65122 | - |
+| Ethernet26 | default | IPv4-UNDERLAY-PEERS | 65124 | - |
+| Ethernet27 | default | IPv4-UNDERLAY-PEERS | 65124 | - |
+| Ethernet28 | default | IPv4-UNDERLAY-PEERS | 65126 | - |
+| Ethernet29 | default | IPv4-UNDERLAY-PEERS | 65126 | - |
+| Ethernet30 | default | IPv4-UNDERLAY-PEERS | 65128 | - |
+| Ethernet31 | default | IPv4-UNDERLAY-PEERS | 65128 | - |
+| Ethernet32 | default | IPv4-UNDERLAY-PEERS | 65130 | - |
+| Ethernet33 | default | IPv4-UNDERLAY-PEERS | 65130 | - |
+| Ethernet34 | default | IPv4-UNDERLAY-PEERS | 65132 | - |
+| Ethernet35 | default | IPv4-UNDERLAY-PEERS | 65132 | - |
+| Ethernet36 | default | IPv4-UNDERLAY-PEERS | 65134 | - |
+| Ethernet37 | default | IPv4-UNDERLAY-PEERS | 65134 | - |
+| Ethernet38 | default | IPv4-UNDERLAY-PEERS | 65136 | - |
+| Ethernet39 | default | IPv4-UNDERLAY-PEERS | 65136 | - |
+| Ethernet40 | default | IPv4-UNDERLAY-PEERS | 65138 | - |
+| Ethernet41 | default | IPv4-UNDERLAY-PEERS | 65138 | - |
+| Ethernet42 | default | IPv4-UNDERLAY-PEERS | 65140 | - |
+| Ethernet43 | default | IPv4-UNDERLAY-PEERS | 65140 | - |
+| Ethernet44 | default | IPv4-UNDERLAY-PEERS | 65142 | - |
+| Ethernet45 | default | IPv4-UNDERLAY-PEERS | 65142 | - |
+| Ethernet46 | default | IPv4-UNDERLAY-PEERS | 65144 | - |
+| Ethernet47 | default | IPv4-UNDERLAY-PEERS | 65144 | - |
+| Ethernet48 | default | IPv4-UNDERLAY-PEERS | 65146 | - |
+| Ethernet49 | default | IPv4-UNDERLAY-PEERS | 65146 | - |
+| Ethernet50 | default | IPv4-UNDERLAY-PEERS | 65148 | - |
+| Ethernet51 | default | IPv4-UNDERLAY-PEERS | 65148 | - |
+| Ethernet52 | default | IPv4-UNDERLAY-PEERS | 65190 | - |
+| Ethernet53 | default | IPv4-UNDERLAY-PEERS | 65191 | - |
+
 #### Router BGP EVPN Address Family
 
 ##### EVPN Peer Groups
 
-| Peer Group | Activate | Encapsulation |
-| ---------- | -------- | ------------- |
-| EVPN-OVERLAY-PEERS | True | default |
+| Peer Group | Activate | Route-map In | Route-map Out | Encapsulation | Next-hop-self Source Interface |
+| ---------- | -------- | ------------ | ------------- | ------------- | ------------------------------ |
+| EVPN-OVERLAY-PEERS | True |  - | - | default | - |
 
 #### Router BGP Device Configuration
 
@@ -1196,8 +965,8 @@ ASN Notation: asplain
 !
 router bgp 65001
    router-id 192.168.101.102
-   maximum-paths 4 ecmp 4
    no bgp default ipv4-unicast
+   maximum-paths 4 ecmp 4
    neighbor EVPN-OVERLAY-PEERS peer group
    neighbor EVPN-OVERLAY-PEERS next-hop-unchanged
    neighbor EVPN-OVERLAY-PEERS update-source Loopback0
@@ -1205,168 +974,226 @@ router bgp 65001
    neighbor EVPN-OVERLAY-PEERS ebgp-multihop 3
    neighbor EVPN-OVERLAY-PEERS send-community
    neighbor EVPN-OVERLAY-PEERS maximum-routes 0
+   neighbor IPv4-UNDERLAY-PEERS peer group
+   neighbor IPv4-UNDERLAY-PEERS send-community
+   neighbor IPv4-UNDERLAY-PEERS maximum-routes 12000
    neighbor 192.168.101.1 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.1 remote-as 65100
-   neighbor 192.168.101.1 description clab-clos-large-leaf1
+   neighbor 192.168.101.1 description clab-clos-large-leaf1_Loopback0
    neighbor 192.168.101.2 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.2 remote-as 65100
-   neighbor 192.168.101.2 description clab-clos-large-leaf2
+   neighbor 192.168.101.2 description clab-clos-large-leaf2_Loopback0
    neighbor 192.168.101.3 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.3 remote-as 65102
-   neighbor 192.168.101.3 description clab-clos-large-leaf3
+   neighbor 192.168.101.3 description clab-clos-large-leaf3_Loopback0
    neighbor 192.168.101.4 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.4 remote-as 65102
-   neighbor 192.168.101.4 description clab-clos-large-leaf4
+   neighbor 192.168.101.4 description clab-clos-large-leaf4_Loopback0
    neighbor 192.168.101.5 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.5 remote-as 65104
-   neighbor 192.168.101.5 description clab-clos-large-leaf5
+   neighbor 192.168.101.5 description clab-clos-large-leaf5_Loopback0
    neighbor 192.168.101.6 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.6 remote-as 65104
-   neighbor 192.168.101.6 description clab-clos-large-leaf6
+   neighbor 192.168.101.6 description clab-clos-large-leaf6_Loopback0
    neighbor 192.168.101.7 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.7 remote-as 65106
-   neighbor 192.168.101.7 description clab-clos-large-leaf7
+   neighbor 192.168.101.7 description clab-clos-large-leaf7_Loopback0
    neighbor 192.168.101.8 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.8 remote-as 65106
-   neighbor 192.168.101.8 description clab-clos-large-leaf8
+   neighbor 192.168.101.8 description clab-clos-large-leaf8_Loopback0
    neighbor 192.168.101.9 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.9 remote-as 65108
-   neighbor 192.168.101.9 description clab-clos-large-leaf9
+   neighbor 192.168.101.9 description clab-clos-large-leaf9_Loopback0
    neighbor 192.168.101.10 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.10 remote-as 65108
-   neighbor 192.168.101.10 description clab-clos-large-leaf10
+   neighbor 192.168.101.10 description clab-clos-large-leaf10_Loopback0
    neighbor 192.168.101.11 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.11 remote-as 65110
-   neighbor 192.168.101.11 description clab-clos-large-leaf11
+   neighbor 192.168.101.11 description clab-clos-large-leaf11_Loopback0
    neighbor 192.168.101.12 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.12 remote-as 65110
-   neighbor 192.168.101.12 description clab-clos-large-leaf12
+   neighbor 192.168.101.12 description clab-clos-large-leaf12_Loopback0
    neighbor 192.168.101.13 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.13 remote-as 65112
-   neighbor 192.168.101.13 description clab-clos-large-leaf13
+   neighbor 192.168.101.13 description clab-clos-large-leaf13_Loopback0
    neighbor 192.168.101.14 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.14 remote-as 65112
-   neighbor 192.168.101.14 description clab-clos-large-leaf14
+   neighbor 192.168.101.14 description clab-clos-large-leaf14_Loopback0
    neighbor 192.168.101.15 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.15 remote-as 65114
-   neighbor 192.168.101.15 description clab-clos-large-leaf15
+   neighbor 192.168.101.15 description clab-clos-large-leaf15_Loopback0
    neighbor 192.168.101.16 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.16 remote-as 65114
-   neighbor 192.168.101.16 description clab-clos-large-leaf16
+   neighbor 192.168.101.16 description clab-clos-large-leaf16_Loopback0
    neighbor 192.168.101.17 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.17 remote-as 65116
-   neighbor 192.168.101.17 description clab-clos-large-leaf17
+   neighbor 192.168.101.17 description clab-clos-large-leaf17_Loopback0
    neighbor 192.168.101.18 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.18 remote-as 65116
-   neighbor 192.168.101.18 description clab-clos-large-leaf18
+   neighbor 192.168.101.18 description clab-clos-large-leaf18_Loopback0
    neighbor 192.168.101.19 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.19 remote-as 65118
-   neighbor 192.168.101.19 description clab-clos-large-leaf19
+   neighbor 192.168.101.19 description clab-clos-large-leaf19_Loopback0
    neighbor 192.168.101.20 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.20 remote-as 65118
-   neighbor 192.168.101.20 description clab-clos-large-leaf20
+   neighbor 192.168.101.20 description clab-clos-large-leaf20_Loopback0
    neighbor 192.168.101.21 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.21 remote-as 65120
-   neighbor 192.168.101.21 description clab-clos-large-leaf21
+   neighbor 192.168.101.21 description clab-clos-large-leaf21_Loopback0
    neighbor 192.168.101.22 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.22 remote-as 65120
-   neighbor 192.168.101.22 description clab-clos-large-leaf22
+   neighbor 192.168.101.22 description clab-clos-large-leaf22_Loopback0
    neighbor 192.168.101.23 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.23 remote-as 65122
-   neighbor 192.168.101.23 description clab-clos-large-leaf23
+   neighbor 192.168.101.23 description clab-clos-large-leaf23_Loopback0
    neighbor 192.168.101.24 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.24 remote-as 65122
-   neighbor 192.168.101.24 description clab-clos-large-leaf24
+   neighbor 192.168.101.24 description clab-clos-large-leaf24_Loopback0
    neighbor 192.168.101.25 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.25 remote-as 65124
-   neighbor 192.168.101.25 description clab-clos-large-leaf25
+   neighbor 192.168.101.25 description clab-clos-large-leaf25_Loopback0
    neighbor 192.168.101.26 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.26 remote-as 65124
-   neighbor 192.168.101.26 description clab-clos-large-leaf26
+   neighbor 192.168.101.26 description clab-clos-large-leaf26_Loopback0
    neighbor 192.168.101.27 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.27 remote-as 65126
-   neighbor 192.168.101.27 description clab-clos-large-leaf27
+   neighbor 192.168.101.27 description clab-clos-large-leaf27_Loopback0
    neighbor 192.168.101.28 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.28 remote-as 65126
-   neighbor 192.168.101.28 description clab-clos-large-leaf28
+   neighbor 192.168.101.28 description clab-clos-large-leaf28_Loopback0
    neighbor 192.168.101.29 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.29 remote-as 65128
-   neighbor 192.168.101.29 description clab-clos-large-leaf29
+   neighbor 192.168.101.29 description clab-clos-large-leaf29_Loopback0
    neighbor 192.168.101.30 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.30 remote-as 65128
-   neighbor 192.168.101.30 description clab-clos-large-leaf30
+   neighbor 192.168.101.30 description clab-clos-large-leaf30_Loopback0
    neighbor 192.168.101.31 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.31 remote-as 65130
-   neighbor 192.168.101.31 description clab-clos-large-leaf31
+   neighbor 192.168.101.31 description clab-clos-large-leaf31_Loopback0
    neighbor 192.168.101.32 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.32 remote-as 65130
-   neighbor 192.168.101.32 description clab-clos-large-leaf32
+   neighbor 192.168.101.32 description clab-clos-large-leaf32_Loopback0
    neighbor 192.168.101.33 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.33 remote-as 65132
-   neighbor 192.168.101.33 description clab-clos-large-leaf33
+   neighbor 192.168.101.33 description clab-clos-large-leaf33_Loopback0
    neighbor 192.168.101.34 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.34 remote-as 65132
-   neighbor 192.168.101.34 description clab-clos-large-leaf34
+   neighbor 192.168.101.34 description clab-clos-large-leaf34_Loopback0
    neighbor 192.168.101.35 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.35 remote-as 65134
-   neighbor 192.168.101.35 description clab-clos-large-leaf35
+   neighbor 192.168.101.35 description clab-clos-large-leaf35_Loopback0
    neighbor 192.168.101.36 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.36 remote-as 65134
-   neighbor 192.168.101.36 description clab-clos-large-leaf36
+   neighbor 192.168.101.36 description clab-clos-large-leaf36_Loopback0
    neighbor 192.168.101.37 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.37 remote-as 65136
-   neighbor 192.168.101.37 description clab-clos-large-leaf37
+   neighbor 192.168.101.37 description clab-clos-large-leaf37_Loopback0
    neighbor 192.168.101.38 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.38 remote-as 65136
-   neighbor 192.168.101.38 description clab-clos-large-leaf38
+   neighbor 192.168.101.38 description clab-clos-large-leaf38_Loopback0
    neighbor 192.168.101.39 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.39 remote-as 65138
-   neighbor 192.168.101.39 description clab-clos-large-leaf39
+   neighbor 192.168.101.39 description clab-clos-large-leaf39_Loopback0
    neighbor 192.168.101.40 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.40 remote-as 65138
-   neighbor 192.168.101.40 description clab-clos-large-leaf40
+   neighbor 192.168.101.40 description clab-clos-large-leaf40_Loopback0
    neighbor 192.168.101.41 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.41 remote-as 65140
-   neighbor 192.168.101.41 description clab-clos-large-leaf41
+   neighbor 192.168.101.41 description clab-clos-large-leaf41_Loopback0
    neighbor 192.168.101.42 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.42 remote-as 65140
-   neighbor 192.168.101.42 description clab-clos-large-leaf42
+   neighbor 192.168.101.42 description clab-clos-large-leaf42_Loopback0
    neighbor 192.168.101.43 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.43 remote-as 65142
-   neighbor 192.168.101.43 description clab-clos-large-leaf43
+   neighbor 192.168.101.43 description clab-clos-large-leaf43_Loopback0
    neighbor 192.168.101.44 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.44 remote-as 65142
-   neighbor 192.168.101.44 description clab-clos-large-leaf44
+   neighbor 192.168.101.44 description clab-clos-large-leaf44_Loopback0
    neighbor 192.168.101.45 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.45 remote-as 65144
-   neighbor 192.168.101.45 description clab-clos-large-leaf45
+   neighbor 192.168.101.45 description clab-clos-large-leaf45_Loopback0
    neighbor 192.168.101.46 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.46 remote-as 65144
-   neighbor 192.168.101.46 description clab-clos-large-leaf46
+   neighbor 192.168.101.46 description clab-clos-large-leaf46_Loopback0
    neighbor 192.168.101.47 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.47 remote-as 65146
-   neighbor 192.168.101.47 description clab-clos-large-leaf47
+   neighbor 192.168.101.47 description clab-clos-large-leaf47_Loopback0
    neighbor 192.168.101.48 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.48 remote-as 65146
-   neighbor 192.168.101.48 description clab-clos-large-leaf48
+   neighbor 192.168.101.48 description clab-clos-large-leaf48_Loopback0
    neighbor 192.168.101.49 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.49 remote-as 65148
-   neighbor 192.168.101.49 description clab-clos-large-leaf49
+   neighbor 192.168.101.49 description clab-clos-large-leaf49_Loopback0
    neighbor 192.168.101.50 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.50 remote-as 65148
-   neighbor 192.168.101.50 description clab-clos-large-leaf50
+   neighbor 192.168.101.50 description clab-clos-large-leaf50_Loopback0
    neighbor 192.168.101.91 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.91 remote-as 65190
-   neighbor 192.168.101.91 description clab-clos-large-borderleaf1
+   neighbor 192.168.101.91 description clab-clos-large-borderleaf1_Loopback0
    neighbor 192.168.101.92 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.92 remote-as 65191
-   neighbor 192.168.101.92 description clab-clos-large-borderleaf2
+   neighbor 192.168.101.92 description clab-clos-large-borderleaf2_Loopback0
+   redistribute connected route-map RM-CONN-2-BGP
+   neighbor interface Ethernet2 peer-group IPv4-UNDERLAY-PEERS remote-as 65100
+   neighbor interface Ethernet3 peer-group IPv4-UNDERLAY-PEERS remote-as 65100
+   neighbor interface Ethernet4 peer-group IPv4-UNDERLAY-PEERS remote-as 65102
+   neighbor interface Ethernet5 peer-group IPv4-UNDERLAY-PEERS remote-as 65102
+   neighbor interface Ethernet6 peer-group IPv4-UNDERLAY-PEERS remote-as 65104
+   neighbor interface Ethernet7 peer-group IPv4-UNDERLAY-PEERS remote-as 65104
+   neighbor interface Ethernet8 peer-group IPv4-UNDERLAY-PEERS remote-as 65106
+   neighbor interface Ethernet9 peer-group IPv4-UNDERLAY-PEERS remote-as 65106
+   neighbor interface Ethernet10 peer-group IPv4-UNDERLAY-PEERS remote-as 65108
+   neighbor interface Ethernet11 peer-group IPv4-UNDERLAY-PEERS remote-as 65108
+   neighbor interface Ethernet12 peer-group IPv4-UNDERLAY-PEERS remote-as 65110
+   neighbor interface Ethernet13 peer-group IPv4-UNDERLAY-PEERS remote-as 65110
+   neighbor interface Ethernet14 peer-group IPv4-UNDERLAY-PEERS remote-as 65112
+   neighbor interface Ethernet15 peer-group IPv4-UNDERLAY-PEERS remote-as 65112
+   neighbor interface Ethernet16 peer-group IPv4-UNDERLAY-PEERS remote-as 65114
+   neighbor interface Ethernet17 peer-group IPv4-UNDERLAY-PEERS remote-as 65114
+   neighbor interface Ethernet18 peer-group IPv4-UNDERLAY-PEERS remote-as 65116
+   neighbor interface Ethernet19 peer-group IPv4-UNDERLAY-PEERS remote-as 65116
+   neighbor interface Ethernet20 peer-group IPv4-UNDERLAY-PEERS remote-as 65118
+   neighbor interface Ethernet21 peer-group IPv4-UNDERLAY-PEERS remote-as 65118
+   neighbor interface Ethernet22 peer-group IPv4-UNDERLAY-PEERS remote-as 65120
+   neighbor interface Ethernet23 peer-group IPv4-UNDERLAY-PEERS remote-as 65120
+   neighbor interface Ethernet24 peer-group IPv4-UNDERLAY-PEERS remote-as 65122
+   neighbor interface Ethernet25 peer-group IPv4-UNDERLAY-PEERS remote-as 65122
+   neighbor interface Ethernet26 peer-group IPv4-UNDERLAY-PEERS remote-as 65124
+   neighbor interface Ethernet27 peer-group IPv4-UNDERLAY-PEERS remote-as 65124
+   neighbor interface Ethernet28 peer-group IPv4-UNDERLAY-PEERS remote-as 65126
+   neighbor interface Ethernet29 peer-group IPv4-UNDERLAY-PEERS remote-as 65126
+   neighbor interface Ethernet30 peer-group IPv4-UNDERLAY-PEERS remote-as 65128
+   neighbor interface Ethernet31 peer-group IPv4-UNDERLAY-PEERS remote-as 65128
+   neighbor interface Ethernet32 peer-group IPv4-UNDERLAY-PEERS remote-as 65130
+   neighbor interface Ethernet33 peer-group IPv4-UNDERLAY-PEERS remote-as 65130
+   neighbor interface Ethernet34 peer-group IPv4-UNDERLAY-PEERS remote-as 65132
+   neighbor interface Ethernet35 peer-group IPv4-UNDERLAY-PEERS remote-as 65132
+   neighbor interface Ethernet36 peer-group IPv4-UNDERLAY-PEERS remote-as 65134
+   neighbor interface Ethernet37 peer-group IPv4-UNDERLAY-PEERS remote-as 65134
+   neighbor interface Ethernet38 peer-group IPv4-UNDERLAY-PEERS remote-as 65136
+   neighbor interface Ethernet39 peer-group IPv4-UNDERLAY-PEERS remote-as 65136
+   neighbor interface Ethernet40 peer-group IPv4-UNDERLAY-PEERS remote-as 65138
+   neighbor interface Ethernet41 peer-group IPv4-UNDERLAY-PEERS remote-as 65138
+   neighbor interface Ethernet42 peer-group IPv4-UNDERLAY-PEERS remote-as 65140
+   neighbor interface Ethernet43 peer-group IPv4-UNDERLAY-PEERS remote-as 65140
+   neighbor interface Ethernet44 peer-group IPv4-UNDERLAY-PEERS remote-as 65142
+   neighbor interface Ethernet45 peer-group IPv4-UNDERLAY-PEERS remote-as 65142
+   neighbor interface Ethernet46 peer-group IPv4-UNDERLAY-PEERS remote-as 65144
+   neighbor interface Ethernet47 peer-group IPv4-UNDERLAY-PEERS remote-as 65144
+   neighbor interface Ethernet48 peer-group IPv4-UNDERLAY-PEERS remote-as 65146
+   neighbor interface Ethernet49 peer-group IPv4-UNDERLAY-PEERS remote-as 65146
+   neighbor interface Ethernet50 peer-group IPv4-UNDERLAY-PEERS remote-as 65148
+   neighbor interface Ethernet51 peer-group IPv4-UNDERLAY-PEERS remote-as 65148
+   neighbor interface Ethernet52 peer-group IPv4-UNDERLAY-PEERS remote-as 65190
+   neighbor interface Ethernet53 peer-group IPv4-UNDERLAY-PEERS remote-as 65191
    !
    address-family evpn
       neighbor EVPN-OVERLAY-PEERS activate
    !
    address-family ipv4
       no neighbor EVPN-OVERLAY-PEERS activate
+      neighbor IPv4-UNDERLAY-PEERS activate
+      neighbor IPv4-UNDERLAY-PEERS next-hop address-family ipv6 originate
 ```
 
 ## BFD
@@ -1385,6 +1212,120 @@ router bgp 65001
 !
 router bfd
    multihop interval 1200 min-rx 1200 multiplier 3
+```
+
+## Multicast
+
+### Router Multicast
+
+#### IP Router Multicast Summary
+
+- Routing for IPv4 multicast is enabled.
+
+#### Router Multicast Device Configuration
+
+```eos
+!
+router multicast
+   ipv4
+      routing
+```
+
+### PIM Sparse Mode
+
+#### PIM Sparse Mode Enabled Interfaces
+
+| Interface Name | VRF Name | IP Version | Border Router | DR Priority | Local Interface |
+| -------------- | -------- | ---------- | ------------- | ----------- | --------------- |
+| Ethernet2 | - | IPv4 | - | - | - |
+| Ethernet3 | - | IPv4 | - | - | - |
+| Ethernet4 | - | IPv4 | - | - | - |
+| Ethernet5 | - | IPv4 | - | - | - |
+| Ethernet6 | - | IPv4 | - | - | - |
+| Ethernet7 | - | IPv4 | - | - | - |
+| Ethernet8 | - | IPv4 | - | - | - |
+| Ethernet9 | - | IPv4 | - | - | - |
+| Ethernet10 | - | IPv4 | - | - | - |
+| Ethernet11 | - | IPv4 | - | - | - |
+| Ethernet12 | - | IPv4 | - | - | - |
+| Ethernet13 | - | IPv4 | - | - | - |
+| Ethernet14 | - | IPv4 | - | - | - |
+| Ethernet15 | - | IPv4 | - | - | - |
+| Ethernet16 | - | IPv4 | - | - | - |
+| Ethernet17 | - | IPv4 | - | - | - |
+| Ethernet18 | - | IPv4 | - | - | - |
+| Ethernet19 | - | IPv4 | - | - | - |
+| Ethernet20 | - | IPv4 | - | - | - |
+| Ethernet21 | - | IPv4 | - | - | - |
+| Ethernet22 | - | IPv4 | - | - | - |
+| Ethernet23 | - | IPv4 | - | - | - |
+| Ethernet24 | - | IPv4 | - | - | - |
+| Ethernet25 | - | IPv4 | - | - | - |
+| Ethernet26 | - | IPv4 | - | - | - |
+| Ethernet27 | - | IPv4 | - | - | - |
+| Ethernet28 | - | IPv4 | - | - | - |
+| Ethernet29 | - | IPv4 | - | - | - |
+| Ethernet30 | - | IPv4 | - | - | - |
+| Ethernet31 | - | IPv4 | - | - | - |
+| Ethernet32 | - | IPv4 | - | - | - |
+| Ethernet33 | - | IPv4 | - | - | - |
+| Ethernet34 | - | IPv4 | - | - | - |
+| Ethernet35 | - | IPv4 | - | - | - |
+| Ethernet36 | - | IPv4 | - | - | - |
+| Ethernet37 | - | IPv4 | - | - | - |
+| Ethernet38 | - | IPv4 | - | - | - |
+| Ethernet39 | - | IPv4 | - | - | - |
+| Ethernet40 | - | IPv4 | - | - | - |
+| Ethernet41 | - | IPv4 | - | - | - |
+| Ethernet42 | - | IPv4 | - | - | - |
+| Ethernet43 | - | IPv4 | - | - | - |
+| Ethernet44 | - | IPv4 | - | - | - |
+| Ethernet45 | - | IPv4 | - | - | - |
+| Ethernet46 | - | IPv4 | - | - | - |
+| Ethernet47 | - | IPv4 | - | - | - |
+| Ethernet48 | - | IPv4 | - | - | - |
+| Ethernet49 | - | IPv4 | - | - | - |
+| Ethernet50 | - | IPv4 | - | - | - |
+| Ethernet51 | - | IPv4 | - | - | - |
+| Ethernet52 | - | IPv4 | - | - | - |
+| Ethernet53 | - | IPv4 | - | - | - |
+
+## Filters
+
+### Prefix-lists
+
+#### Prefix-lists Summary
+
+##### PL-LOOPBACKS-EVPN-OVERLAY
+
+| Sequence | Action |
+| -------- | ------ |
+| 10 | permit 192.168.101.0/24 eq 32 |
+
+#### Prefix-lists Device Configuration
+
+```eos
+!
+ip prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+   seq 10 permit 192.168.101.0/24 eq 32
+```
+
+### Route-maps
+
+#### Route-maps Summary
+
+##### RM-CONN-2-BGP
+
+| Sequence | Type | Match | Set | Sub-Route-Map | Continue |
+| -------- | ---- | ----- | --- | ------------- | -------- |
+| 10 | permit | ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY | - | - | - |
+
+#### Route-maps Device Configuration
+
+```eos
+!
+route-map RM-CONN-2-BGP permit 10
+   match ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
 ```
 
 ## VRF Instances

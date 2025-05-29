@@ -6,11 +6,12 @@ fabric_name: FABRIC
 
 # Enable vlan aware bundles
 evpn_vlan_aware_bundles: true
+underlay_rfc5549: true
+underlay_multicast: true
+  #isis_area_id: 49.0001
+  #ishis_system_id_format: underlay_loopback
 
-isis_area_id: 49.0001
-isis_system_id_format: underlay_loopback
-
-underlay_routing_protocol: isis
+  #underlay_routing_protocol: isis
 
 # Spine Switches
 spine:

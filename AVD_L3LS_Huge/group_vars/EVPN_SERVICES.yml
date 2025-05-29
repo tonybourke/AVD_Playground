@@ -1,5 +1,7 @@
 ---
 tenants:
+  pim_rp_addresses:
+    - rps: [ 192.168.101.101, 192.168.101.102 ]     
   - name: ACME
     mac_vrf_vni_base: 10000
     redistribute_mlag_ibgp_peering_vrfs: false

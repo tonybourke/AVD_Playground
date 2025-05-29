@@ -1,0 +1,377 @@
+aaa_root:
+  disabled: true
+config_end: true
+enable_password:
+  disabled: true
+ethernet_interfaces:
+- name: Ethernet3
+  description: P2P_spine1_Ethernet3
+  shutdown: false
+  mtu: 1550
+  ip_address: 192.168.108.1/31
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: spine1
+  peer_interface: Ethernet3
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet4
+  description: P2P_spine2_Ethernet3
+  shutdown: false
+  mtu: 1550
+  ip_address: 192.168.108.3/31
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: spine2
+  peer_interface: Ethernet3
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet10
+  description: SERVER_host1_eth1
+  shutdown: false
+  peer: host1
+  peer_interface: eth1
+  peer_type: server
+  switchport:
+    enabled: true
+    mode: access
+    access_vlan: 10
+hostname: leaf1
+ip_igmp_snooping:
+  globally_enabled: true
+  vlans:
+  - id: 10
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 20
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 30
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 40
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 50
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 100
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 200
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 300
+    querier:
+      enabled: true
+      address: 192.168.101.1
+  - id: 400
+    querier:
+      enabled: true
+      address: 192.168.101.1
+ip_name_servers:
+- ip_address: 192.168.1.9
+  vrf: MGMT
+ip_routing: true
+ip_virtual_router_mac_address: 00:1c:73:00:00:99
+is_deployed: true
+local_users:
+- name: admin
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1
+  no_password: true
+- name: tony
+  privilege: 15
+  role: network-admin
+  no_password: true
+  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUrro9HRd2CeRRS69Yn7Lz8fHfNEj3877gbXSb7eBdzMOFDMd05AWj/4reNc1hRyy8DGx/JXrfLzaJBbh9731cy+4kl2/gtIvin0T3ZWtHJ3HaBTZIRDtoI5Pgnpz1C4Zk/cQZM82RgF7SoQBCAx+dxj73FPylw8zBAtsgFl+t64L8N3atjQn7ThCc7QpPPrefh29WRchKH67Zormq6jX5bNZ/kUUw7fF2Sx4AzL9Ox5MmAiu05rvTm7+hLkahJfBghmKHzeNtZVoUkY7T0sAIQIJ+d/7xjwBrG0Lw2d89jaBmeUU3bbuIxG6nReQ7hWMlTzvxadMfyyf8y792ZRxTr93OPSGBdbS1GuZ15NM9HvP8nx+5V/Xt2fQBS+yc+NypIUwR2swUtyBrnAWYXL7KihO5BlP1JGGuGYYUUGlZlJDNNYeOT4EUhhPJ8peCHsbNqagEbxrrC9I87jKADcSJNyjYxorFN8Crh9rB8HPWFNtolTr/IrVwQliuPHSeNC0=
+    tony@evpn-book
+loopback_interfaces:
+- name: Loopback0
+  description: ROUTER_ID
+  shutdown: false
+  ip_address: 192.168.101.1/32
+- name: Loopback1
+  description: VXLAN_TUNNEL_SOURCE
+  shutdown: false
+  ip_address: 192.168.102.1/32
+management_api_http:
+  enable_https: true
+  enable_vrfs:
+  - name: MGMT
+management_interfaces:
+- name: Management0
+  description: OOB_MANAGEMENT
+  shutdown: false
+  vrf: MGMT
+  ip_address: 172.20.20.11/24
+  type: oob
+  gateway: 172.20.20.1
+metadata:
+  platform: cEOS-lab
+  fabric_name: FABRIC
+prefix_lists:
+- name: PL-LOOPBACKS-EVPN-OVERLAY
+  sequence_numbers:
+  - sequence: 10
+    action: permit 192.168.101.0/24 eq 32
+  - sequence: 20
+    action: permit 192.168.102.0/24 eq 32
+route_maps:
+- name: RM-CONN-2-BGP
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    match:
+    - ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+router_bfd:
+  multihop:
+    interval: 1200
+    min_rx: 1200
+    multiplier: 3
+router_bgp:
+  as: '65100'
+  router_id: 192.168.101.1
+  maximum_paths:
+    paths: 4
+    ecmp: 4
+  bgp:
+    default:
+      ipv4_unicast: false
+  peer_groups:
+  - name: IPv4-UNDERLAY-PEERS
+    type: ipv4
+    send_community: all
+    maximum_routes: 12000
+  - name: EVPN-OVERLAY-PEERS
+    type: evpn
+    update_source: Loopback0
+    bfd: true
+    ebgp_multihop: 3
+    send_community: all
+    maximum_routes: 0
+  neighbors:
+  - ip_address: 192.168.108.0
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65001'
+    peer: spine1
+    description: spine1_Ethernet3
+  - ip_address: 192.168.108.2
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65001'
+    peer: spine2
+    description: spine2_Ethernet3
+  - ip_address: 192.168.101.101
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65001'
+    peer: spine1
+    description: spine1_Loopback0
+  - ip_address: 192.168.101.102
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65001'
+    peer: spine2
+    description: spine2_Loopback0
+  redistribute:
+    connected:
+      enabled: true
+      route_map: RM-CONN-2-BGP
+  vlan_aware_bundles:
+  - name: VRF_A
+    rd: 192.168.101.1:10
+    route_targets:
+      both:
+      - '10:10'
+    redistribute_routes:
+    - learned
+    - igmp
+    vlan: 10,20,30,40,50,100,200,300,400
+  address_family_evpn:
+    peer_groups:
+    - name: EVPN-OVERLAY-PEERS
+      activate: true
+  address_family_ipv4:
+    peer_groups:
+    - name: IPv4-UNDERLAY-PEERS
+      activate: true
+    - name: EVPN-OVERLAY-PEERS
+      activate: false
+  vrfs:
+  - name: VRF_A
+    rd: 192.168.101.1:10
+    route_targets:
+      import:
+      - address_family: evpn
+        route_targets:
+        - '10:10'
+      export:
+      - address_family: evpn
+        route_targets:
+        - '10:10'
+    router_id: 192.168.101.1
+    redistribute:
+      connected:
+        enabled: true
+router_multicast:
+  ipv4:
+    routing: true
+    software_forwarding: sfe
+router_pim_sparse_mode:
+  ipv4:
+    rp_addresses:
+    - address: 192.168.109.10
+      groups:
+      - 239.0.0.0/22
+service_routing_protocols_model: multi-agent
+spanning_tree:
+  mode: mstp
+  mst_instances:
+  - id: '0'
+    priority: 16384
+static_routes:
+- vrf: MGMT
+  prefix: 0.0.0.0/0
+  next_hop: 172.20.20.1
+transceiver_qsfp_default_mode_4x10: true
+vlan_interfaces:
+- name: Vlan10
+  description: DMZ
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.10.1/24
+  tenant: ACME
+- name: Vlan20
+  description: Internal
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.20.1/24
+  tenant: ACME
+- name: Vlan30
+  description: Dev
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.30.1/24
+  tenant: ACME
+- name: Vlan40
+  description: QA
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.40.1/24
+  tenant: ACME
+- name: Vlan50
+  description: Guest
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.50.1/24
+  tenant: ACME
+- name: Vlan100
+  description: VLAN_100
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.100.1/24
+  tenant: ACME
+- name: Vlan200
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.200.1/24
+  tenant: ACME
+- name: Vlan300
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.31.1/24
+  tenant: ACME
+- name: Vlan400
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.41.1/24
+  tenant: ACME
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
+vlans:
+- id: 10
+  name: DMZ
+  tenant: ACME
+- id: 20
+  name: Internal
+  tenant: ACME
+- id: 30
+  name: Dev
+  tenant: ACME
+- id: 40
+  name: QA
+  tenant: ACME
+- id: 50
+  name: Guest
+  tenant: ACME
+- id: 100
+  name: VLAN_100
+  tenant: ACME
+- id: 200
+  name: VLAN_200
+  tenant: ACME
+- id: 300
+  name: VLAN_200
+  tenant: ACME
+- id: 400
+  name: VLAN_200
+  tenant: ACME
+vrfs:
+- name: MGMT
+  ip_routing: false
+- name: VRF_A
+  ip_routing: true
+  tenant: ACME
+vxlan_interface:
+  vxlan1:
+    description: leaf1_VTEP
+    vxlan:
+      source_interface: Loopback1
+      udp_port: 4789
+      vlans:
+      - id: 10
+        vni: 10010
+        multicast_group: 239.0.0.9
+      - id: 20
+        vni: 10020
+        multicast_group: 239.0.0.19
+      - id: 30
+        vni: 10030
+        multicast_group: 239.0.0.29
+      - id: 40
+        vni: 10040
+        multicast_group: 239.0.0.39
+      - id: 50
+        vni: 10050
+        multicast_group: 239.0.0.49
+      - id: 100
+        vni: 10100
+        multicast_group: 239.0.0.99
+      - id: 200
+        vni: 10200
+        multicast_group: 239.0.0.199
+      - id: 300
+        vni: 10300
+        multicast_group: 239.0.1.43
+      - id: 400
+        vni: 10400
+        multicast_group: 239.0.1.143
+      vrfs:
+      - name: VRF_A
+        vni: 10

@@ -1,75 +1,511 @@
+aaa_root:
+  disabled: true
+config_end: true
+daemon_terminattr:
+  cvaddrs:
+  - 192.168.1.201:9910
+  cvauth:
+    method: token
+    token_file: /tmp/token
+  cvvrf: MGMT
+  disable_aaa: false
+  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
+enable_password:
+  disabled: true
+ethernet_interfaces:
+- name: Ethernet1
+  description: MLAG_clab-clos-large-leaf18_Ethernet1
+  shutdown: false
+  channel_group:
+    id: 1
+    mode: active
+  peer: clab-clos-large-leaf18
+  peer_interface: Ethernet1
+  peer_type: mlag_peer
+- name: Ethernet2
+  description: MLAG_clab-clos-large-leaf18_Ethernet2
+  shutdown: false
+  channel_group:
+    id: 1
+    mode: active
+  peer: clab-clos-large-leaf18
+  peer_interface: Ethernet2
+  peer_type: mlag_peer
+- name: Ethernet3
+  description: P2P_clab-clos-large-spine1_Ethernet18
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-spine1
+  peer_interface: Ethernet18
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet4
+  description: P2P_clab-clos-large-spine2_Ethernet18
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-spine2
+  peer_interface: Ethernet18
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet5
+  description: P2P_clab-clos-large-spine3_Ethernet18
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-spine3
+  peer_interface: Ethernet18
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet7
+  shutdown: false
+  channel_group:
+    id: 7
+    mode: active
+  peer_type: network_port
+- name: Ethernet8
+  shutdown: false
+  channel_group:
+    id: 8
+    mode: active
+  peer_type: network_port
+- name: Ethernet9
+  shutdown: false
+  channel_group:
+    id: 9
+    mode: active
+  peer_type: network_port
+- name: Ethernet10
+  shutdown: false
+  channel_group:
+    id: 10
+    mode: active
+  peer_type: network_port
+- name: Ethernet11
+  shutdown: false
+  channel_group:
+    id: 11
+    mode: active
+  peer_type: network_port
+- name: Ethernet12
+  shutdown: false
+  channel_group:
+    id: 12
+    mode: active
+  peer_type: network_port
+- name: Ethernet13
+  shutdown: false
+  channel_group:
+    id: 13
+    mode: active
+  peer_type: network_port
+- name: Ethernet14
+  shutdown: false
+  channel_group:
+    id: 14
+    mode: active
+  peer_type: network_port
+- name: Ethernet15
+  shutdown: false
+  channel_group:
+    id: 15
+    mode: active
+  peer_type: network_port
+- name: Ethernet16
+  shutdown: false
+  channel_group:
+    id: 16
+    mode: active
+  peer_type: network_port
+- name: Ethernet17
+  shutdown: false
+  channel_group:
+    id: 17
+    mode: active
+  peer_type: network_port
+- name: Ethernet18
+  shutdown: false
+  channel_group:
+    id: 18
+    mode: active
+  peer_type: network_port
+- name: Ethernet19
+  shutdown: false
+  channel_group:
+    id: 19
+    mode: active
+  peer_type: network_port
+- name: Ethernet20
+  shutdown: false
+  channel_group:
+    id: 20
+    mode: active
+  peer_type: network_port
+- name: Ethernet21
+  shutdown: false
+  channel_group:
+    id: 21
+    mode: active
+  peer_type: network_port
+- name: Ethernet22
+  shutdown: false
+  channel_group:
+    id: 22
+    mode: active
+  peer_type: network_port
+- name: Ethernet23
+  shutdown: false
+  channel_group:
+    id: 23
+    mode: active
+  peer_type: network_port
+- name: Ethernet24
+  shutdown: false
+  channel_group:
+    id: 24
+    mode: active
+  peer_type: network_port
+- name: Ethernet25
+  shutdown: false
+  channel_group:
+    id: 25
+    mode: active
+  peer_type: network_port
+- name: Ethernet26
+  shutdown: false
+  channel_group:
+    id: 26
+    mode: active
+  peer_type: network_port
+- name: Ethernet27
+  shutdown: false
+  channel_group:
+    id: 27
+    mode: active
+  peer_type: network_port
+- name: Ethernet28
+  shutdown: false
+  channel_group:
+    id: 28
+    mode: active
+  peer_type: network_port
+- name: Ethernet29
+  shutdown: false
+  channel_group:
+    id: 29
+    mode: active
+  peer_type: network_port
+- name: Ethernet30
+  shutdown: false
+  channel_group:
+    id: 30
+    mode: active
+  peer_type: network_port
 hostname: clab-clos-large-leaf17
+ip_igmp_snooping:
+  globally_enabled: true
+ip_name_servers:
+- ip_address: 192.168.1.9
+  vrf: MGMT
+ip_routing_ipv6_interfaces: true
+ip_virtual_router_mac_address: 00:1c:73:00:00:99
+ipv6_unicast_routing: true
 is_deployed: true
+local_users:
+- name: admin
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1
+  no_password: true
+- name: arista
+  privilege: 15
+  role: network-admin
+  no_password: true
+  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk=
+    tony@autobox-huge
+loopback_interfaces:
+- name: Loopback0
+  description: ROUTER_ID
+  shutdown: false
+  ip_address: 192.168.101.17/32
+- name: Loopback1
+  description: VXLAN_TUNNEL_SOURCE
+  shutdown: false
+  ip_address: 192.168.102.17/32
+management_api_http:
+  enable_https: true
+  enable_vrfs:
+  - name: MGMT
+management_interfaces:
+- name: Management0
+  description: OOB_MANAGEMENT
+  shutdown: false
+  vrf: MGMT
+  ip_address: 172.20.20.27/24
+  type: oob
+  gateway: 172.20.20.1
+metadata:
+  platform: cEOS-lab
+  fabric_name: FABRIC
+mlag_configuration:
+  domain_id: mlag9
+  local_interface: Vlan4094
+  peer_address: 10.255.252.33
+  peer_link: Port-Channel1
+  reload_delay_mlag: '300'
+  reload_delay_non_mlag: '330'
+port_channel_interfaces:
+- name: Port-Channel1
+  description: MLAG_clab-clos-large-leaf18_Port-Channel1
+  shutdown: false
+  switchport:
+    enabled: true
+    mode: trunk
+    trunk:
+      groups:
+      - MLAG
+- name: Port-Channel7
+  shutdown: false
+  mlag: 7
+  switchport:
+    enabled: true
+- name: Port-Channel8
+  shutdown: false
+  mlag: 8
+  switchport:
+    enabled: true
+- name: Port-Channel9
+  shutdown: false
+  mlag: 9
+  switchport:
+    enabled: true
+- name: Port-Channel10
+  shutdown: false
+  mlag: 10
+  switchport:
+    enabled: true
+- name: Port-Channel11
+  shutdown: false
+  mlag: 11
+  switchport:
+    enabled: true
+- name: Port-Channel12
+  shutdown: false
+  mlag: 12
+  switchport:
+    enabled: true
+- name: Port-Channel13
+  shutdown: false
+  mlag: 13
+  switchport:
+    enabled: true
+- name: Port-Channel14
+  shutdown: false
+  mlag: 14
+  switchport:
+    enabled: true
+- name: Port-Channel15
+  shutdown: false
+  mlag: 15
+  switchport:
+    enabled: true
+- name: Port-Channel16
+  shutdown: false
+  mlag: 16
+  switchport:
+    enabled: true
+- name: Port-Channel17
+  shutdown: false
+  mlag: 17
+  switchport:
+    enabled: true
+- name: Port-Channel18
+  shutdown: false
+  mlag: 18
+  switchport:
+    enabled: true
+- name: Port-Channel19
+  shutdown: false
+  mlag: 19
+  switchport:
+    enabled: true
+- name: Port-Channel20
+  shutdown: false
+  mlag: 20
+  switchport:
+    enabled: true
+- name: Port-Channel21
+  shutdown: false
+  mlag: 21
+  switchport:
+    enabled: true
+- name: Port-Channel22
+  shutdown: false
+  mlag: 22
+  switchport:
+    enabled: true
+- name: Port-Channel23
+  shutdown: false
+  mlag: 23
+  switchport:
+    enabled: true
+- name: Port-Channel24
+  shutdown: false
+  mlag: 24
+  switchport:
+    enabled: true
+- name: Port-Channel25
+  shutdown: false
+  mlag: 25
+  switchport:
+    enabled: true
+- name: Port-Channel26
+  shutdown: false
+  mlag: 26
+  switchport:
+    enabled: true
+- name: Port-Channel27
+  shutdown: false
+  mlag: 27
+  switchport:
+    enabled: true
+- name: Port-Channel28
+  shutdown: false
+  mlag: 28
+  switchport:
+    enabled: true
+- name: Port-Channel29
+  shutdown: false
+  mlag: 29
+  switchport:
+    enabled: true
+- name: Port-Channel30
+  shutdown: false
+  mlag: 30
+  switchport:
+    enabled: true
+prefix_lists:
+- name: PL-LOOPBACKS-EVPN-OVERLAY
+  sequence_numbers:
+  - sequence: 10
+    action: permit 192.168.101.0/24 eq 32
+  - sequence: 20
+    action: permit 192.168.102.0/24 eq 32
+- name: PL-MLAG-PEER-VRFS
+  sequence_numbers:
+  - sequence: 10
+    action: permit 10.255.251.32/31
+route_maps:
+- name: RM-MLAG-PEER-IN
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    description: Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+    set:
+    - origin incomplete
+- name: RM-CONN-2-BGP
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    match:
+    - ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+- name: RM-CONN-2-BGP-VRFS
+  sequence_numbers:
+  - sequence: 10
+    type: deny
+    match:
+    - ip address prefix-list PL-MLAG-PEER-VRFS
+  - sequence: 20
+    type: permit
+router_bfd:
+  multihop:
+    interval: 1200
+    min_rx: 1200
+    multiplier: 3
 router_bgp:
   as: '65116'
   router_id: 192.168.101.17
-  bgp:
-    default:
-      ipv4_unicast: false
   maximum_paths:
     paths: 4
     ecmp: 4
+  bgp:
+    default:
+      ipv4_unicast: false
   peer_groups:
+  - name: MLAG-IPv4-UNDERLAY-PEER
+    type: ipv4
+    remote_as: '65116'
+    description: clab-clos-large-leaf18
+    next_hop_self: true
+    send_community: all
+    maximum_routes: 12000
+    route_map_in: RM-MLAG-PEER-IN
+  - name: IPv4-UNDERLAY-PEERS
+    type: ipv4
+    send_community: all
+    maximum_routes: 12000
   - name: EVPN-OVERLAY-PEERS
     type: evpn
     update_source: Loopback0
     bfd: true
+    ebgp_multihop: 3
     send_community: all
     maximum_routes: 0
-    ebgp_multihop: 3
-  - name: MLAG-IPv4-UNDERLAY-PEER
-    type: ipv4
-    remote_as: '65116'
-    next_hop_self: true
-    description: clab-clos-large-leaf18
-    maximum_routes: 12000
-    send_community: all
-    route_map_in: RM-MLAG-PEER-IN
-  address_family_evpn:
-    peer_groups:
-    - name: EVPN-OVERLAY-PEERS
-      activate: true
-  address_family_ipv4:
-    peer_groups:
-    - name: EVPN-OVERLAY-PEERS
-      activate: false
-    - name: MLAG-IPv4-UNDERLAY-PEER
-      activate: true
   neighbors:
   - ip_address: 192.168.101.101
     peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-spine1
-    description: clab-clos-large-spine1
     remote_as: '65001'
+    peer: clab-clos-large-spine1
+    description: clab-clos-large-spine1_Loopback0
   - ip_address: 192.168.101.102
     peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-spine2
-    description: clab-clos-large-spine2
     remote_as: '65001'
+    peer: clab-clos-large-spine2
+    description: clab-clos-large-spine2_Loopback0
   - ip_address: 192.168.101.103
     peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-spine3
-    description: clab-clos-large-spine3
     remote_as: '65001'
-  vrfs:
-  - name: VRF_A
-    router_id: 192.168.101.17
-    rd: 192.168.101.17:10
-    route_targets:
-      import:
-      - address_family: evpn
-        route_targets:
-        - '10:10'
-      export:
-      - address_family: evpn
-        route_targets:
-        - '10:10'
-    redistribute_routes:
-    - source_protocol: connected
-      route_map: RM-CONN-2-BGP-VRFS
-    neighbors:
-    - ip_address: 10.255.251.33
-      peer_group: MLAG-IPv4-UNDERLAY-PEER
+    peer: clab-clos-large-spine3
+    description: clab-clos-large-spine3_Loopback0
+  neighbor_interfaces:
+  - name: Vlan4093
+    remote_as: '65116'
+    peer: clab-clos-large-leaf18
+    peer_group: MLAG-IPv4-UNDERLAY-PEER
+    description: clab-clos-large-leaf18_Vlan4093
+  - name: Ethernet3
+    remote_as: '65001'
+    peer: clab-clos-large-spine1
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-spine1_Ethernet18
+  - name: Ethernet4
+    remote_as: '65001'
+    peer: clab-clos-large-spine2
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-spine2_Ethernet18
+  - name: Ethernet5
+    remote_as: '65001'
+    peer: clab-clos-large-spine3
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-spine3_Ethernet18
+  redistribute:
+    connected:
+      enabled: true
+      route_map: RM-CONN-2-BGP
   vlan_aware_bundles:
   - name: VRF_A
     rd: 192.168.101.17:10
@@ -142,77 +578,161 @@ router_bgp:
     redistribute_routes:
     - learned
     vlan: '1006'
-static_routes:
-- vrf: MGMT
-  destination_address_prefix: 0.0.0.0/0
-  gateway: 172.20.20.1
+  address_family_evpn:
+    peer_groups:
+    - name: EVPN-OVERLAY-PEERS
+      activate: true
+  address_family_ipv4:
+    peer_groups:
+    - name: MLAG-IPv4-UNDERLAY-PEER
+      activate: true
+      next_hop:
+        address_family_ipv6:
+          enabled: true
+          originate: true
+    - name: IPv4-UNDERLAY-PEERS
+      activate: true
+      next_hop:
+        address_family_ipv6:
+          enabled: true
+          originate: true
+    - name: EVPN-OVERLAY-PEERS
+      activate: false
+  vrfs:
+  - name: VRF_A
+    rd: 192.168.101.17:10
+    route_targets:
+      import:
+      - address_family: evpn
+        route_targets:
+        - '10:10'
+      export:
+      - address_family: evpn
+        route_targets:
+        - '10:10'
+    router_id: 192.168.101.17
+    neighbors:
+    - ip_address: 10.255.251.33
+      peer_group: MLAG-IPv4-UNDERLAY-PEER
+      description: clab-clos-large-leaf18_Vlan3009
+    redistribute:
+      connected:
+        enabled: true
+        route_map: RM-CONN-2-BGP-VRFS
+    address_family_ipv4:
+      neighbors:
+      - ip_address: 10.255.251.33
+        next_hop:
+          address_family_ipv6:
+            enabled: false
+router_multicast:
+  ipv4:
+    routing: true
 service_routing_protocols_model: multi-agent
-ip_routing: true
-daemon_terminattr:
-  cvaddrs:
-  - 192.168.1.201:9910
-  cvauth:
-    method: token
-    token_file: /tmp/token
-  cvvrf: MGMT
-  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
-  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
-  disable_aaa: false
-vlan_internal_order:
-  allocation: ascending
-  range:
-    beginning: 1006
-    ending: 1199
-ip_name_servers:
-- ip_address: 192.168.1.9
-  vrf: MGMT
 spanning_tree:
   mode: mstp
   mst_instances:
   - id: '0'
     priority: 16384
   no_spanning_tree_vlan: 4093-4094
-local_users:
-- name: admin
-  privilege: 15
-  role: network-admin
-  no_password: true
-  sha512_password: $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1
-- name: arista
-  privilege: 15
-  role: network-admin
-  no_password: true
-  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk=
-    tony@autobox-huge
-vrfs:
-- name: MGMT
-  ip_routing: false
-- name: VRF_A
-  tenant: ACME
-  ip_routing: true
-management_interfaces:
-- name: Management0
-  description: oob_management
+static_routes:
+- vrf: MGMT
+  prefix: 0.0.0.0/0
+  next_hop: 172.20.20.1
+transceiver_qsfp_default_mode_4x10: true
+vlan_interfaces:
+- name: Vlan4093
+  description: MLAG_L3
   shutdown: false
-  vrf: MGMT
-  ip_address: 172.20.20.27/24
-  gateway: 172.20.20.1
-  type: oob
-management_api_http:
-  enable_vrfs:
-  - name: MGMT
-  enable_https: true
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  mtu: 1550
+- name: Vlan4094
+  description: MLAG
+  shutdown: false
+  ip_address: 10.255.252.32/31
+  mtu: 1550
+  no_autostate: true
+- name: Vlan10
+  description: DMZ
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.10.1/24
+  tenant: ACME
+- name: Vlan20
+  description: Internal
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.20.1/24
+  tenant: ACME
+- name: Vlan30
+  description: Dev
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.30.1/24
+  tenant: ACME
+- name: Vlan40
+  description: QA
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.40.1/24
+  tenant: ACME
+- name: Vlan50
+  description: Guest
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.50.1/24
+  tenant: ACME
+- name: Vlan100
+  description: VLAN_100
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.100.1/24
+  tenant: ACME
+- name: Vlan200
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.200.1/24
+  tenant: ACME
+- name: Vlan300
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.31.1/24
+  tenant: ACME
+- name: Vlan400
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.41.1/24
+  tenant: ACME
+- name: Vlan3009
+  description: MLAG_L3_VRF_VRF_A
+  shutdown: false
+  vrf: VRF_A
+  ip_address: 10.255.251.32/31
+  mtu: 1550
+  tenant: ACME
+  type: underlay_peering
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
 vlans:
 - id: 4093
-  tenant: system
-  name: LEAF_PEER_L3
-  trunk_groups:
-  - LEAF_PEER_L3
-- id: 4094
-  tenant: system
-  name: MLAG_PEER
+  name: MLAG_L3
   trunk_groups:
   - MLAG
+  tenant: system
+- id: 4094
+  name: MLAG
+  trunk_groups:
+  - MLAG
+  tenant: system
 - id: 10
   name: DMZ
   tenant: ACME
@@ -241,9 +761,9 @@ vlans:
   name: VLAN_200
   tenant: ACME
 - id: 3009
-  name: MLAG_iBGP_VRF_A
+  name: MLAG_L3_VRF_VRF_A
   trunk_groups:
-  - LEAF_PEER_L3
+  - MLAG
   tenant: ACME
 - id: 1000
   name: VLAN_1000
@@ -266,504 +786,18 @@ vlans:
 - id: 1006
   name: VLAN_1006
   tenant: ACME
-vlan_interfaces:
-- name: Vlan4093
-  description: MLAG_PEER_L3_PEERING
-  shutdown: false
-  mtu: 1550
-  ip_address: 10.255.251.32/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-- name: Vlan4094
-  description: MLAG_PEER
-  shutdown: false
-  no_autostate: true
-  mtu: 1550
-  ip_address: 10.255.252.32/31
-- name: Vlan10
+vrfs:
+- name: MGMT
+  ip_routing: false
+- name: VRF_A
+  ip_routing: true
   tenant: ACME
-  description: DMZ
-  shutdown: false
-  ip_address_virtual: 10.1.10.1/24
-  vrf: VRF_A
-- name: Vlan20
-  tenant: ACME
-  description: Internal
-  shutdown: false
-  ip_address_virtual: 10.1.20.1/24
-  vrf: VRF_A
-- name: Vlan30
-  tenant: ACME
-  description: Dev
-  shutdown: false
-  ip_address_virtual: 10.1.30.1/24
-  vrf: VRF_A
-- name: Vlan40
-  tenant: ACME
-  description: QA
-  shutdown: false
-  ip_address_virtual: 10.1.40.1/24
-  vrf: VRF_A
-- name: Vlan50
-  tenant: ACME
-  description: Guest
-  shutdown: false
-  ip_address_virtual: 10.1.50.1/24
-  vrf: VRF_A
-- name: Vlan100
-  tenant: ACME
-  description: VLAN_100
-  shutdown: false
-  ip_address_virtual: 10.1.100.1/24
-  vrf: VRF_A
-- name: Vlan200
-  tenant: ACME
-  description: VLAN_200
-  shutdown: false
-  ip_address_virtual: 10.1.200.1/24
-  vrf: VRF_A
-- name: Vlan300
-  tenant: ACME
-  description: VLAN_200
-  shutdown: false
-  ip_address_virtual: 10.1.31.1/24
-  vrf: VRF_A
-- name: Vlan400
-  tenant: ACME
-  description: VLAN_200
-  shutdown: false
-  ip_address_virtual: 10.1.41.1/24
-  vrf: VRF_A
-- name: Vlan3009
-  tenant: ACME
-  type: underlay_peering
-  shutdown: false
-  description: 'MLAG_PEER_L3_iBGP: vrf VRF_A'
-  vrf: VRF_A
-  mtu: 1550
-  ip_address: 10.255.251.32/31
-port_channel_interfaces:
-- name: Port-Channel1
-  description: MLAG_PEER_clab-clos-large-leaf18_Po1
-  type: switched
-  shutdown: false
-  mode: trunk
-  trunk_groups:
-  - LEAF_PEER_L3
-  - MLAG
-- name: Port-Channel7
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 7
-- name: Port-Channel8
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 8
-- name: Port-Channel9
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 9
-- name: Port-Channel10
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 10
-- name: Port-Channel11
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 11
-- name: Port-Channel12
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 12
-- name: Port-Channel13
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 13
-- name: Port-Channel14
-  type: switched
-  shutdown: false
-  vlans: 10, 20, 30, 40, 50
-  mlag: 14
-- name: Port-Channel15
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 15
-- name: Port-Channel16
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 16
-- name: Port-Channel17
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 17
-- name: Port-Channel18
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 18
-- name: Port-Channel19
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 19
-- name: Port-Channel20
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 20
-- name: Port-Channel21
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 21
-- name: Port-Channel22
-  type: switched
-  shutdown: false
-  vlans: 100, 200, 300, 400
-  mlag: 22
-- name: Port-Channel23
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 23
-- name: Port-Channel24
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 24
-- name: Port-Channel25
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 25
-- name: Port-Channel26
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 26
-- name: Port-Channel27
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 27
-- name: Port-Channel28
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 28
-- name: Port-Channel29
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 29
-- name: Port-Channel30
-  type: switched
-  shutdown: false
-  vlans: 1000, 1001, 1002, 1003, 1004, 1005, 1006
-  mlag: 30
-ethernet_interfaces:
-- name: Ethernet1
-  peer: clab-clos-large-leaf18
-  peer_interface: Ethernet1
-  peer_type: mlag_peer
-  description: MLAG_PEER_clab-clos-large-leaf18_Ethernet1
-  type: port-channel-member
-  shutdown: false
-  channel_group:
-    id: 1
-    mode: active
-- name: Ethernet2
-  peer: clab-clos-large-leaf18
-  peer_interface: Ethernet2
-  peer_type: mlag_peer
-  description: MLAG_PEER_clab-clos-large-leaf18_Ethernet2
-  type: port-channel-member
-  shutdown: false
-  channel_group:
-    id: 1
-    mode: active
-- name: Ethernet3
-  peer: clab-clos-large-spine1
-  peer_interface: Ethernet18
-  peer_type: spine
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE1_Ethernet18
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.97/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet4
-  peer: clab-clos-large-spine2
-  peer_interface: Ethernet18
-  peer_type: spine
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE2_Ethernet18
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.99/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet5
-  peer: clab-clos-large-spine3
-  peer_interface: Ethernet18
-  peer_type: spine
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE3_Ethernet18
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.101/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet7
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 7
-    mode: active
-- name: Ethernet8
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 8
-    mode: active
-- name: Ethernet9
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 9
-    mode: active
-- name: Ethernet10
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 10
-    mode: active
-- name: Ethernet11
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 11
-    mode: active
-- name: Ethernet12
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 12
-    mode: active
-- name: Ethernet13
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 13
-    mode: active
-- name: Ethernet14
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 14
-    mode: active
-- name: Ethernet15
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 15
-    mode: active
-- name: Ethernet16
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 16
-    mode: active
-- name: Ethernet17
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 17
-    mode: active
-- name: Ethernet18
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 18
-    mode: active
-- name: Ethernet19
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 19
-    mode: active
-- name: Ethernet20
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 20
-    mode: active
-- name: Ethernet21
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 21
-    mode: active
-- name: Ethernet22
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 22
-    mode: active
-- name: Ethernet23
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 23
-    mode: active
-- name: Ethernet24
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 24
-    mode: active
-- name: Ethernet25
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 25
-    mode: active
-- name: Ethernet26
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 26
-    mode: active
-- name: Ethernet27
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 27
-    mode: active
-- name: Ethernet28
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 28
-    mode: active
-- name: Ethernet29
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 29
-    mode: active
-- name: Ethernet30
-  peer_type: network_port
-  shutdown: false
-  type: port-channel-member
-  channel_group:
-    id: 30
-    mode: active
-mlag_configuration:
-  domain_id: mlag9
-  local_interface: Vlan4094
-  peer_address: 10.255.252.33
-  peer_link: Port-Channel1
-  reload_delay_mlag: '300'
-  reload_delay_non_mlag: '330'
-loopback_interfaces:
-- name: Loopback0
-  description: EVPN_Overlay_Peering
-  shutdown: false
-  ip_address: 192.168.101.17/32
-  isis_enable: EVPN_UNDERLAY
-  isis_passive: true
-- name: Loopback1
-  description: VTEP_VXLAN_Tunnel_Source
-  shutdown: false
-  ip_address: 192.168.102.17/32
-  isis_enable: EVPN_UNDERLAY
-  isis_passive: true
-router_isis:
-  instance: EVPN_UNDERLAY
-  log_adjacency_changes: true
-  net: 49.0001.1921.6810.1017.00
-  router_id: 192.168.101.17
-  is_type: level-2
-  address_family_ipv4:
-    enabled: true
-    maximum_paths: 4
-router_bfd:
-  multihop:
-    interval: 1200
-    min_rx: 1200
-    multiplier: 3
-ip_igmp_snooping:
-  globally_enabled: true
-ip_virtual_router_mac_address: 00:1c:73:00:00:99
-route_maps:
-- name: RM-MLAG-PEER-IN
-  sequence_numbers:
-  - sequence: 10
-    type: permit
-    set:
-    - origin incomplete
-    description: Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
-- name: RM-CONN-2-BGP-VRFS
-  sequence_numbers:
-  - sequence: 10
-    type: deny
-    match:
-    - ip address prefix-list PL-MLAG-PEER-VRFS
-  - sequence: 20
-    type: permit
-prefix_lists:
-- name: PL-MLAG-PEER-VRFS
-  sequence_numbers:
-  - sequence: 10
-    action: permit 10.255.251.32/31
 vxlan_interface:
-  Vxlan1:
+  vxlan1:
     description: clab-clos-large-leaf17_VTEP
     vxlan:
-      udp_port: 4789
       source_interface: Loopback1
+      udp_port: 4789
       virtual_router_encapsulation_mac_address: mlag-system-id
       vlans:
       - id: 10
@@ -801,5 +835,3 @@ vxlan_interface:
       vrfs:
       - name: VRF_A
         vni: 10
-metadata:
-  platform: cEOS-lab

@@ -1,298 +1,6 @@
-hostname: clab-clos-large-spine3
-is_deployed: true
-router_bgp:
-  as: '65001'
-  router_id: 192.168.101.103
-  bgp:
-    default:
-      ipv4_unicast: false
-  maximum_paths:
-    paths: 4
-    ecmp: 4
-  peer_groups:
-  - name: EVPN-OVERLAY-PEERS
-    type: evpn
-    update_source: Loopback0
-    bfd: true
-    send_community: all
-    maximum_routes: 0
-    ebgp_multihop: 3
-    next_hop_unchanged: true
-  address_family_evpn:
-    peer_groups:
-    - name: EVPN-OVERLAY-PEERS
-      activate: true
-  address_family_ipv4:
-    peer_groups:
-    - name: EVPN-OVERLAY-PEERS
-      activate: false
-  neighbors:
-  - ip_address: 192.168.101.91
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-borderleaf1
-    description: clab-clos-large-borderleaf1
-    remote_as: '65190'
-  - ip_address: 192.168.101.92
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-borderleaf2
-    description: clab-clos-large-borderleaf2
-    remote_as: '65191'
-  - ip_address: 192.168.101.1
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf1
-    description: clab-clos-large-leaf1
-    remote_as: '65100'
-  - ip_address: 192.168.101.2
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf2
-    description: clab-clos-large-leaf2
-    remote_as: '65100'
-  - ip_address: 192.168.101.3
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf3
-    description: clab-clos-large-leaf3
-    remote_as: '65102'
-  - ip_address: 192.168.101.4
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf4
-    description: clab-clos-large-leaf4
-    remote_as: '65102'
-  - ip_address: 192.168.101.5
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf5
-    description: clab-clos-large-leaf5
-    remote_as: '65104'
-  - ip_address: 192.168.101.6
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf6
-    description: clab-clos-large-leaf6
-    remote_as: '65104'
-  - ip_address: 192.168.101.7
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf7
-    description: clab-clos-large-leaf7
-    remote_as: '65106'
-  - ip_address: 192.168.101.8
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf8
-    description: clab-clos-large-leaf8
-    remote_as: '65106'
-  - ip_address: 192.168.101.9
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf9
-    description: clab-clos-large-leaf9
-    remote_as: '65108'
-  - ip_address: 192.168.101.10
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf10
-    description: clab-clos-large-leaf10
-    remote_as: '65108'
-  - ip_address: 192.168.101.11
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf11
-    description: clab-clos-large-leaf11
-    remote_as: '65110'
-  - ip_address: 192.168.101.12
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf12
-    description: clab-clos-large-leaf12
-    remote_as: '65110'
-  - ip_address: 192.168.101.13
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf13
-    description: clab-clos-large-leaf13
-    remote_as: '65112'
-  - ip_address: 192.168.101.14
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf14
-    description: clab-clos-large-leaf14
-    remote_as: '65112'
-  - ip_address: 192.168.101.15
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf15
-    description: clab-clos-large-leaf15
-    remote_as: '65114'
-  - ip_address: 192.168.101.16
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf16
-    description: clab-clos-large-leaf16
-    remote_as: '65114'
-  - ip_address: 192.168.101.17
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf17
-    description: clab-clos-large-leaf17
-    remote_as: '65116'
-  - ip_address: 192.168.101.18
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf18
-    description: clab-clos-large-leaf18
-    remote_as: '65116'
-  - ip_address: 192.168.101.19
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf19
-    description: clab-clos-large-leaf19
-    remote_as: '65118'
-  - ip_address: 192.168.101.20
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf20
-    description: clab-clos-large-leaf20
-    remote_as: '65118'
-  - ip_address: 192.168.101.21
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf21
-    description: clab-clos-large-leaf21
-    remote_as: '65120'
-  - ip_address: 192.168.101.22
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf22
-    description: clab-clos-large-leaf22
-    remote_as: '65120'
-  - ip_address: 192.168.101.23
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf23
-    description: clab-clos-large-leaf23
-    remote_as: '65122'
-  - ip_address: 192.168.101.24
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf24
-    description: clab-clos-large-leaf24
-    remote_as: '65122'
-  - ip_address: 192.168.101.25
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf25
-    description: clab-clos-large-leaf25
-    remote_as: '65124'
-  - ip_address: 192.168.101.26
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf26
-    description: clab-clos-large-leaf26
-    remote_as: '65124'
-  - ip_address: 192.168.101.27
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf27
-    description: clab-clos-large-leaf27
-    remote_as: '65126'
-  - ip_address: 192.168.101.28
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf28
-    description: clab-clos-large-leaf28
-    remote_as: '65126'
-  - ip_address: 192.168.101.29
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf29
-    description: clab-clos-large-leaf29
-    remote_as: '65128'
-  - ip_address: 192.168.101.30
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf30
-    description: clab-clos-large-leaf30
-    remote_as: '65128'
-  - ip_address: 192.168.101.31
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf31
-    description: clab-clos-large-leaf31
-    remote_as: '65130'
-  - ip_address: 192.168.101.32
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf32
-    description: clab-clos-large-leaf32
-    remote_as: '65130'
-  - ip_address: 192.168.101.33
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf33
-    description: clab-clos-large-leaf33
-    remote_as: '65132'
-  - ip_address: 192.168.101.34
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf34
-    description: clab-clos-large-leaf34
-    remote_as: '65132'
-  - ip_address: 192.168.101.35
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf35
-    description: clab-clos-large-leaf35
-    remote_as: '65134'
-  - ip_address: 192.168.101.36
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf36
-    description: clab-clos-large-leaf36
-    remote_as: '65134'
-  - ip_address: 192.168.101.37
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf37
-    description: clab-clos-large-leaf37
-    remote_as: '65136'
-  - ip_address: 192.168.101.38
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf38
-    description: clab-clos-large-leaf38
-    remote_as: '65136'
-  - ip_address: 192.168.101.39
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf39
-    description: clab-clos-large-leaf39
-    remote_as: '65138'
-  - ip_address: 192.168.101.40
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf40
-    description: clab-clos-large-leaf40
-    remote_as: '65138'
-  - ip_address: 192.168.101.41
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf41
-    description: clab-clos-large-leaf41
-    remote_as: '65140'
-  - ip_address: 192.168.101.42
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf42
-    description: clab-clos-large-leaf42
-    remote_as: '65140'
-  - ip_address: 192.168.101.43
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf43
-    description: clab-clos-large-leaf43
-    remote_as: '65142'
-  - ip_address: 192.168.101.44
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf44
-    description: clab-clos-large-leaf44
-    remote_as: '65142'
-  - ip_address: 192.168.101.45
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf45
-    description: clab-clos-large-leaf45
-    remote_as: '65144'
-  - ip_address: 192.168.101.46
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf46
-    description: clab-clos-large-leaf46
-    remote_as: '65144'
-  - ip_address: 192.168.101.47
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf47
-    description: clab-clos-large-leaf47
-    remote_as: '65146'
-  - ip_address: 192.168.101.48
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf48
-    description: clab-clos-large-leaf48
-    remote_as: '65146'
-  - ip_address: 192.168.101.49
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf49
-    description: clab-clos-large-leaf49
-    remote_as: '65148'
-  - ip_address: 192.168.101.50
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-leaf50
-    description: clab-clos-large-leaf50
-    remote_as: '65148'
-static_routes:
-- vrf: MGMT
-  destination_address_prefix: 0.0.0.0/0
-  gateway: 172.20.20.1
-service_routing_protocols_model: multi-agent
-ip_routing: true
+aaa_root:
+  disabled: true
+config_end: true
 daemon_terminattr:
   cvaddrs:
   - 192.168.1.201:9910
@@ -300,743 +8,1322 @@ daemon_terminattr:
     method: token
     token_file: /tmp/token
   cvvrf: MGMT
-  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
-  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
   disable_aaa: false
-vlan_internal_order:
-  allocation: ascending
-  range:
-    beginning: 1006
-    ending: 1199
+  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
+enable_password:
+  disabled: true
+ethernet_interfaces:
+- name: Ethernet2
+  description: P2P_clab-clos-large-leaf1_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf1
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet3
+  description: P2P_clab-clos-large-leaf2_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf2
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet4
+  description: P2P_clab-clos-large-leaf3_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf3
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet5
+  description: P2P_clab-clos-large-leaf4_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf4
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet6
+  description: P2P_clab-clos-large-leaf5_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf5
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet7
+  description: P2P_clab-clos-large-leaf6_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf6
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet8
+  description: P2P_clab-clos-large-leaf7_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf7
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet9
+  description: P2P_clab-clos-large-leaf8_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf8
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet10
+  description: P2P_clab-clos-large-leaf9_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf9
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet11
+  description: P2P_clab-clos-large-leaf10_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf10
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet12
+  description: P2P_clab-clos-large-leaf11_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf11
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet13
+  description: P2P_clab-clos-large-leaf12_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf12
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet14
+  description: P2P_clab-clos-large-leaf13_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf13
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet15
+  description: P2P_clab-clos-large-leaf14_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf14
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet16
+  description: P2P_clab-clos-large-leaf15_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf15
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet17
+  description: P2P_clab-clos-large-leaf16_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf16
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet18
+  description: P2P_clab-clos-large-leaf17_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf17
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet19
+  description: P2P_clab-clos-large-leaf18_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf18
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet20
+  description: P2P_clab-clos-large-leaf19_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf19
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet21
+  description: P2P_clab-clos-large-leaf20_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf20
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet22
+  description: P2P_clab-clos-large-leaf21_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf21
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet23
+  description: P2P_clab-clos-large-leaf22_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf22
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet24
+  description: P2P_clab-clos-large-leaf23_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf23
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet25
+  description: P2P_clab-clos-large-leaf24_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf24
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet26
+  description: P2P_clab-clos-large-leaf25_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf25
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet27
+  description: P2P_clab-clos-large-leaf26_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf26
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet28
+  description: P2P_clab-clos-large-leaf27_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf27
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet29
+  description: P2P_clab-clos-large-leaf28_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf28
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet30
+  description: P2P_clab-clos-large-leaf29_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf29
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet31
+  description: P2P_clab-clos-large-leaf30_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf30
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet32
+  description: P2P_clab-clos-large-leaf31_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf31
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet33
+  description: P2P_clab-clos-large-leaf32_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf32
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet34
+  description: P2P_clab-clos-large-leaf33_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf33
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet35
+  description: P2P_clab-clos-large-leaf34_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf34
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet36
+  description: P2P_clab-clos-large-leaf35_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf35
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet37
+  description: P2P_clab-clos-large-leaf36_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf36
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet38
+  description: P2P_clab-clos-large-leaf37_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf37
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet39
+  description: P2P_clab-clos-large-leaf38_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf38
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet40
+  description: P2P_clab-clos-large-leaf39_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf39
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet41
+  description: P2P_clab-clos-large-leaf40_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf40
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet42
+  description: P2P_clab-clos-large-leaf41_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf41
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet43
+  description: P2P_clab-clos-large-leaf42_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf42
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet44
+  description: P2P_clab-clos-large-leaf43_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf43
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet45
+  description: P2P_clab-clos-large-leaf44_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf44
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet46
+  description: P2P_clab-clos-large-leaf45_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf45
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet47
+  description: P2P_clab-clos-large-leaf46_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf46
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet48
+  description: P2P_clab-clos-large-leaf47_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf47
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet49
+  description: P2P_clab-clos-large-leaf48_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf48
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet50
+  description: P2P_clab-clos-large-leaf49_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf49
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet51
+  description: P2P_clab-clos-large-leaf50_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-leaf50
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet52
+  description: P2P_clab-clos-large-borderleaf1_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-borderleaf1
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+- name: Ethernet53
+  description: P2P_clab-clos-large-borderleaf2_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-borderleaf2
+  peer_interface: Ethernet5
+  peer_type: l3leaf
+  switchport:
+    enabled: false
+hostname: clab-clos-large-spine3
 ip_name_servers:
 - ip_address: 192.168.1.9
   vrf: MGMT
-spanning_tree:
-  mode: none
+ip_routing_ipv6_interfaces: true
+ipv6_unicast_routing: true
+is_deployed: true
 local_users:
 - name: admin
   privilege: 15
   role: network-admin
-  no_password: true
   sha512_password: $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1
+  no_password: true
 - name: arista
   privilege: 15
   role: network-admin
   no_password: true
   ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk=
     tony@autobox-huge
-vrfs:
-- name: MGMT
-  ip_routing: false
+loopback_interfaces:
+- name: Loopback0
+  description: ROUTER_ID
+  shutdown: false
+  ip_address: 192.168.101.103/32
+management_api_http:
+  enable_https: true
+  enable_vrfs:
+  - name: MGMT
 management_interfaces:
 - name: Management0
-  description: oob_management
+  description: OOB_MANAGEMENT
   shutdown: false
   vrf: MGMT
   ip_address: 172.20.20.103/24
-  gateway: 172.20.20.1
   type: oob
-management_api_http:
-  enable_vrfs:
-  - name: MGMT
-  enable_https: true
-ethernet_interfaces:
-- name: Ethernet2
-  peer: clab-clos-large-leaf1
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF1_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.4/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet3
-  peer: clab-clos-large-leaf2
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF2_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.10/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet4
-  peer: clab-clos-large-leaf3
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF3_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.16/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet5
-  peer: clab-clos-large-leaf4
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF4_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.22/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet6
-  peer: clab-clos-large-leaf5
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF5_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.28/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet7
-  peer: clab-clos-large-leaf6
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF6_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.34/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet8
-  peer: clab-clos-large-leaf7
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF7_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.40/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet9
-  peer: clab-clos-large-leaf8
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF8_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.46/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet10
-  peer: clab-clos-large-leaf9
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF9_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.52/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet11
-  peer: clab-clos-large-leaf10
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF10_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.58/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet12
-  peer: clab-clos-large-leaf11
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF11_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.64/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet13
-  peer: clab-clos-large-leaf12
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF12_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.70/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet14
-  peer: clab-clos-large-leaf13
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF13_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.76/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet15
-  peer: clab-clos-large-leaf14
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF14_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.82/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet16
-  peer: clab-clos-large-leaf15
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF15_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.88/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet17
-  peer: clab-clos-large-leaf16
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF16_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.94/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet18
-  peer: clab-clos-large-leaf17
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF17_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.100/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet19
-  peer: clab-clos-large-leaf18
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF18_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.106/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet20
-  peer: clab-clos-large-leaf19
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF19_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.112/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet21
-  peer: clab-clos-large-leaf20
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF20_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.118/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet22
-  peer: clab-clos-large-leaf21
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF21_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.124/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet23
-  peer: clab-clos-large-leaf22
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF22_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.130/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet24
-  peer: clab-clos-large-leaf23
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF23_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.136/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet25
-  peer: clab-clos-large-leaf24
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF24_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.142/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet26
-  peer: clab-clos-large-leaf25
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF25_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.148/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet27
-  peer: clab-clos-large-leaf26
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF26_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.154/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet28
-  peer: clab-clos-large-leaf27
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF27_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.160/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet29
-  peer: clab-clos-large-leaf28
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF28_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.166/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet30
-  peer: clab-clos-large-leaf29
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF29_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.172/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet31
-  peer: clab-clos-large-leaf30
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF30_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.178/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet32
-  peer: clab-clos-large-leaf31
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF31_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.184/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet33
-  peer: clab-clos-large-leaf32
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF32_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.190/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet34
-  peer: clab-clos-large-leaf33
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF33_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.196/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet35
-  peer: clab-clos-large-leaf34
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF34_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.202/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet36
-  peer: clab-clos-large-leaf35
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF35_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.208/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet37
-  peer: clab-clos-large-leaf36
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF36_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.214/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet38
-  peer: clab-clos-large-leaf37
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF37_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.220/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet39
-  peer: clab-clos-large-leaf38
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF38_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.226/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet40
-  peer: clab-clos-large-leaf39
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF39_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.232/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet41
-  peer: clab-clos-large-leaf40
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF40_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.238/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet42
-  peer: clab-clos-large-leaf41
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF41_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.244/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet43
-  peer: clab-clos-large-leaf42
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF42_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.250/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet44
-  peer: clab-clos-large-leaf43
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF43_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.0/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet45
-  peer: clab-clos-large-leaf44
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF44_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.6/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet46
-  peer: clab-clos-large-leaf45
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF45_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.12/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet47
-  peer: clab-clos-large-leaf46
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF46_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.18/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet48
-  peer: clab-clos-large-leaf47
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF47_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.24/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet49
-  peer: clab-clos-large-leaf48
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF48_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.30/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet50
-  peer: clab-clos-large-leaf49
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF49_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.36/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet51
-  peer: clab-clos-large-leaf50
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-LEAF50_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.109.42/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet52
-  peer: clab-clos-large-borderleaf1
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-BORDERLEAF1_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.110.32/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet53
-  peer: clab-clos-large-borderleaf2
-  peer_interface: Ethernet5
-  peer_type: l3leaf
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-BORDERLEAF2_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.110.38/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-loopback_interfaces:
-- name: Loopback0
-  description: EVPN_Overlay_Peering
-  shutdown: false
-  ip_address: 192.168.101.103/32
-  isis_enable: EVPN_UNDERLAY
-  isis_passive: true
-router_isis:
-  instance: EVPN_UNDERLAY
-  log_adjacency_changes: true
-  net: 49.0001.1921.6810.1103.00
-  router_id: 192.168.101.103
-  is_type: level-2
-  address_family_ipv4:
-    enabled: true
-    maximum_paths: 4
+  gateway: 172.20.20.1
+metadata:
+  platform: cEOS-lab
+  fabric_name: FABRIC
+prefix_lists:
+- name: PL-LOOPBACKS-EVPN-OVERLAY
+  sequence_numbers:
+  - sequence: 10
+    action: permit 192.168.101.0/24 eq 32
+route_maps:
+- name: RM-CONN-2-BGP
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    match:
+    - ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
 router_bfd:
   multihop:
     interval: 1200
     min_rx: 1200
     multiplier: 3
-metadata:
-  platform: cEOS-lab
+router_bgp:
+  as: '65001'
+  router_id: 192.168.101.103
+  maximum_paths:
+    paths: 4
+    ecmp: 4
+  bgp:
+    default:
+      ipv4_unicast: false
+  peer_groups:
+  - name: IPv4-UNDERLAY-PEERS
+    type: ipv4
+    send_community: all
+    maximum_routes: 12000
+  - name: EVPN-OVERLAY-PEERS
+    type: evpn
+    next_hop_unchanged: true
+    update_source: Loopback0
+    bfd: true
+    ebgp_multihop: 3
+    send_community: all
+    maximum_routes: 0
+  neighbors:
+  - ip_address: 192.168.101.91
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65190'
+    peer: clab-clos-large-borderleaf1
+    description: clab-clos-large-borderleaf1_Loopback0
+  - ip_address: 192.168.101.92
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65191'
+    peer: clab-clos-large-borderleaf2
+    description: clab-clos-large-borderleaf2_Loopback0
+  - ip_address: 192.168.101.1
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65100'
+    peer: clab-clos-large-leaf1
+    description: clab-clos-large-leaf1_Loopback0
+  - ip_address: 192.168.101.2
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65100'
+    peer: clab-clos-large-leaf2
+    description: clab-clos-large-leaf2_Loopback0
+  - ip_address: 192.168.101.3
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65102'
+    peer: clab-clos-large-leaf3
+    description: clab-clos-large-leaf3_Loopback0
+  - ip_address: 192.168.101.4
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65102'
+    peer: clab-clos-large-leaf4
+    description: clab-clos-large-leaf4_Loopback0
+  - ip_address: 192.168.101.5
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65104'
+    peer: clab-clos-large-leaf5
+    description: clab-clos-large-leaf5_Loopback0
+  - ip_address: 192.168.101.6
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65104'
+    peer: clab-clos-large-leaf6
+    description: clab-clos-large-leaf6_Loopback0
+  - ip_address: 192.168.101.7
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65106'
+    peer: clab-clos-large-leaf7
+    description: clab-clos-large-leaf7_Loopback0
+  - ip_address: 192.168.101.8
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65106'
+    peer: clab-clos-large-leaf8
+    description: clab-clos-large-leaf8_Loopback0
+  - ip_address: 192.168.101.9
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65108'
+    peer: clab-clos-large-leaf9
+    description: clab-clos-large-leaf9_Loopback0
+  - ip_address: 192.168.101.10
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65108'
+    peer: clab-clos-large-leaf10
+    description: clab-clos-large-leaf10_Loopback0
+  - ip_address: 192.168.101.11
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65110'
+    peer: clab-clos-large-leaf11
+    description: clab-clos-large-leaf11_Loopback0
+  - ip_address: 192.168.101.12
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65110'
+    peer: clab-clos-large-leaf12
+    description: clab-clos-large-leaf12_Loopback0
+  - ip_address: 192.168.101.13
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65112'
+    peer: clab-clos-large-leaf13
+    description: clab-clos-large-leaf13_Loopback0
+  - ip_address: 192.168.101.14
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65112'
+    peer: clab-clos-large-leaf14
+    description: clab-clos-large-leaf14_Loopback0
+  - ip_address: 192.168.101.15
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65114'
+    peer: clab-clos-large-leaf15
+    description: clab-clos-large-leaf15_Loopback0
+  - ip_address: 192.168.101.16
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65114'
+    peer: clab-clos-large-leaf16
+    description: clab-clos-large-leaf16_Loopback0
+  - ip_address: 192.168.101.17
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65116'
+    peer: clab-clos-large-leaf17
+    description: clab-clos-large-leaf17_Loopback0
+  - ip_address: 192.168.101.18
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65116'
+    peer: clab-clos-large-leaf18
+    description: clab-clos-large-leaf18_Loopback0
+  - ip_address: 192.168.101.19
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65118'
+    peer: clab-clos-large-leaf19
+    description: clab-clos-large-leaf19_Loopback0
+  - ip_address: 192.168.101.20
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65118'
+    peer: clab-clos-large-leaf20
+    description: clab-clos-large-leaf20_Loopback0
+  - ip_address: 192.168.101.21
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65120'
+    peer: clab-clos-large-leaf21
+    description: clab-clos-large-leaf21_Loopback0
+  - ip_address: 192.168.101.22
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65120'
+    peer: clab-clos-large-leaf22
+    description: clab-clos-large-leaf22_Loopback0
+  - ip_address: 192.168.101.23
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65122'
+    peer: clab-clos-large-leaf23
+    description: clab-clos-large-leaf23_Loopback0
+  - ip_address: 192.168.101.24
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65122'
+    peer: clab-clos-large-leaf24
+    description: clab-clos-large-leaf24_Loopback0
+  - ip_address: 192.168.101.25
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65124'
+    peer: clab-clos-large-leaf25
+    description: clab-clos-large-leaf25_Loopback0
+  - ip_address: 192.168.101.26
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65124'
+    peer: clab-clos-large-leaf26
+    description: clab-clos-large-leaf26_Loopback0
+  - ip_address: 192.168.101.27
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65126'
+    peer: clab-clos-large-leaf27
+    description: clab-clos-large-leaf27_Loopback0
+  - ip_address: 192.168.101.28
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65126'
+    peer: clab-clos-large-leaf28
+    description: clab-clos-large-leaf28_Loopback0
+  - ip_address: 192.168.101.29
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65128'
+    peer: clab-clos-large-leaf29
+    description: clab-clos-large-leaf29_Loopback0
+  - ip_address: 192.168.101.30
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65128'
+    peer: clab-clos-large-leaf30
+    description: clab-clos-large-leaf30_Loopback0
+  - ip_address: 192.168.101.31
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65130'
+    peer: clab-clos-large-leaf31
+    description: clab-clos-large-leaf31_Loopback0
+  - ip_address: 192.168.101.32
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65130'
+    peer: clab-clos-large-leaf32
+    description: clab-clos-large-leaf32_Loopback0
+  - ip_address: 192.168.101.33
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65132'
+    peer: clab-clos-large-leaf33
+    description: clab-clos-large-leaf33_Loopback0
+  - ip_address: 192.168.101.34
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65132'
+    peer: clab-clos-large-leaf34
+    description: clab-clos-large-leaf34_Loopback0
+  - ip_address: 192.168.101.35
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65134'
+    peer: clab-clos-large-leaf35
+    description: clab-clos-large-leaf35_Loopback0
+  - ip_address: 192.168.101.36
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65134'
+    peer: clab-clos-large-leaf36
+    description: clab-clos-large-leaf36_Loopback0
+  - ip_address: 192.168.101.37
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65136'
+    peer: clab-clos-large-leaf37
+    description: clab-clos-large-leaf37_Loopback0
+  - ip_address: 192.168.101.38
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65136'
+    peer: clab-clos-large-leaf38
+    description: clab-clos-large-leaf38_Loopback0
+  - ip_address: 192.168.101.39
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65138'
+    peer: clab-clos-large-leaf39
+    description: clab-clos-large-leaf39_Loopback0
+  - ip_address: 192.168.101.40
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65138'
+    peer: clab-clos-large-leaf40
+    description: clab-clos-large-leaf40_Loopback0
+  - ip_address: 192.168.101.41
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65140'
+    peer: clab-clos-large-leaf41
+    description: clab-clos-large-leaf41_Loopback0
+  - ip_address: 192.168.101.42
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65140'
+    peer: clab-clos-large-leaf42
+    description: clab-clos-large-leaf42_Loopback0
+  - ip_address: 192.168.101.43
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65142'
+    peer: clab-clos-large-leaf43
+    description: clab-clos-large-leaf43_Loopback0
+  - ip_address: 192.168.101.44
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65142'
+    peer: clab-clos-large-leaf44
+    description: clab-clos-large-leaf44_Loopback0
+  - ip_address: 192.168.101.45
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65144'
+    peer: clab-clos-large-leaf45
+    description: clab-clos-large-leaf45_Loopback0
+  - ip_address: 192.168.101.46
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65144'
+    peer: clab-clos-large-leaf46
+    description: clab-clos-large-leaf46_Loopback0
+  - ip_address: 192.168.101.47
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65146'
+    peer: clab-clos-large-leaf47
+    description: clab-clos-large-leaf47_Loopback0
+  - ip_address: 192.168.101.48
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65146'
+    peer: clab-clos-large-leaf48
+    description: clab-clos-large-leaf48_Loopback0
+  - ip_address: 192.168.101.49
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65148'
+    peer: clab-clos-large-leaf49
+    description: clab-clos-large-leaf49_Loopback0
+  - ip_address: 192.168.101.50
+    peer_group: EVPN-OVERLAY-PEERS
+    remote_as: '65148'
+    peer: clab-clos-large-leaf50
+    description: clab-clos-large-leaf50_Loopback0
+  neighbor_interfaces:
+  - name: Ethernet2
+    remote_as: '65100'
+    peer: clab-clos-large-leaf1
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf1_Ethernet5
+  - name: Ethernet3
+    remote_as: '65100'
+    peer: clab-clos-large-leaf2
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf2_Ethernet5
+  - name: Ethernet4
+    remote_as: '65102'
+    peer: clab-clos-large-leaf3
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf3_Ethernet5
+  - name: Ethernet5
+    remote_as: '65102'
+    peer: clab-clos-large-leaf4
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf4_Ethernet5
+  - name: Ethernet6
+    remote_as: '65104'
+    peer: clab-clos-large-leaf5
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf5_Ethernet5
+  - name: Ethernet7
+    remote_as: '65104'
+    peer: clab-clos-large-leaf6
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf6_Ethernet5
+  - name: Ethernet8
+    remote_as: '65106'
+    peer: clab-clos-large-leaf7
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf7_Ethernet5
+  - name: Ethernet9
+    remote_as: '65106'
+    peer: clab-clos-large-leaf8
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf8_Ethernet5
+  - name: Ethernet10
+    remote_as: '65108'
+    peer: clab-clos-large-leaf9
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf9_Ethernet5
+  - name: Ethernet11
+    remote_as: '65108'
+    peer: clab-clos-large-leaf10
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf10_Ethernet5
+  - name: Ethernet12
+    remote_as: '65110'
+    peer: clab-clos-large-leaf11
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf11_Ethernet5
+  - name: Ethernet13
+    remote_as: '65110'
+    peer: clab-clos-large-leaf12
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf12_Ethernet5
+  - name: Ethernet14
+    remote_as: '65112'
+    peer: clab-clos-large-leaf13
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf13_Ethernet5
+  - name: Ethernet15
+    remote_as: '65112'
+    peer: clab-clos-large-leaf14
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf14_Ethernet5
+  - name: Ethernet16
+    remote_as: '65114'
+    peer: clab-clos-large-leaf15
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf15_Ethernet5
+  - name: Ethernet17
+    remote_as: '65114'
+    peer: clab-clos-large-leaf16
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf16_Ethernet5
+  - name: Ethernet18
+    remote_as: '65116'
+    peer: clab-clos-large-leaf17
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf17_Ethernet5
+  - name: Ethernet19
+    remote_as: '65116'
+    peer: clab-clos-large-leaf18
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf18_Ethernet5
+  - name: Ethernet20
+    remote_as: '65118'
+    peer: clab-clos-large-leaf19
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf19_Ethernet5
+  - name: Ethernet21
+    remote_as: '65118'
+    peer: clab-clos-large-leaf20
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf20_Ethernet5
+  - name: Ethernet22
+    remote_as: '65120'
+    peer: clab-clos-large-leaf21
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf21_Ethernet5
+  - name: Ethernet23
+    remote_as: '65120'
+    peer: clab-clos-large-leaf22
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf22_Ethernet5
+  - name: Ethernet24
+    remote_as: '65122'
+    peer: clab-clos-large-leaf23
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf23_Ethernet5
+  - name: Ethernet25
+    remote_as: '65122'
+    peer: clab-clos-large-leaf24
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf24_Ethernet5
+  - name: Ethernet26
+    remote_as: '65124'
+    peer: clab-clos-large-leaf25
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf25_Ethernet5
+  - name: Ethernet27
+    remote_as: '65124'
+    peer: clab-clos-large-leaf26
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf26_Ethernet5
+  - name: Ethernet28
+    remote_as: '65126'
+    peer: clab-clos-large-leaf27
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf27_Ethernet5
+  - name: Ethernet29
+    remote_as: '65126'
+    peer: clab-clos-large-leaf28
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf28_Ethernet5
+  - name: Ethernet30
+    remote_as: '65128'
+    peer: clab-clos-large-leaf29
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf29_Ethernet5
+  - name: Ethernet31
+    remote_as: '65128'
+    peer: clab-clos-large-leaf30
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf30_Ethernet5
+  - name: Ethernet32
+    remote_as: '65130'
+    peer: clab-clos-large-leaf31
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf31_Ethernet5
+  - name: Ethernet33
+    remote_as: '65130'
+    peer: clab-clos-large-leaf32
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf32_Ethernet5
+  - name: Ethernet34
+    remote_as: '65132'
+    peer: clab-clos-large-leaf33
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf33_Ethernet5
+  - name: Ethernet35
+    remote_as: '65132'
+    peer: clab-clos-large-leaf34
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf34_Ethernet5
+  - name: Ethernet36
+    remote_as: '65134'
+    peer: clab-clos-large-leaf35
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf35_Ethernet5
+  - name: Ethernet37
+    remote_as: '65134'
+    peer: clab-clos-large-leaf36
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf36_Ethernet5
+  - name: Ethernet38
+    remote_as: '65136'
+    peer: clab-clos-large-leaf37
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf37_Ethernet5
+  - name: Ethernet39
+    remote_as: '65136'
+    peer: clab-clos-large-leaf38
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf38_Ethernet5
+  - name: Ethernet40
+    remote_as: '65138'
+    peer: clab-clos-large-leaf39
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf39_Ethernet5
+  - name: Ethernet41
+    remote_as: '65138'
+    peer: clab-clos-large-leaf40
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf40_Ethernet5
+  - name: Ethernet42
+    remote_as: '65140'
+    peer: clab-clos-large-leaf41
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf41_Ethernet5
+  - name: Ethernet43
+    remote_as: '65140'
+    peer: clab-clos-large-leaf42
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf42_Ethernet5
+  - name: Ethernet44
+    remote_as: '65142'
+    peer: clab-clos-large-leaf43
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf43_Ethernet5
+  - name: Ethernet45
+    remote_as: '65142'
+    peer: clab-clos-large-leaf44
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf44_Ethernet5
+  - name: Ethernet46
+    remote_as: '65144'
+    peer: clab-clos-large-leaf45
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf45_Ethernet5
+  - name: Ethernet47
+    remote_as: '65144'
+    peer: clab-clos-large-leaf46
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf46_Ethernet5
+  - name: Ethernet48
+    remote_as: '65146'
+    peer: clab-clos-large-leaf47
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf47_Ethernet5
+  - name: Ethernet49
+    remote_as: '65146'
+    peer: clab-clos-large-leaf48
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf48_Ethernet5
+  - name: Ethernet50
+    remote_as: '65148'
+    peer: clab-clos-large-leaf49
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf49_Ethernet5
+  - name: Ethernet51
+    remote_as: '65148'
+    peer: clab-clos-large-leaf50
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-leaf50_Ethernet5
+  - name: Ethernet52
+    remote_as: '65190'
+    peer: clab-clos-large-borderleaf1
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-borderleaf1_Ethernet5
+  - name: Ethernet53
+    remote_as: '65191'
+    peer: clab-clos-large-borderleaf2
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-borderleaf2_Ethernet5
+  redistribute:
+    connected:
+      enabled: true
+      route_map: RM-CONN-2-BGP
+  address_family_evpn:
+    peer_groups:
+    - name: EVPN-OVERLAY-PEERS
+      activate: true
+  address_family_ipv4:
+    peer_groups:
+    - name: IPv4-UNDERLAY-PEERS
+      activate: true
+      next_hop:
+        address_family_ipv6:
+          enabled: true
+          originate: true
+    - name: EVPN-OVERLAY-PEERS
+      activate: false
+router_multicast:
+  ipv4:
+    routing: true
+service_routing_protocols_model: multi-agent
+spanning_tree:
+  mode: none
+static_routes:
+- vrf: MGMT
+  prefix: 0.0.0.0/0
+  next_hop: 172.20.20.1
+transceiver_qsfp_default_mode_4x10: true
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
+vrfs:
+- name: MGMT
+  ip_routing: false

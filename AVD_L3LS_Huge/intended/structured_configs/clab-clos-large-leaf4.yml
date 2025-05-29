@@ -1,75 +1,247 @@
+aaa_root:
+  disabled: true
+config_end: true
+daemon_terminattr:
+  cvaddrs:
+  - 192.168.1.201:9910
+  cvauth:
+    method: token
+    token_file: /tmp/token
+  cvvrf: MGMT
+  disable_aaa: false
+  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
+  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
+enable_password:
+  disabled: true
+ethernet_interfaces:
+- name: Ethernet1
+  description: MLAG_clab-clos-large-leaf3_Ethernet1
+  shutdown: false
+  channel_group:
+    id: 1
+    mode: active
+  peer: clab-clos-large-leaf3
+  peer_interface: Ethernet1
+  peer_type: mlag_peer
+- name: Ethernet2
+  description: MLAG_clab-clos-large-leaf3_Ethernet2
+  shutdown: false
+  channel_group:
+    id: 1
+    mode: active
+  peer: clab-clos-large-leaf3
+  peer_interface: Ethernet2
+  peer_type: mlag_peer
+- name: Ethernet3
+  description: P2P_clab-clos-large-spine1_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-spine1
+  peer_interface: Ethernet5
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet4
+  description: P2P_clab-clos-large-spine2_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-spine2
+  peer_interface: Ethernet5
+  peer_type: spine
+  switchport:
+    enabled: false
+- name: Ethernet5
+  description: P2P_clab-clos-large-spine3_Ethernet5
+  shutdown: false
+  mtu: 1550
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  peer: clab-clos-large-spine3
+  peer_interface: Ethernet5
+  peer_type: spine
+  switchport:
+    enabled: false
 hostname: clab-clos-large-leaf4
+ip_igmp_snooping:
+  globally_enabled: true
+ip_name_servers:
+- ip_address: 192.168.1.9
+  vrf: MGMT
+ip_routing_ipv6_interfaces: true
+ip_virtual_router_mac_address: 00:1c:73:00:00:99
+ipv6_unicast_routing: true
 is_deployed: true
+local_users:
+- name: admin
+  privilege: 15
+  role: network-admin
+  sha512_password: $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1
+  no_password: true
+- name: arista
+  privilege: 15
+  role: network-admin
+  no_password: true
+  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk=
+    tony@autobox-huge
+loopback_interfaces:
+- name: Loopback0
+  description: ROUTER_ID
+  shutdown: false
+  ip_address: 192.168.101.4/32
+- name: Loopback1
+  description: VXLAN_TUNNEL_SOURCE
+  shutdown: false
+  ip_address: 192.168.102.3/32
+management_api_http:
+  enable_https: true
+  enable_vrfs:
+  - name: MGMT
+management_interfaces:
+- name: Management0
+  description: OOB_MANAGEMENT
+  shutdown: false
+  vrf: MGMT
+  ip_address: 172.20.20.14/24
+  type: oob
+  gateway: 172.20.20.1
+metadata:
+  platform: cEOS-lab
+  fabric_name: FABRIC
+mlag_configuration:
+  domain_id: mlag2
+  local_interface: Vlan4094
+  peer_address: 10.255.252.4
+  peer_link: Port-Channel1
+  reload_delay_mlag: '300'
+  reload_delay_non_mlag: '330'
+port_channel_interfaces:
+- name: Port-Channel1
+  description: MLAG_clab-clos-large-leaf3_Port-Channel1
+  shutdown: false
+  switchport:
+    enabled: true
+    mode: trunk
+    trunk:
+      groups:
+      - MLAG
+prefix_lists:
+- name: PL-LOOPBACKS-EVPN-OVERLAY
+  sequence_numbers:
+  - sequence: 10
+    action: permit 192.168.101.0/24 eq 32
+  - sequence: 20
+    action: permit 192.168.102.0/24 eq 32
+- name: PL-MLAG-PEER-VRFS
+  sequence_numbers:
+  - sequence: 10
+    action: permit 10.255.251.4/31
+route_maps:
+- name: RM-MLAG-PEER-IN
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    description: Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
+    set:
+    - origin incomplete
+- name: RM-CONN-2-BGP
+  sequence_numbers:
+  - sequence: 10
+    type: permit
+    match:
+    - ip address prefix-list PL-LOOPBACKS-EVPN-OVERLAY
+- name: RM-CONN-2-BGP-VRFS
+  sequence_numbers:
+  - sequence: 10
+    type: deny
+    match:
+    - ip address prefix-list PL-MLAG-PEER-VRFS
+  - sequence: 20
+    type: permit
+router_bfd:
+  multihop:
+    interval: 1200
+    min_rx: 1200
+    multiplier: 3
 router_bgp:
   as: '65102'
   router_id: 192.168.101.4
-  bgp:
-    default:
-      ipv4_unicast: false
   maximum_paths:
     paths: 4
     ecmp: 4
+  bgp:
+    default:
+      ipv4_unicast: false
   peer_groups:
+  - name: MLAG-IPv4-UNDERLAY-PEER
+    type: ipv4
+    remote_as: '65102'
+    description: clab-clos-large-leaf3
+    next_hop_self: true
+    send_community: all
+    maximum_routes: 12000
+    route_map_in: RM-MLAG-PEER-IN
+  - name: IPv4-UNDERLAY-PEERS
+    type: ipv4
+    send_community: all
+    maximum_routes: 12000
   - name: EVPN-OVERLAY-PEERS
     type: evpn
     update_source: Loopback0
     bfd: true
+    ebgp_multihop: 3
     send_community: all
     maximum_routes: 0
-    ebgp_multihop: 3
-  - name: MLAG-IPv4-UNDERLAY-PEER
-    type: ipv4
-    remote_as: '65102'
-    next_hop_self: true
-    description: clab-clos-large-leaf3
-    maximum_routes: 12000
-    send_community: all
-    route_map_in: RM-MLAG-PEER-IN
-  address_family_evpn:
-    peer_groups:
-    - name: EVPN-OVERLAY-PEERS
-      activate: true
-  address_family_ipv4:
-    peer_groups:
-    - name: EVPN-OVERLAY-PEERS
-      activate: false
-    - name: MLAG-IPv4-UNDERLAY-PEER
-      activate: true
   neighbors:
   - ip_address: 192.168.101.101
     peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-spine1
-    description: clab-clos-large-spine1
     remote_as: '65001'
+    peer: clab-clos-large-spine1
+    description: clab-clos-large-spine1_Loopback0
   - ip_address: 192.168.101.102
     peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-spine2
-    description: clab-clos-large-spine2
     remote_as: '65001'
+    peer: clab-clos-large-spine2
+    description: clab-clos-large-spine2_Loopback0
   - ip_address: 192.168.101.103
     peer_group: EVPN-OVERLAY-PEERS
-    peer: clab-clos-large-spine3
-    description: clab-clos-large-spine3
     remote_as: '65001'
-  vrfs:
-  - name: VRF_A
-    router_id: 192.168.101.4
-    rd: 192.168.101.4:10
-    route_targets:
-      import:
-      - address_family: evpn
-        route_targets:
-        - '10:10'
-      export:
-      - address_family: evpn
-        route_targets:
-        - '10:10'
-    redistribute_routes:
-    - source_protocol: connected
-      route_map: RM-CONN-2-BGP-VRFS
-    neighbors:
-    - ip_address: 10.255.251.4
-      peer_group: MLAG-IPv4-UNDERLAY-PEER
+    peer: clab-clos-large-spine3
+    description: clab-clos-large-spine3_Loopback0
+  neighbor_interfaces:
+  - name: Vlan4093
+    remote_as: '65102'
+    peer: clab-clos-large-leaf3
+    peer_group: MLAG-IPv4-UNDERLAY-PEER
+    description: clab-clos-large-leaf3_Vlan4093
+  - name: Ethernet3
+    remote_as: '65001'
+    peer: clab-clos-large-spine1
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-spine1_Ethernet5
+  - name: Ethernet4
+    remote_as: '65001'
+    peer: clab-clos-large-spine2
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-spine2_Ethernet5
+  - name: Ethernet5
+    remote_as: '65001'
+    peer: clab-clos-large-spine3
+    peer_group: IPv4-UNDERLAY-PEERS
+    description: clab-clos-large-spine3_Ethernet5
+  redistribute:
+    connected:
+      enabled: true
+      route_map: RM-CONN-2-BGP
   vlan_aware_bundles:
   - name: VRF_A
     rd: 192.168.101.4:10
@@ -142,77 +314,161 @@ router_bgp:
     redistribute_routes:
     - learned
     vlan: '1006'
-static_routes:
-- vrf: MGMT
-  destination_address_prefix: 0.0.0.0/0
-  gateway: 172.20.20.1
+  address_family_evpn:
+    peer_groups:
+    - name: EVPN-OVERLAY-PEERS
+      activate: true
+  address_family_ipv4:
+    peer_groups:
+    - name: MLAG-IPv4-UNDERLAY-PEER
+      activate: true
+      next_hop:
+        address_family_ipv6:
+          enabled: true
+          originate: true
+    - name: IPv4-UNDERLAY-PEERS
+      activate: true
+      next_hop:
+        address_family_ipv6:
+          enabled: true
+          originate: true
+    - name: EVPN-OVERLAY-PEERS
+      activate: false
+  vrfs:
+  - name: VRF_A
+    rd: 192.168.101.4:10
+    route_targets:
+      import:
+      - address_family: evpn
+        route_targets:
+        - '10:10'
+      export:
+      - address_family: evpn
+        route_targets:
+        - '10:10'
+    router_id: 192.168.101.4
+    neighbors:
+    - ip_address: 10.255.251.4
+      peer_group: MLAG-IPv4-UNDERLAY-PEER
+      description: clab-clos-large-leaf3_Vlan3009
+    redistribute:
+      connected:
+        enabled: true
+        route_map: RM-CONN-2-BGP-VRFS
+    address_family_ipv4:
+      neighbors:
+      - ip_address: 10.255.251.4
+        next_hop:
+          address_family_ipv6:
+            enabled: false
+router_multicast:
+  ipv4:
+    routing: true
 service_routing_protocols_model: multi-agent
-ip_routing: true
-daemon_terminattr:
-  cvaddrs:
-  - 192.168.1.201:9910
-  cvauth:
-    method: token
-    token_file: /tmp/token
-  cvvrf: MGMT
-  smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
-  ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
-  disable_aaa: false
-vlan_internal_order:
-  allocation: ascending
-  range:
-    beginning: 1006
-    ending: 1199
-ip_name_servers:
-- ip_address: 192.168.1.9
-  vrf: MGMT
 spanning_tree:
   mode: mstp
   mst_instances:
   - id: '0'
     priority: 16384
   no_spanning_tree_vlan: 4093-4094
-local_users:
-- name: admin
-  privilege: 15
-  role: network-admin
-  no_password: true
-  sha512_password: $6$NZ12Yq8utIdvS7ku$4WCFK1LfF946G/Zxca0z0M4OHvQp0EKyNXoHtesvjLQx75V.LMb8BFTGSd0OScTSy.ieohjAokoImHArPJ9QN1
-- name: arista
-  privilege: 15
-  role: network-admin
-  no_password: true
-  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaaW0yCS+kwtUVIJdwCVaw2+Ul/yYhaPXYltoVcszcEJPWCSwAmMdvrlecxcyEfrs1KJLYVLD8RwmMRlMRrteYJzmk8MGuAyNxQMcma0EWI78suzJOlxGczxwUzZY2+vYwLgWQZPYEZeScjY8ko68r+sEUmgg+y/WC+OGshtytqahs1zaJhDHwu2y3GAW9KnCA1vQL8qyaXvTKkci6+unMlwdc7jTL7bktoudWFKAAHxVtJf0SdBGvWdbbh3JgAt3mHtjKMfm+8qQgv1mfr6Sn41tLlsmn/RTsMMkDbuYVmpjXFSb6LXwf/ylx1zc/FxJHHXh4yD0wOKD3rYEIjndF7uGEqrs1BZtje50L6YPVcjUCGI9kL4R1BUI8uzTmTLATOmDJ03KAaTnXwkhlW96FQshJjiDL4K9FZUaYww6vEp2nk2XOaXxyB1JXe0/2A/H57f2wIR1TwdqAbcHOkGLqj0mS+focnRJvaxPk6ytIGmfRqF9n8K0RLMXN9s/G+sk=
-    tony@autobox-huge
-vrfs:
-- name: MGMT
-  ip_routing: false
-- name: VRF_A
-  tenant: ACME
-  ip_routing: true
-management_interfaces:
-- name: Management0
-  description: oob_management
+static_routes:
+- vrf: MGMT
+  prefix: 0.0.0.0/0
+  next_hop: 172.20.20.1
+transceiver_qsfp_default_mode_4x10: true
+vlan_interfaces:
+- name: Vlan4093
+  description: MLAG_L3
   shutdown: false
-  vrf: MGMT
-  ip_address: 172.20.20.14/24
-  gateway: 172.20.20.1
-  type: oob
-management_api_http:
-  enable_vrfs:
-  - name: MGMT
-  enable_https: true
+  ipv6_enable: true
+  pim:
+    ipv4:
+      sparse_mode: true
+  mtu: 1550
+- name: Vlan4094
+  description: MLAG
+  shutdown: false
+  ip_address: 10.255.252.5/31
+  mtu: 1550
+  no_autostate: true
+- name: Vlan10
+  description: DMZ
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.10.1/24
+  tenant: ACME
+- name: Vlan20
+  description: Internal
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.20.1/24
+  tenant: ACME
+- name: Vlan30
+  description: Dev
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.30.1/24
+  tenant: ACME
+- name: Vlan40
+  description: QA
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.40.1/24
+  tenant: ACME
+- name: Vlan50
+  description: Guest
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.50.1/24
+  tenant: ACME
+- name: Vlan100
+  description: VLAN_100
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.100.1/24
+  tenant: ACME
+- name: Vlan200
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.200.1/24
+  tenant: ACME
+- name: Vlan300
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.31.1/24
+  tenant: ACME
+- name: Vlan400
+  description: VLAN_200
+  shutdown: false
+  vrf: VRF_A
+  ip_address_virtual: 10.1.41.1/24
+  tenant: ACME
+- name: Vlan3009
+  description: MLAG_L3_VRF_VRF_A
+  shutdown: false
+  vrf: VRF_A
+  ip_address: 10.255.251.5/31
+  mtu: 1550
+  tenant: ACME
+  type: underlay_peering
+vlan_internal_order:
+  allocation: ascending
+  range:
+    beginning: 1006
+    ending: 1199
 vlans:
 - id: 4093
-  tenant: system
-  name: LEAF_PEER_L3
-  trunk_groups:
-  - LEAF_PEER_L3
-- id: 4094
-  tenant: system
-  name: MLAG_PEER
+  name: MLAG_L3
   trunk_groups:
   - MLAG
+  tenant: system
+- id: 4094
+  name: MLAG
+  trunk_groups:
+  - MLAG
+  tenant: system
 - id: 10
   name: DMZ
   tenant: ACME
@@ -241,9 +497,9 @@ vlans:
   name: VLAN_200
   tenant: ACME
 - id: 3009
-  name: MLAG_iBGP_VRF_A
+  name: MLAG_L3_VRF_VRF_A
   trunk_groups:
-  - LEAF_PEER_L3
+  - MLAG
   tenant: ACME
 - id: 1000
   name: VLAN_1000
@@ -266,216 +522,18 @@ vlans:
 - id: 1006
   name: VLAN_1006
   tenant: ACME
-vlan_interfaces:
-- name: Vlan4093
-  description: MLAG_PEER_L3_PEERING
-  shutdown: false
-  mtu: 1550
-  ip_address: 10.255.251.5/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-- name: Vlan4094
-  description: MLAG_PEER
-  shutdown: false
-  no_autostate: true
-  mtu: 1550
-  ip_address: 10.255.252.5/31
-- name: Vlan10
+vrfs:
+- name: MGMT
+  ip_routing: false
+- name: VRF_A
+  ip_routing: true
   tenant: ACME
-  description: DMZ
-  shutdown: false
-  ip_address_virtual: 10.1.10.1/24
-  vrf: VRF_A
-- name: Vlan20
-  tenant: ACME
-  description: Internal
-  shutdown: false
-  ip_address_virtual: 10.1.20.1/24
-  vrf: VRF_A
-- name: Vlan30
-  tenant: ACME
-  description: Dev
-  shutdown: false
-  ip_address_virtual: 10.1.30.1/24
-  vrf: VRF_A
-- name: Vlan40
-  tenant: ACME
-  description: QA
-  shutdown: false
-  ip_address_virtual: 10.1.40.1/24
-  vrf: VRF_A
-- name: Vlan50
-  tenant: ACME
-  description: Guest
-  shutdown: false
-  ip_address_virtual: 10.1.50.1/24
-  vrf: VRF_A
-- name: Vlan100
-  tenant: ACME
-  description: VLAN_100
-  shutdown: false
-  ip_address_virtual: 10.1.100.1/24
-  vrf: VRF_A
-- name: Vlan200
-  tenant: ACME
-  description: VLAN_200
-  shutdown: false
-  ip_address_virtual: 10.1.200.1/24
-  vrf: VRF_A
-- name: Vlan300
-  tenant: ACME
-  description: VLAN_200
-  shutdown: false
-  ip_address_virtual: 10.1.31.1/24
-  vrf: VRF_A
-- name: Vlan400
-  tenant: ACME
-  description: VLAN_200
-  shutdown: false
-  ip_address_virtual: 10.1.41.1/24
-  vrf: VRF_A
-- name: Vlan3009
-  tenant: ACME
-  type: underlay_peering
-  shutdown: false
-  description: 'MLAG_PEER_L3_iBGP: vrf VRF_A'
-  vrf: VRF_A
-  mtu: 1550
-  ip_address: 10.255.251.5/31
-port_channel_interfaces:
-- name: Port-Channel1
-  description: MLAG_PEER_clab-clos-large-leaf3_Po1
-  type: switched
-  shutdown: false
-  mode: trunk
-  trunk_groups:
-  - LEAF_PEER_L3
-  - MLAG
-ethernet_interfaces:
-- name: Ethernet1
-  peer: clab-clos-large-leaf3
-  peer_interface: Ethernet1
-  peer_type: mlag_peer
-  description: MLAG_PEER_clab-clos-large-leaf3_Ethernet1
-  type: port-channel-member
-  shutdown: false
-  channel_group:
-    id: 1
-    mode: active
-- name: Ethernet2
-  peer: clab-clos-large-leaf3
-  peer_interface: Ethernet2
-  peer_type: mlag_peer
-  description: MLAG_PEER_clab-clos-large-leaf3_Ethernet2
-  type: port-channel-member
-  shutdown: false
-  channel_group:
-    id: 1
-    mode: active
-- name: Ethernet3
-  peer: clab-clos-large-spine1
-  peer_interface: Ethernet5
-  peer_type: spine
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE1_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.19/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet4
-  peer: clab-clos-large-spine2
-  peer_interface: Ethernet5
-  peer_type: spine
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE2_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.21/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-- name: Ethernet5
-  peer: clab-clos-large-spine3
-  peer_interface: Ethernet5
-  peer_type: spine
-  description: P2P_LINK_TO_CLAB-CLOS-LARGE-SPINE3_Ethernet5
-  shutdown: false
-  mtu: 1550
-  type: routed
-  ip_address: 192.168.108.23/31
-  isis_enable: EVPN_UNDERLAY
-  isis_metric: 50
-  isis_network_point_to_point: true
-  isis_circuit_type: level-2
-mlag_configuration:
-  domain_id: mlag2
-  local_interface: Vlan4094
-  peer_address: 10.255.252.4
-  peer_link: Port-Channel1
-  reload_delay_mlag: '300'
-  reload_delay_non_mlag: '330'
-loopback_interfaces:
-- name: Loopback0
-  description: EVPN_Overlay_Peering
-  shutdown: false
-  ip_address: 192.168.101.4/32
-  isis_enable: EVPN_UNDERLAY
-  isis_passive: true
-- name: Loopback1
-  description: VTEP_VXLAN_Tunnel_Source
-  shutdown: false
-  ip_address: 192.168.102.3/32
-  isis_enable: EVPN_UNDERLAY
-  isis_passive: true
-router_isis:
-  instance: EVPN_UNDERLAY
-  log_adjacency_changes: true
-  net: 49.0001.1921.6810.1004.00
-  router_id: 192.168.101.4
-  is_type: level-2
-  address_family_ipv4:
-    enabled: true
-    maximum_paths: 4
-router_bfd:
-  multihop:
-    interval: 1200
-    min_rx: 1200
-    multiplier: 3
-ip_igmp_snooping:
-  globally_enabled: true
-ip_virtual_router_mac_address: 00:1c:73:00:00:99
-route_maps:
-- name: RM-MLAG-PEER-IN
-  sequence_numbers:
-  - sequence: 10
-    type: permit
-    set:
-    - origin incomplete
-    description: Make routes learned over MLAG Peer-link less preferred on spines to ensure optimal routing
-- name: RM-CONN-2-BGP-VRFS
-  sequence_numbers:
-  - sequence: 10
-    type: deny
-    match:
-    - ip address prefix-list PL-MLAG-PEER-VRFS
-  - sequence: 20
-    type: permit
-prefix_lists:
-- name: PL-MLAG-PEER-VRFS
-  sequence_numbers:
-  - sequence: 10
-    action: permit 10.255.251.4/31
 vxlan_interface:
-  Vxlan1:
+  vxlan1:
     description: clab-clos-large-leaf4_VTEP
     vxlan:
-      udp_port: 4789
       source_interface: Loopback1
+      udp_port: 4789
       virtual_router_encapsulation_mac_address: mlag-system-id
       vlans:
       - id: 10
@@ -513,5 +571,3 @@ vxlan_interface:
       vrfs:
       - name: VRF_A
         vni: 10
-metadata:
-  platform: cEOS-lab
