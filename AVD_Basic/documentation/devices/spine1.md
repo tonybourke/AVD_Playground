@@ -136,7 +136,7 @@ management api http-commands
 !
 username admin privilege 15 role network-admin secret sha512 <removed>
 username tony privilege 15 role network-admin nopassword
-username tony ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUrro9HRd2CeRRS69Yn7Lz8fHfNEj3877gbXSb7eBdzMOFDMd05AWj/4reNc1hRyy8DGx/JXrfLzaJBbh9731cy+4kl2/gtIvin0T3ZWtHJ3HaBTZIRDtoI5Pgnpz1C4Zk/cQZM82RgF7SoQBCAx+dxj73FPylw8zBAtsgFl+t64L8N3atjQn7ThCc7QpPPrefh29WRchKH67Zormq6jX5bNZ/kUUw7fF2Sx4AzL9Ox5MmAiu05rvTm7+hLkahJfBghmKHzeNtZVoUkY7T0sAIQIJ+d/7xjwBrG0Lw2d89jaBmeUU3bbuIxG6nReQ7hWMlTzvxadMfyyf8y792ZRxTr93OPSGBdbS1GuZ15NM9HvP8nx+5V/Xt2fQBS+yc+NypIUwR2swUtyBrnAWYXL7KihO5BlP1JGGuGYYUUGlZlJDNNYeOT4EUhhPJ8peCHsbNqagEbxrrC9I87jKADcSJNyjYxorFN8Crh9rB8HPWFNtolTr/IrVwQliuPHSeNC0= tony@evpn-book
+username tony ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwcRUzAE9qoos9ftWtER5H/cjK3VeE9vA3ugS+aPdYGZVFsOkeC9YuGQ1PXslp+VAoD1bFMuQNsmAKdtfLgDx+XdV/5KoBudvgQDn9KAtX7/lU8TgrFvHLsijbMNyDnMN0lovbHSEADh0s15dLsnWsFJ1AMIHY2CSyh4SwoJQraAr+6VYLM6lLC7WptfLn9Wm3VReP0fFAoPXhPROIB/EGyNPHEUaom/nK4r1mw8nRvb2hc3/8pFR0Uj87rW2g5nDSaqwJHtMEq2ffCQY+QsCVn5MDC/WQgf4ZTsqtXvWoZQwpCUjVP6b1EQnbjraXXZRPuwAeblfej5BZqIhmk1ME7TLBlnaILEpjRYUdEkqg+wLD2hky7TK8e/uQavbuAcSlnN5BuNPfZi9rBlu9yQwLaHGd1c6CSEM1Y9BtHH82KSpYeb76Jl3WtDg16ae/u9en32AqhN9t1IuJAGcQdA4TZxDXzpUohoSIT4M72FsH2yfvOaDHErYxgJhpdzfX1IE= tony@autobox-live-1
 ```
 
 ### Enable Password
@@ -220,45 +220,27 @@ vlan internal order ascending range 1006 1199
 
 | Interface | Description | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
-| Ethernet3 | P2P_leaf1_Ethernet3 | - | 192.168.108.0/31 | default | 1550 | False | - | - |
-| Ethernet4 | P2P_leaf2_Ethernet3 | - | 192.168.108.4/31 | default | 1550 | False | - | - |
-| Ethernet5 | P2P_leaf3_Ethernet3 | - | 192.168.108.8/31 | default | 1550 | False | - | - |
-| Ethernet6 | P2P_leaf4_Ethernet3 | - | 192.168.108.12/31 | default | 1550 | False | - | - |
+| Ethernet1 | P2P_leaf1_Ethernet1 | - | 192.168.108.0/31 | default | 1550 | False | - | - |
+| Ethernet2 | P2P_leaf2_Ethernet1 | - | 192.168.108.2/31 | default | 1550 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
 ```eos
 !
-interface Ethernet3
-   description P2P_leaf1_Ethernet3
+interface Ethernet1
+   description P2P_leaf1_Ethernet1
    no shutdown
    mtu 1550
    no switchport
    ip address 192.168.108.0/31
    pim ipv4 sparse-mode
 !
-interface Ethernet4
-   description P2P_leaf2_Ethernet3
+interface Ethernet2
+   description P2P_leaf2_Ethernet1
    no shutdown
    mtu 1550
    no switchport
-   ip address 192.168.108.4/31
-   pim ipv4 sparse-mode
-!
-interface Ethernet5
-   description P2P_leaf3_Ethernet3
-   no shutdown
-   mtu 1550
-   no switchport
-   ip address 192.168.108.8/31
-   pim ipv4 sparse-mode
-!
-interface Ethernet6
-   description P2P_leaf4_Ethernet3
-   no shutdown
-   mtu 1550
-   no switchport
-   ip address 192.168.108.12/31
+   ip address 192.168.108.2/31
    pim ipv4 sparse-mode
 ```
 
@@ -389,12 +371,8 @@ ASN Notation: asplain
 | -------- | --------- | --- | -------- | -------------- | -------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
 | 192.168.101.1 | 65100 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 192.168.101.2 | 65101 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 192.168.101.3 | 65102 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 192.168.101.4 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 192.168.108.1 | 65100 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 192.168.108.5 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 192.168.108.9 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 192.168.108.13 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
+| 192.168.108.3 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -428,24 +406,12 @@ router bgp 65001
    neighbor 192.168.101.2 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.2 remote-as 65101
    neighbor 192.168.101.2 description leaf2_Loopback0
-   neighbor 192.168.101.3 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.168.101.3 remote-as 65102
-   neighbor 192.168.101.3 description leaf3_Loopback0
-   neighbor 192.168.101.4 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.168.101.4 remote-as 65103
-   neighbor 192.168.101.4 description leaf4_Loopback0
    neighbor 192.168.108.1 peer group IPv4-UNDERLAY-PEERS
    neighbor 192.168.108.1 remote-as 65100
-   neighbor 192.168.108.1 description leaf1_Ethernet3
-   neighbor 192.168.108.5 peer group IPv4-UNDERLAY-PEERS
-   neighbor 192.168.108.5 remote-as 65101
-   neighbor 192.168.108.5 description leaf2_Ethernet3
-   neighbor 192.168.108.9 peer group IPv4-UNDERLAY-PEERS
-   neighbor 192.168.108.9 remote-as 65102
-   neighbor 192.168.108.9 description leaf3_Ethernet3
-   neighbor 192.168.108.13 peer group IPv4-UNDERLAY-PEERS
-   neighbor 192.168.108.13 remote-as 65103
-   neighbor 192.168.108.13 description leaf4_Ethernet3
+   neighbor 192.168.108.1 description leaf1_Ethernet1
+   neighbor 192.168.108.3 peer group IPv4-UNDERLAY-PEERS
+   neighbor 192.168.108.3 remote-as 65101
+   neighbor 192.168.108.3 description leaf2_Ethernet1
    redistribute connected route-map RM-CONN-2-BGP
    !
    address-family evpn
@@ -505,13 +471,6 @@ BFD enabled: False
 | ------------------------ | ------------- | ------------ | -------- | -------- | -------- |
 | 192.168.109.10 | 239.0.0.0/22 | - | - | - | - |
 
-##### IP Anycast Information
-
-| IP Anycast Address | Other Rendezvous Point Address | Register Count |
-| ------------------ | ------------------------------ | -------------- |
-| 192.168.109.10 | 192.168.101.101 | - |
-| 192.168.109.10 | 192.168.101.102 | - |
-
 ##### Router Multicast Device Configuration
 
 ```eos
@@ -519,18 +478,14 @@ BFD enabled: False
 router pim sparse-mode
    ipv4
       rp address 192.168.109.10 239.0.0.0/22
-      anycast-rp 192.168.109.10 192.168.101.101
-      anycast-rp 192.168.109.10 192.168.101.102
 ```
 
 #### PIM Sparse Mode Enabled Interfaces
 
 | Interface Name | VRF Name | IP Version | Border Router | DR Priority | Local Interface |
 | -------------- | -------- | ---------- | ------------- | ----------- | --------------- |
-| Ethernet3 | - | IPv4 | - | - | - |
-| Ethernet4 | - | IPv4 | - | - | - |
-| Ethernet5 | - | IPv4 | - | - | - |
-| Ethernet6 | - | IPv4 | - | - | - |
+| Ethernet1 | - | IPv4 | - | - | - |
+| Ethernet2 | - | IPv4 | - | - | - |
 
 ## Filters
 

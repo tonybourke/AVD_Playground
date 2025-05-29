@@ -143,7 +143,7 @@ management api http-commands
 !
 username admin privilege 15 role network-admin secret sha512 <removed>
 username tony privilege 15 role network-admin nopassword
-username tony ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUrro9HRd2CeRRS69Yn7Lz8fHfNEj3877gbXSb7eBdzMOFDMd05AWj/4reNc1hRyy8DGx/JXrfLzaJBbh9731cy+4kl2/gtIvin0T3ZWtHJ3HaBTZIRDtoI5Pgnpz1C4Zk/cQZM82RgF7SoQBCAx+dxj73FPylw8zBAtsgFl+t64L8N3atjQn7ThCc7QpPPrefh29WRchKH67Zormq6jX5bNZ/kUUw7fF2Sx4AzL9Ox5MmAiu05rvTm7+hLkahJfBghmKHzeNtZVoUkY7T0sAIQIJ+d/7xjwBrG0Lw2d89jaBmeUU3bbuIxG6nReQ7hWMlTzvxadMfyyf8y792ZRxTr93OPSGBdbS1GuZ15NM9HvP8nx+5V/Xt2fQBS+yc+NypIUwR2swUtyBrnAWYXL7KihO5BlP1JGGuGYYUUGlZlJDNNYeOT4EUhhPJ8peCHsbNqagEbxrrC9I87jKADcSJNyjYxorFN8Crh9rB8HPWFNtolTr/IrVwQliuPHSeNC0= tony@evpn-book
+username tony ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwcRUzAE9qoos9ftWtER5H/cjK3VeE9vA3ugS+aPdYGZVFsOkeC9YuGQ1PXslp+VAoD1bFMuQNsmAKdtfLgDx+XdV/5KoBudvgQDn9KAtX7/lU8TgrFvHLsijbMNyDnMN0lovbHSEADh0s15dLsnWsFJ1AMIHY2CSyh4SwoJQraAr+6VYLM6lLC7WptfLn9Wm3VReP0fFAoPXhPROIB/EGyNPHEUaom/nK4r1mw8nRvb2hc3/8pFR0Uj87rW2g5nDSaqwJHtMEq2ffCQY+QsCVn5MDC/WQgf4ZTsqtXvWoZQwpCUjVP6b1EQnbjraXXZRPuwAeblfej5BZqIhmk1ME7TLBlnaILEpjRYUdEkqg+wLD2hky7TK8e/uQavbuAcSlnN5BuNPfZi9rBlu9yQwLaHGd1c6CSEM1Y9BtHH82KSpYeb76Jl3WtDg16ae/u9en32AqhN9t1IuJAGcQdA4TZxDXzpUohoSIT4M72FsH2yfvOaDHErYxgJhpdzfX1IE= tony@autobox-live-1
 ```
 
 ### Enable Password
@@ -275,7 +275,7 @@ vlan 400
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet10 | SERVER_host1_eth1 | access | 10 | - | - | - |
+| Ethernet2 | SERVER_host1_eth1 | access | 10 | - | - | - |
 
 *Inherited from Port-Channel Interface
 
@@ -283,30 +283,21 @@ vlan 400
 
 | Interface | Description | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
-| Ethernet3 | P2P_spine1_Ethernet3 | - | 192.168.108.1/31 | default | 1550 | False | - | - |
-| Ethernet4 | P2P_spine2_Ethernet3 | - | 192.168.108.3/31 | default | 1550 | False | - | - |
+| Ethernet1 | P2P_spine1_Ethernet1 | - | 192.168.108.1/31 | default | 1550 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
 ```eos
 !
-interface Ethernet3
-   description P2P_spine1_Ethernet3
+interface Ethernet1
+   description P2P_spine1_Ethernet1
    no shutdown
    mtu 1550
    no switchport
    ip address 192.168.108.1/31
    pim ipv4 sparse-mode
 !
-interface Ethernet4
-   description P2P_spine2_Ethernet3
-   no shutdown
-   mtu 1550
-   no switchport
-   ip address 192.168.108.3/31
-   pim ipv4 sparse-mode
-!
-interface Ethernet10
+interface Ethernet2
    description SERVER_host1_eth1
    no shutdown
    switchport access vlan 10
@@ -603,9 +594,7 @@ ASN Notation: asplain
 | Neighbor | Remote AS | VRF | Shutdown | Send-community | Maximum-routes | Allowas-in | BFD | RIB Pre-Policy Retain | Route-Reflector Client | Passive | TTL Max Hops |
 | -------- | --------- | --- | -------- | -------------- | -------------- | ---------- | --- | --------------------- | ---------------------- | ------- | ------------ |
 | 192.168.101.101 | 65001 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 192.168.101.102 | 65001 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 192.168.108.0 | 65001 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 192.168.108.2 | 65001 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -623,9 +612,9 @@ ASN Notation: asplain
 
 #### Router BGP VRFs
 
-| VRF | Route-Distinguisher | Redistribute | Graceful Restart |
-| --- | ------------------- | ------------ | ---------------- |
-| VRF_A | 192.168.101.1:10 | connected | - |
+| VRF | Route-Distinguisher | Redistribute |
+| --- | ------------------- | ------------ |
+| VRF_A | 192.168.101.1:10 | connected |
 
 #### Router BGP Device Configuration
 
@@ -647,15 +636,9 @@ router bgp 65100
    neighbor 192.168.101.101 peer group EVPN-OVERLAY-PEERS
    neighbor 192.168.101.101 remote-as 65001
    neighbor 192.168.101.101 description spine1_Loopback0
-   neighbor 192.168.101.102 peer group EVPN-OVERLAY-PEERS
-   neighbor 192.168.101.102 remote-as 65001
-   neighbor 192.168.101.102 description spine2_Loopback0
    neighbor 192.168.108.0 peer group IPv4-UNDERLAY-PEERS
    neighbor 192.168.108.0 remote-as 65001
-   neighbor 192.168.108.0 description spine1_Ethernet3
-   neighbor 192.168.108.2 peer group IPv4-UNDERLAY-PEERS
-   neighbor 192.168.108.2 remote-as 65001
-   neighbor 192.168.108.2 description spine2_Ethernet3
+   neighbor 192.168.108.0 description spine1_Ethernet1
    redistribute connected route-map RM-CONN-2-BGP
    !
    vlan-aware-bundle VRF_A
@@ -802,8 +785,7 @@ router pim sparse-mode
 
 | Interface Name | VRF Name | IP Version | Border Router | DR Priority | Local Interface |
 | -------------- | -------- | ---------- | ------------- | ----------- | --------------- |
-| Ethernet3 | - | IPv4 | - | - | - |
-| Ethernet4 | - | IPv4 | - | - | - |
+| Ethernet1 | - | IPv4 | - | - | - |
 
 ## Filters
 

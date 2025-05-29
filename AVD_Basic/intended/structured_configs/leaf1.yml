@@ -4,8 +4,8 @@ config_end: true
 enable_password:
   disabled: true
 ethernet_interfaces:
-- name: Ethernet3
-  description: P2P_spine1_Ethernet3
+- name: Ethernet1
+  description: P2P_spine1_Ethernet1
   shutdown: false
   mtu: 1550
   ip_address: 192.168.108.1/31
@@ -13,24 +13,11 @@ ethernet_interfaces:
     ipv4:
       sparse_mode: true
   peer: spine1
-  peer_interface: Ethernet3
+  peer_interface: Ethernet1
   peer_type: spine
   switchport:
     enabled: false
-- name: Ethernet4
-  description: P2P_spine2_Ethernet3
-  shutdown: false
-  mtu: 1550
-  ip_address: 192.168.108.3/31
-  pim:
-    ipv4:
-      sparse_mode: true
-  peer: spine2
-  peer_interface: Ethernet3
-  peer_type: spine
-  switchport:
-    enabled: false
-- name: Ethernet10
+- name: Ethernet2
   description: SERVER_host1_eth1
   shutdown: false
   peer: host1
@@ -96,8 +83,8 @@ local_users:
   privilege: 15
   role: network-admin
   no_password: true
-  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUrro9HRd2CeRRS69Yn7Lz8fHfNEj3877gbXSb7eBdzMOFDMd05AWj/4reNc1hRyy8DGx/JXrfLzaJBbh9731cy+4kl2/gtIvin0T3ZWtHJ3HaBTZIRDtoI5Pgnpz1C4Zk/cQZM82RgF7SoQBCAx+dxj73FPylw8zBAtsgFl+t64L8N3atjQn7ThCc7QpPPrefh29WRchKH67Zormq6jX5bNZ/kUUw7fF2Sx4AzL9Ox5MmAiu05rvTm7+hLkahJfBghmKHzeNtZVoUkY7T0sAIQIJ+d/7xjwBrG0Lw2d89jaBmeUU3bbuIxG6nReQ7hWMlTzvxadMfyyf8y792ZRxTr93OPSGBdbS1GuZ15NM9HvP8nx+5V/Xt2fQBS+yc+NypIUwR2swUtyBrnAWYXL7KihO5BlP1JGGuGYYUUGlZlJDNNYeOT4EUhhPJ8peCHsbNqagEbxrrC9I87jKADcSJNyjYxorFN8Crh9rB8HPWFNtolTr/IrVwQliuPHSeNC0=
-    tony@evpn-book
+  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwcRUzAE9qoos9ftWtER5H/cjK3VeE9vA3ugS+aPdYGZVFsOkeC9YuGQ1PXslp+VAoD1bFMuQNsmAKdtfLgDx+XdV/5KoBudvgQDn9KAtX7/lU8TgrFvHLsijbMNyDnMN0lovbHSEADh0s15dLsnWsFJ1AMIHY2CSyh4SwoJQraAr+6VYLM6lLC7WptfLn9Wm3VReP0fFAoPXhPROIB/EGyNPHEUaom/nK4r1mw8nRvb2hc3/8pFR0Uj87rW2g5nDSaqwJHtMEq2ffCQY+QsCVn5MDC/WQgf4ZTsqtXvWoZQwpCUjVP6b1EQnbjraXXZRPuwAeblfej5BZqIhmk1ME7TLBlnaILEpjRYUdEkqg+wLD2hky7TK8e/uQavbuAcSlnN5BuNPfZi9rBlu9yQwLaHGd1c6CSEM1Y9BtHH82KSpYeb76Jl3WtDg16ae/u9en32AqhN9t1IuJAGcQdA4TZxDXzpUohoSIT4M72FsH2yfvOaDHErYxgJhpdzfX1IE=
+    tony@autobox-live-1
 loopback_interfaces:
 - name: Loopback0
   description: ROUTER_ID
@@ -167,22 +154,12 @@ router_bgp:
     peer_group: IPv4-UNDERLAY-PEERS
     remote_as: '65001'
     peer: spine1
-    description: spine1_Ethernet3
-  - ip_address: 192.168.108.2
-    peer_group: IPv4-UNDERLAY-PEERS
-    remote_as: '65001'
-    peer: spine2
-    description: spine2_Ethernet3
+    description: spine1_Ethernet1
   - ip_address: 192.168.101.101
     peer_group: EVPN-OVERLAY-PEERS
     remote_as: '65001'
     peer: spine1
     description: spine1_Loopback0
-  - ip_address: 192.168.101.102
-    peer_group: EVPN-OVERLAY-PEERS
-    remote_as: '65001'
-    peer: spine2
-    description: spine2_Loopback0
   redistribute:
     connected:
       enabled: true
@@ -241,8 +218,8 @@ spanning_tree:
     priority: 16384
 static_routes:
 - vrf: MGMT
-  prefix: 0.0.0.0/0
-  next_hop: 172.20.20.1
+  destination_address_prefix: 0.0.0.0/0
+  gateway: 172.20.20.1
 transceiver_qsfp_default_mode_4x10: true
 vlan_interfaces:
 - name: Vlan10

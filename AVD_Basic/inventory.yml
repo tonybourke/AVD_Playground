@@ -23,17 +23,17 @@ all:
           vars:
             type: spine
           hosts:
-            spine[1:2]:
+            spine1:
         LEAFS:
           vars: 
             type: l3leaf
           children:
             RACK_1:
               hosts:
-                leaf[1:2]:
+                leaf1:
             RACK_2:
               hosts:
-                leaf[3:4]:
+                leaf2:
         EVPN_SERVICES:
           children:
             LEAFS:

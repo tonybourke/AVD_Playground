@@ -3,7 +3,7 @@ servers:
   - name: host2
     adapters:
       - endpoint_ports: [ e1]
-        switch_ports: [ Ethernet10]
-        switches: [ leaf3 ]
+        switch_ports: [ Ethernet2]
+        switches: [ leaf2 ]
         vlans: 10
         mode: access

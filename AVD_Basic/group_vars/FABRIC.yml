@@ -15,8 +15,6 @@ underlay_multicast_rps:
     nodes:
       - name: spine1
         loopback_number: 10
-      - name: spine2
-        loopback_number: 10
     groups:
       - 239.0.0.0/22
 
@@ -38,9 +36,6 @@ spine:
     - name: spine1
       id: 101
       mgmt_ip: 172.20.20.101/24
-    - name: spine2
-      id: 102
-      mgmt_ip: 172.20.20.102/24
 
 # leaf switches. Most leafs will be l3leaf, not l2leaf.
 l3leaf:
@@ -49,34 +44,22 @@ l3leaf:
     platform: cEOS-lab
     loopback_ipv4_pool: 192.168.101.0/24 # This is loopback0 (underlay)
     vtep_loopback_ipv4_pool: 192.168.102.0/24 # This is loopback1 (VTEP)
-    uplink_interfaces: [Ethernet3, Ethernet4] # leaf uplinks
-    uplink_switches: [spine1, spine2] # Where the leaf uplinks go
+    uplink_interfaces: [Ethernet1] # leaf uplinks
+    uplink_switches: [spine1] # Where the leaf uplinks go
     uplink_ipv4_pool: 192.168.110.0/22 # For the p2p interfaces to chopped up into /31s
-    mlag_interfaces: [Ethernet1, Ethernet2] # MLAG peer link
-    mlag_peer_ipv4_pool: 10.255.252.0/24 # MLAG peer IPs
-    mlag_peer_l3_ipv4_pool: 10.255.251.0/24 # iBGP peering between MLAG peers
     virtual_router_mac_address: 00:1c:73:00:00:99 # The vMAC for the anycast gateways
     spanning_tree_mode: mstp # Spanning Tree is still enabled even in EVPN setups
     spanning_tree_priority: 16384 
-    mlag: true # By default, use MLAG
+    mlag: false
   nodes:
     - name: leaf1
       id: 1
       mgmt_ip: 172.20.20.11/24
-      uplink_switch_interfaces: [Ethernet3, Ethernet3]
+      uplink_switch_interfaces: [Ethernet1]
     - name: leaf2
       id: 2
       mgmt_ip: 172.20.20.12/24
-      uplink_switch_interfaces: [Ethernet4, Ethernet4]
-    - name: leaf3
-      id: 3
-      mgmt_ip: 172.20.20.13/24
-      uplink_switch_interfaces: [Ethernet5, Ethernet5]
-    - name: leaf4
-      id: 4
-      mgmt_ip: 172.20.20.14/24
-      uplink_switch_interfaces: [Ethernet6, Ethernet6]
-    
+      uplink_switch_interfaces: [Ethernet2]
 
 # There's an issue with vEOS with larger MTUs
 p2p_uplinks_mtu: 1550
@@ -106,7 +89,7 @@ local_users:
     privilege: 15
     role: network-admin
     no_password: True
-    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCUrro9HRd2CeRRS69Yn7Lz8fHfNEj3877gbXSb7eBdzMOFDMd05AWj/4reNc1hRyy8DGx/JXrfLzaJBbh9731cy+4kl2/gtIvin0T3ZWtHJ3HaBTZIRDtoI5Pgnpz1C4Zk/cQZM82RgF7SoQBCAx+dxj73FPylw8zBAtsgFl+t64L8N3atjQn7ThCc7QpPPrefh29WRchKH67Zormq6jX5bNZ/kUUw7fF2Sx4AzL9Ox5MmAiu05rvTm7+hLkahJfBghmKHzeNtZVoUkY7T0sAIQIJ+d/7xjwBrG0Lw2d89jaBmeUU3bbuIxG6nReQ7hWMlTzvxadMfyyf8y792ZRxTr93OPSGBdbS1GuZ15NM9HvP8nx+5V/Xt2fQBS+yc+NypIUwR2swUtyBrnAWYXL7KihO5BlP1JGGuGYYUUGlZlJDNNYeOT4EUhhPJ8peCHsbNqagEbxrrC9I87jKADcSJNyjYxorFN8Crh9rB8HPWFNtolTr/IrVwQliuPHSeNC0= tony@evpn-book"
+    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCwcRUzAE9qoos9ftWtER5H/cjK3VeE9vA3ugS+aPdYGZVFsOkeC9YuGQ1PXslp+VAoD1bFMuQNsmAKdtfLgDx+XdV/5KoBudvgQDn9KAtX7/lU8TgrFvHLsijbMNyDnMN0lovbHSEADh0s15dLsnWsFJ1AMIHY2CSyh4SwoJQraAr+6VYLM6lLC7WptfLn9Wm3VReP0fFAoPXhPROIB/EGyNPHEUaom/nK4r1mw8nRvb2hc3/8pFR0Uj87rW2g5nDSaqwJHtMEq2ffCQY+QsCVn5MDC/WQgf4ZTsqtXvWoZQwpCUjVP6b1EQnbjraXXZRPuwAeblfej5BZqIhmk1ME7TLBlnaILEpjRYUdEkqg+wLD2hky7TK8e/uQavbuAcSlnN5BuNPfZi9rBlu9yQwLaHGd1c6CSEM1Y9BtHH82KSpYeb76Jl3WtDg16ae/u9en32AqhN9t1IuJAGcQdA4TZxDXzpUohoSIT4M72FsH2yfvOaDHErYxgJhpdzfX1IE= tony@autobox-live-1"
   - name: admin
     privilege: 15
     role: network-admin
